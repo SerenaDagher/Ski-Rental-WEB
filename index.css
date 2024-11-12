@@ -1,0 +1,21 @@
+.topnav {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* padding: 20px; Adjust padding as needed */
+}
+
+header {
+    background-color: black;
+    color: white;
+    padding-right: 50px;
+    display: flex;
+}
+
+.nav-option{
+    font-size: 20px; 
+    color: white;    
+    padding: 10px; 
+    margin-left: 30px;
+}
