@@ -3,33 +3,22 @@
 import React from "react";
 import { Carousel, Navbar, Nav, Container } from "react-bootstrap";
 import "../App.css"; // Ensure App.css is imported
+import RentalList from "./RentalList";
+import TopBar from "./TopBar"; // Import TopBar
 
 function HomePage() {
   return (
     <div className="homepage-fullscreen">
       {/* Top Navigation Bar */}
-      <Navbar style={{ backgroundColor: "#145969" }} variant="dark" expand="lg" fixed="top">
-        <Container fluid>
-          <Navbar.Brand href="/" className="text-white">
-            Ski Rentals
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <a href="/" className="nav-link text-white">Home</a>
-              <a href="/create-rental" className="nav-link text-white">Create Rental</a>
-              <a href="/rental-list" className="nav-link text-white">Rental List</a>
-              <a href="/about" className="nav-link text-white">About Us</a>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-
-      {/* Page Title */}
-      <Container fluid className="text-center my-4">
+      <TopBar />
+      {/* Main Content of Home Page */}
+      <div style={{ padding: "20px" }}>
         <h1>Welcome to Our Ski Rental Service</h1>
-        <p>Your one-stop shop for all ski rental needs!</p>
-      </Container>
+        <p>Wait less and Ski more!</p>
+        <RentalList />
+        
+        {/* Other content can go here */}
+      </div>
 
       {/* Carousel Section */}
       {/* <Container fluid>
