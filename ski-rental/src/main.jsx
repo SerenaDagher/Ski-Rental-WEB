@@ -36,10 +36,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./components/HomePage";
+import App from "./App";
 
 // Define routes with just HomePage
 const router = createBrowserRouter([
-  { path: "/", element: <HomePage /> },
+  { path: "/", element: <App /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

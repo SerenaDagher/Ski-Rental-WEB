@@ -7,14 +7,22 @@ import Button from "@mui/material/Button";
 
 function TopBar() {
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: "#238287" }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "#3339b5" }}>
       <Toolbar>
         {/* Title */}
         <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
           RentTheSlope
         </Typography>
 
-        {/* Sign In Button */}
+        <Button color='inherit'>
+          MyRentals
+        </Button>
+        <Button color='inherit'>
+          Coaches
+        </Button>
+        <Button color="inherit" sx={{ marginRight: 3 }}>
+          Equipments
+        </Button>
         <Button color="inherit" href="/signin">
           Sign In
         </Button>
