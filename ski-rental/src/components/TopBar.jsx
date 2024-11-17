@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material"; // Add Box for layout control
 
-function TopBar() {
+function TopBar({ onSignupClick }) {
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "#3339b5" }}>
       <Toolbar>
@@ -28,7 +28,8 @@ function TopBar() {
           <Button color="inherit" sx={{ marginRight: 3 }}>
             Equipments
           </Button>
-          <Button color="inherit" href="/signin">
+          <Button color="inherit" onClick={onSignupClick}>
+          
             Sign In
           </Button>
         </Box>

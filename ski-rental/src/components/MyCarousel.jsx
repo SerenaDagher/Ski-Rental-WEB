@@ -11,9 +11,9 @@ function MyCarousel() {
           margin: 0,
         }}
       >
-        <Carousel fade style={{ width: '100%', height: '100%' }}>
+        <Carousel fade style={{ width: '100%', height: '800px' }}>
           {/* First Carousel Item */}
-          <Carousel.Item style={{ height: '100%' }}>
+          <Carousel.Item style={{ height: '800px' }}>
             <div
               style={{
                 height: '100%',
@@ -41,7 +41,7 @@ function MyCarousel() {
           </Carousel.Item>
 
           {/* Second Carousel Item */}
-          <Carousel.Item style={{ height: '100%' }}>
+          <Carousel.Item style={{ height: '800px' }}>
             <div
               style={{
                 height: '100%',
@@ -53,7 +53,7 @@ function MyCarousel() {
             >
               <img
                 className="carousel-image"
-                src="https://ik.imagekit.io/mayamaya/wp-content/uploads/2023/06/Skis-and-other-skiing-equipment_-1.jpeg"
+                src="https://www.wagnerskis.com/cdn/shop/articles/mplantz-6089-min_1200x.jpg?v=1601937718"
                 alt="Affordable Prices"
                 style={{
                   objectFit: 'cover',  // Ensure the image covers the container
@@ -69,7 +69,7 @@ function MyCarousel() {
           </Carousel.Item>
 
           {/* Third Carousel Item */}
-          <Carousel.Item style={{ height: '100%' }}>
+          <Carousel.Item style={{ height: '800px' }}>
             <div
               style={{
                 height: '100%',
