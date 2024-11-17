@@ -35,7 +35,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import HomePage from "./components/HomePage";
+// import HomePage from "./components/HomePage";
 import App from "./App";
 
 // Define routes with just HomePage
