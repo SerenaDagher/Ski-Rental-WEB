@@ -1,9 +1,9 @@
 const express = require("express");
 const connectDB = require("./config/db");
-const routes = require("./routes/api/skis");
+const skiRoutes = require("./routes/api/skis");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
+const userRoutes = require("./routes/api/users");
 const app = express();
 
 // use the cors middleware with the
@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // use the routes module as a middleware
 // for the /api/books path
-app.use("/api/skis", routes);
-
+app.use("/api/skis", skiRoutes);
+app.use("/api/users", userRoutes);
 // Connect Database
 connectDB();
 

@@ -1,4 +1,3 @@
-// routes/api/books.js
 
 const express = require('express');
 const router = express.Router();
@@ -9,15 +8,12 @@ const Book = require('../../models/ski');
 // @route   GET api/books/test
 // @desc    Tests books route
 // @access  Public
-router.get('/test', (req, res) => res.send('book route testing!'));
+router.get('/test', (req, res) => res.send('ski route testing!'));
 
-// @route   GET api/books
-// @desc    Get all books
-// @access  Public
 router.get('/', (req, res) => {
   Book.find()
     .then(books => res.json(books))
-    .catch(err => res.status(404).json({ nobooksfound: 'No Books found' }));
+    .catch(err => res.status(404).json({ nobooksfound: 'No skis found' }));
 });
 
 // @route   GET api/books/:id
@@ -26,7 +22,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   Book.findById(req.params.id)
     .then(book => res.json(book))
-    .catch(err => res.status(404).json({ nobookfound: 'No Book found' }));
+    .catch(err => res.status(404).json({ nobookfound: 'No skis found' }));
 });
 
 // @route   POST api/books
@@ -34,8 +30,8 @@ router.get('/:id', (req, res) => {
 // @access  Public
 router.post('/', (req, res) => {
   Book.create(req.body)
-    .then(book => res.json({ msg: 'Book added successfully' }))
-    .catch(err => res.status(400).json({ error: 'Unable to add this book' }));
+    .then(book => res.json({ msg: 'ski added successfully' }))
+    .catch(err => res.status(400).json({ error: 'Unable to add this ski' }));
 });
 
 // @route   PUT api/books/:id
@@ -54,8 +50,8 @@ router.put('/:id', (req, res) => {
 // @access  Public
 router.delete('/:id', (req, res) => {
   Book.findByIdAndDelete(req.params.id)
-    .then(book => res.json({ mgs: 'Book entry deleted successfully' }))
-    .catch(err => res.status(404).json({ error: 'No such a book' }));
+    .then(book => res.json({ mgs: 'ski entry deleted successfully' }))
+    .catch(err => res.status(404).json({ error: 'No such ski' }));
 });
 
 module.exports = router;
