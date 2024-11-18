@@ -1,8 +1,11 @@
-import { makeStyles} from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 
-export default makeStyles (() => ({
-    ul :{
-        justifyContent: 'space-around',
-    },
+// Use styled instead of makeStyles
+const useStyles = styled('div')(({ theme }) => ({
+  ul: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
 }));
 
+export default useStyles;
