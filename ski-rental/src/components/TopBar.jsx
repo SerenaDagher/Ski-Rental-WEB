@@ -16,7 +16,7 @@ function TopBar({ onSignupClick }) {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: "#3339b5" }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "#3339b5" }} style={{ zIndex: 999 }}>
       <Toolbar>
         {/* Logo, Title, and SearchBar */}
         <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>

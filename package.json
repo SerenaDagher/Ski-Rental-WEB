@@ -22,7 +22,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.1",
     "react-bootstrap": "^2.10.5",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "react-toastify": "^10.0.6"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
