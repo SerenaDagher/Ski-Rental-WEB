@@ -13,7 +13,7 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
         .then((result) => {
             toast.success(result.data.message);
             onLoginSuccess(result.data.username)
-            console.log(result.data.username)
+            // console.log(result.data.username)
         })
         .catch((err) => {
             const errorMessage = err.response?.data?.message || "An unexpected error occurred.";

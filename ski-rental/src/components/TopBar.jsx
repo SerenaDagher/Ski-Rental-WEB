@@ -8,7 +8,8 @@ import SearchBar from './SearchBar';
 import LetterAvatar from './LetterAvatar';
 
 
-function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollToSkis }) {
+function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick , onScrollToSkis}) {
+  console.log("Username passed to TopBar:", username);
   const [filterSearch, setFilterSearch] = useState('');
 
   // Function to handle search and update the filter
@@ -16,7 +17,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
     setFilterSearch(searchValue); // Update the search value
     console.log('Search Value:', searchValue); // You can replace this with a filtering function if needed
   };
-
+  
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "#3339b5" }} style={{ zIndex: 999 }}>
       <Toolbar>
@@ -42,7 +43,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
 
           {isLoggedIn ? (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LetterAvatar name = "salim dagher" />
+              <LetterAvatar name = {username} />
               <Button color="inherit" onClick={onLogoutClick}>
                 Logout
               </Button>

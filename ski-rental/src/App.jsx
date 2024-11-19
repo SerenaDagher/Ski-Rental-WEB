@@ -29,6 +29,7 @@ function App() {
   const handleLogin = (userName) => {
     setIsLoggedIn(true);
     setUserName(userName);
+    toast.success(`Welcome, ${userName}!`);
     closeModal();
   };
 
