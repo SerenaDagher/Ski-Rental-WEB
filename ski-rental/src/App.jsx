@@ -7,7 +7,7 @@ import TopBar from "./components/TopBar";
 import MyCarousel from "./components/MyCarousel";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SkisList from './components/SkisList';
+import SkisList from './components/EquipmentsList';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);

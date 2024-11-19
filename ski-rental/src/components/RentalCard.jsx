@@ -1,10 +1,7 @@
 import React from "react";
-import "./RentalCard.css"; 
+import "./RentalCard.css";
 
-function RentalCard({
-  image,
-  title
-}) {
+function RentalCard({ image, title, available }) {
   return (
     <div className="cards_item">
       <div className="card">
@@ -13,7 +10,11 @@ function RentalCard({
         </div>
         <div className="card_content">
           <h2 className="card_title">{title}</h2>
-          <button className="rent-now-btn">Rent Now</button> 
+          {available ? (
+            <button className="rent-now-btn">Rent Now</button>
+          ) : (
+            <p className="not-available">Not Available</p>
+          )}
         </div>
       </div>
     </div>
@@ -21,4 +22,5 @@ function RentalCard({
 }
 
 export default RentalCard;
+
 

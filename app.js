@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const skiRoutes = require("./routes/api/skis");
+const snowboardRoutes = require("./routes/api/snowboards")
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/api/users");
@@ -18,6 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // for the /api/books path
 app.use("/api/skis", skiRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/snowboards", snowboardRoutes);
+
 // Connect Database
 connectDB();
 
