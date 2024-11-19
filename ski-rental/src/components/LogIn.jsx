@@ -1,30 +1,37 @@
 import React, { useState } from "react";
 import axios from 'axios'
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function Login({ onClose, onSwitchToSignup }) {    
+function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {    
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        axios.post("http://localhost:8082/api/users/login", { email, password })
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:8082/api/users/login", {email, password })
         .then((result) => {
-            toast.success("Signup successful! Welcome to the platform.");
-            setTimeout(() => onClose(), 3000);
-          })
-          .catch((err) => {
-            toast.error("Login failed. Please try again.");
-          });
-    }
+            toast.success(result.data.message);
+            onLoginSuccess(result.data.username)
+            console.log(result.data.username)
+        })
+        .catch((err) => {
+            const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
+            toast.error(errorMessage);
+        });
+    
+    };
 
   return (
     <div className="signup-overlay">
         <div className="bg-white p-3 rounded w-25 position-relative">
         <button
          className="x-button position-absolute top-0 end-0 " 
-        onClick={onClose}>
+         onClick={() => {
+            onClose();
+            onSwitchToSignup();
+          }}
+        >
             &times;
         </button>
             <h2><center>Login</center></h2>
@@ -55,7 +62,7 @@ function Login({ onClose, onSwitchToSignup }) {
 
                     />
                 </div>
-                <button type="submit" className="btn btn-success w-100 rounded-0" onClick={handleSubmit}>
+                <button type="submit" className="btn btn-success w-100 rounded-0" >
                     Login
                 </button>
                 </form>
@@ -64,7 +71,6 @@ function Login({ onClose, onSwitchToSignup }) {
                     Signup here
                 </button>
         </div>
-        {/* <ToastContainer position="top-center" style={{ zIndex: 10000 }} hideProgressBar/> */}
     </div>
   );
 }

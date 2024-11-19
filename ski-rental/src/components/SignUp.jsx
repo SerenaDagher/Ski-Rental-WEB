@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from 'axios';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function Signup({ onClose, onSwitchToLogin }) {    
+function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {    
 
     const [username, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -14,12 +13,14 @@ function Signup({ onClose, onSwitchToLogin }) {
         e.preventDefault()
         axios.post("http://localhost:8082/api/users/signup", { username, email, password })
         .then((result) => {
-            toast.success("Signup successful! Welcome to the platform.");
-            onClose(); 
-          })
-          .catch((err) => {
-            toast.error("Signup failed. Please try again.");
-          });
+            toast.success(result.data.message);
+            onSignupSuccess(username)
+        })
+        .catch((err) => {
+            const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
+            toast.error(errorMessage);
+        });
+    
     }
 
   return (
@@ -72,7 +73,7 @@ function Signup({ onClose, onSwitchToLogin }) {
 
                     />
                 </div>
-                <button type="submit" className="btn btn-success w-100 rounded-0" onClick={handleSubmit}>
+                <button type="submit" className="btn btn-success w-100 rounded-0">
                     Sign Up
                 </button>
                 </form>
@@ -84,7 +85,6 @@ function Signup({ onClose, onSwitchToLogin }) {
                 </button>
                 </p>
         </div>
-        <ToastContainer position="top-center" style={{ zIndex: 10000 }} hideProgressBar/>
     </div>
   );
 }

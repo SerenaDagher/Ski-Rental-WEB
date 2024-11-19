@@ -10,14 +10,14 @@ import "react-toastify/dist/ReactToastify.css";
 import SkisList from './components/EquipmentsList';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSignup, setIsSignup] = useState(true); 
-
+  const [isSignup, setIsSignup] = useState(true);
   const skisListRef = useRef(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
   const toggleSignupLogin = () => setIsSignup((prev) => !prev);
 
   const scrollToSkisList = () => {
@@ -25,19 +25,33 @@ function App() {
       behavior: 'smooth',
       block: 'start',
     });
+  }
+  const handleLogin = (userName) => {
+    setIsLoggedIn(true);
+    setUserName(userName);
+    closeModal();
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserName("");
+    toast.info("You have been logged out.");
+  };
   return (
-    <div className="App" style={{ zIndex: 1 }}>
-      <ToastContainer position="top-center" style={{ zIndex: 10001 }} hideProgressBar />
-      <TopBar onSignupClick={openModal} onScrollToSkis={scrollToSkisList} />
+    <div className="App" style = {{zIndex: 1}}>
+      <TopBar
+       onSignupClick={openModal}
+       isLoggedIn={isLoggedIn}
+       userName={userName}
+       onLogoutClick={handleLogout}
+       onScrollToSkis={scrollToSkisList}/>
 
       {isModalOpen && (
         <div className="modal-overlay">
           {isSignup ? (
-            <Signup onClose={closeModal} onSwitchToLogin={toggleSignupLogin} />
+            <Signup onClose={closeModal} onSwitchToLogin={toggleSignupLogin} onSignupSuccess={handleLogin}/>
           ) : (
-            <Login onClose={closeModal} onSwitchToSignup={toggleSignupLogin} />
+            <Login onClose={closeModal} onSwitchToSignup={toggleSignupLogin} onLoginSuccess={handleLogin}/>
           )}
         </div>
       )}
@@ -45,6 +59,7 @@ function App() {
       <div ref={skisListRef}>
         <SkisList />
       </div>
+      <ToastContainer position="top-center" style={{ zIndex: 10001 }} hideProgressBar />
     </div>
   );
 }

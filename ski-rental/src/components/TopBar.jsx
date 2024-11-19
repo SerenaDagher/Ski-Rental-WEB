@@ -3,10 +3,12 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/material"; // Add Box for layout control
-import SearchBar from './SearchBar'; // Import your SearchBar component
+import { Box } from "@mui/material"; 
+import SearchBar from './SearchBar'; 
+import LetterAvatar from './LetterAvatar';
 
-function TopBar({ onSignupClick , onScrollToSkis}) {
+
+function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollToSkis }) {
   const [filterSearch, setFilterSearch] = useState('');
 
   // Function to handle search and update the filter
@@ -31,16 +33,25 @@ function TopBar({ onSignupClick , onScrollToSkis}) {
           <SearchBar onSearch={handleSearch} /> {/* Pass the handleSearch function to SearchBar */}
         </Box>
 
-        {/* Navigation Buttons, pushed to the right */}
-        <Box sx={{ marginLeft: 'auto' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
           <Button color="inherit">MyRentals</Button>
           <Button color="inherit">Coaches</Button>
           <Button color="inherit" sx={{ marginRight: 3 }} onClick={onScrollToSkis}>
             Equipments
           </Button>
-          <Button color="inherit" onClick={onSignupClick}>
-            Sign In
-          </Button>
+
+          {isLoggedIn ? (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <LetterAvatar name = "salim dagher" />
+              <Button color="inherit" onClick={onLogoutClick}>
+                Logout
+              </Button>
+            </Box>
+          ) : (
+            <Button color="inherit" onClick={onSignupClick}>
+              Sign In
+            </Button>
+          )}
         </Box>
       </Toolbar>
     </AppBar>
