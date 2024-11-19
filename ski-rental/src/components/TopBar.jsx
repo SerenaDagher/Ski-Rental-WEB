@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { Box } from "@mui/material"; // Add Box for layout control
 import SearchBar from './SearchBar'; // Import your SearchBar component
 
-function TopBar({ onSignupClick }) {
+function TopBar({ onSignupClick , onScrollToSkis}) {
   const [filterSearch, setFilterSearch] = useState('');
 
   // Function to handle search and update the filter
@@ -35,7 +35,7 @@ function TopBar({ onSignupClick }) {
         <Box sx={{ marginLeft: 'auto' }}>
           <Button color="inherit">MyRentals</Button>
           <Button color="inherit">Coaches</Button>
-          <Button color="inherit" sx={{ marginRight: 3 }}>
+          <Button color="inherit" sx={{ marginRight: 3 }} onClick={onScrollToSkis}>
             Equipments
           </Button>
           <Button color="inherit" onClick={onSignupClick}>

@@ -1,7 +1,10 @@
 import React from "react";
-import "./RentalCard.css"; // Ensure this file contains your CSS code
+import "./RentalCard.css"; 
 
-function RentalCard({ image, title, description }) {
+function RentalCard({
+  image,
+  title
+}) {
   return (
     <div className="cards_item">
       <div className="card">
@@ -10,8 +13,7 @@ function RentalCard({ image, title, description }) {
         </div>
         <div className="card_content">
           <h2 className="card_title">{title}</h2>
-          <p className="card_text">{description}</p>
-          <button className="rent-now-btn">Rent Now</button> {/* Blue Rent Now button */}
+          <button className="rent-now-btn">Rent Now</button> 
         </div>
       </div>
     </div>
@@ -19,3 +21,4 @@ function RentalCard({ image, title, description }) {
 }
 
 export default RentalCard;
+
