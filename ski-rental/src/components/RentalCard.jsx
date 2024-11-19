@@ -1,7 +1,7 @@
 import React from "react";
 import "./RentalCard.css";
 
-function RentalCard({ image, title, available }) {
+function RentalCard({ image, title, available, onRentClick }) {
   return (
     <div className="cards_item">
       <div className="card">
@@ -11,7 +11,12 @@ function RentalCard({ image, title, available }) {
         <div className="card_content">
           <h2 className="card_title">{title}</h2>
           {available ? (
-            <button className="rent-now-btn">Rent Now</button>
+            <button 
+              className="rent-now-btn" 
+              onClick={onRentClick} // Trigger the dialog when clicked
+            >
+              Rent Now
+            </button>
           ) : (
             <p className="not-available">Not Available</p>
           )}
@@ -22,5 +27,3 @@ function RentalCard({ image, title, available }) {
 }
 
 export default RentalCard;
-
-

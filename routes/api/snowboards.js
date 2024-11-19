@@ -20,6 +20,20 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(404).json({ nosnowboardfound: 'No snowboard found' }));
 });
 
+router.get('/availability/:status', (req, res) => {
+  const isAvailable = req.params.status === 'true';
+
+  Snowboard.find({ available: isAvailable })
+    .then(snowboards => {
+      if (snowboards.length > 0) {
+        res.json(snowboards); 
+      } else {
+        res.status(404).json({ message: 'No snowboards found with the specified availability status' });
+      }
+    })
+    .catch(err => res.status(500).json({ error: 'Server error', details: err.message }));
+});
+
 // Get snowboards by availability status
 router.get('/availability/:status', (req, res) => {
   const isAvailable = req.params.status === 'true';
