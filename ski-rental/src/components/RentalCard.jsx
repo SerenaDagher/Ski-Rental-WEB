@@ -1,33 +1,20 @@
-// src/components/RentalCard.js
 import React from "react";
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from "@mui/material";
+import "./RentalCard.css"; // Ensure this file contains your CSS code
 
-function RentalCard({ image, title, description, price }) {
+function RentalCard({ image, title, description }) {
   return (
-    <Card sx={{ width: 345, margin: "20px" }}>
-      <CardMedia
-        component="img"
-        height="140"
-        image={image}
-        alt={title}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-        <Typography variant="h6" color="primary" sx={{ marginTop: "10px" }}>
-          ${price}/day
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" variant="contained" color="primary">
-          Rent Now
-        </Button>
-      </CardActions>
-    </Card>
+    <div className="cards_item">
+      <div className="card">
+        <div className="card_image">
+          <img src={image} alt={title} />
+        </div>
+        <div className="card_content">
+          <h2 className="card_title">{title}</h2>
+          <p className="card_text">{description}</p>
+          <button className="rent-now-btn">Rent Now</button> {/* Blue Rent Now button */}
+        </div>
+      </div>
+    </div>
   );
 }
 
