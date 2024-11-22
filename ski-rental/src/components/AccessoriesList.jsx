@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 import MyDropdown from './DropDownButton';
 import ItemDetailsDialog from './ItemsDetailsDialog';
 
-const EquipmentList = () => {
+const AccessoriesList = () => {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(5);
@@ -99,7 +99,7 @@ const EquipmentList = () => {
 
   return (
     <div className="main">
-      <h1>Choose your Ride!</h1>
+      <h1>What else do you need?</h1>
   
       <div className="dropdown-container">
         <MyDropdown
@@ -171,4 +171,4 @@ const EquipmentList = () => {
   )};
   
 
-export default EquipmentList;
+export default AccessoriesList;

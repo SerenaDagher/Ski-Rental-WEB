@@ -8,7 +8,7 @@ import SearchBar from './SearchBar';
 import LetterAvatar from './LetterAvatar';
 
 
-function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick , onScrollToSkis}) {
+function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick , onScrollToEquip, onScrollToAccessories, onLogoCLick}) {
   console.log("Username passed to TopBar:", username);
   const [filterSearch, setFilterSearch] = useState('');
 
@@ -22,7 +22,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick , onScrollT
     <AppBar position="fixed" sx={{ backgroundColor: "#3339b5" }} style={{ zIndex: 999 }}>
       <Toolbar>
         {/* Logo, Title, and SearchBar */}
-        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1}} onClick={onLogoCLick}>
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB47QtTJCBv3qki0edHDfJ5WdhSO4nuLkrIw&s"
             alt="RentTheSlope Logo"
@@ -37,8 +37,11 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick , onScrollT
         <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
           <Button color="inherit">MyRentals</Button>
           <Button color="inherit">Coaches</Button>
-          <Button color="inherit" sx={{ marginRight: 3 }} onClick={onScrollToSkis}>
+          <Button color="inherit" sx={{ marginRight: 3 }} onClick={onScrollToEquip}>
             Equipments
+          </Button>
+          <Button color="inherit" sx={{ marginRight: 3}} onClick={onScrollToAccessories}>
+            Accessories
           </Button>
 
           {isLoggedIn ? (

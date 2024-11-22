@@ -8,20 +8,37 @@ import MyCarousel from "./components/MyCarousel";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SkisList from './components/EquipmentsList';
+import AccessoriesList from './components/AccessoriesList';
+import { Box } from '@mui/material';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSignup, setIsSignup] = useState(true);
-  const skisListRef = useRef(null);
+  const equipListRef = useRef(null);
+  const topBarRef = useRef(null);
+  const accessoriesRef = useRef(null);
+
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const toggleSignupLogin = () => setIsSignup((prev) => !prev);
 
-  const scrollToSkisList = () => {
-    skisListRef.current?.scrollIntoView({
+  const scrollToEquipList = () => {
+    equipListRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+  const scrollToAccessories = () => {
+    accessoriesRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+  const scrollToTop = () => {
+    topBarRef.current?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
@@ -39,13 +56,15 @@ function App() {
     toast.info("You have been logged out.");
   };
   return (
-    <div className="App" style = {{zIndex: 1}}>
+    <div className="App" style = {{zIndex: 1}} ref={topBarRef}>
       <TopBar
        onSignupClick={openModal}
        isLoggedIn={isLoggedIn}
        userName={userName}
        onLogoutClick={handleLogout}
-       onScrollToSkis={scrollToSkisList}/>
+       onScrollToEquip={scrollToEquipList}
+       onScrollToAccessories={scrollToAccessories}
+       onLogoCLick={scrollToTop}/>
 
       {isModalOpen && (
         <div className="modal-overlay">
@@ -56,9 +75,17 @@ function App() {
           )}
         </div>
       )}
-      <MyCarousel />
-      <div ref={skisListRef}>
+      <img 
+        src="https://res.cloudinary.com/sagacity/image/upload/c_crop,h_2000,w_3000,x_0,y_0/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/19-A-005_copy_cjdefy.jpg" 
+        style={{ width: '100vw', height: 'auto' }} 
+        alt="Snowboarding in powder" 
+      />
+
+      <div ref={equipListRef}>
         <SkisList />
+      </div>
+      <div ref={accessoriesRef}>
+        <AccessoriesList/>
       </div>
       <ToastContainer position="top-center" style={{ zIndex: 10001 }} hideProgressBar />
     </div>
