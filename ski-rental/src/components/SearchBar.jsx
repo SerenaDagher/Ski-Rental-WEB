@@ -15,11 +15,15 @@ const SearchBar = ({ onSearch }) => {
 
   const handleChange = (e) => {
     setSearch(e.target.value);
-    onSearch(e.target.value); 
+    onSearch(e.target.value);
   };
 
   return (
-    <div className={`search-bar ${isFocused ? 'elevation-6' : 'elevation-3'}`}>
+    <div
+      className={`search-bar ${
+        isFocused ? 'search-bar-focused' : 'search-bar-unfocused'
+      }`}
+    >
       <input
         type="text"
         name="search"
@@ -28,6 +32,7 @@ const SearchBar = ({ onSearch }) => {
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
+        className="search-input"
       />
     </div>
   );
