@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SkisList from './components/EquipmentsList';
 import AccessoriesList from './components/AccessoriesList';
+import Footer from "./components/Footer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -121,6 +122,7 @@ function App() {
       <div ref={accessoriesRef}>
         <AccessoriesList/>
       </div>
+      <Footer />
       <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
     </div>
   );

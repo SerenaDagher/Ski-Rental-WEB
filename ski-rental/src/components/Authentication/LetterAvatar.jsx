@@ -35,7 +35,7 @@ export default function LetterAvatar({logout}) {
         <div>
             <Tooltip title="Account settings">
                 <IconButton onClick={handleMenuOpen} sx={{ p: 0  }}>
-                    <Avatar sx={{ bgcolor: theme.palette.tertary.main }}>
+                    <Avatar sx={{ bgcolor: theme.palette.darkorange.main }}>
                         {getInitial(user?.username)}
                     </Avatar>
                 </IconButton>

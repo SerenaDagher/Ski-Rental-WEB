@@ -1,9 +1,12 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { useTheme } from '@mui/material';
 
 const Footer = () => {
+  const theme = useTheme();
+
   return (
-    <footer style={{ backgroundColor: '#3339b5', color: '#fff', padding: '20px 0 30px', textAlign: 'center', marginTop: '80px' }}>
+    <footer style={{ backgroundColor: theme.palette.primary.main, color: '#fff', padding: '20px 0 30px', textAlign: 'center', marginTop: '80px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
         {/* Logo, title, and tagline section */}
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingLeft: '150px', paddingTop: '10px' }}>
