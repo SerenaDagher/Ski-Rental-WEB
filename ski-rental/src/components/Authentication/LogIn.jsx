@@ -5,8 +5,10 @@ import "react-toastify/dist/ReactToastify.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useUser } from "../../contexts/UserContext";
+import { useTheme } from "@mui/material/styles";
 
-function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {   
+function Login({ onClose, onSwitchToSignup, onLoginSuccess }) { 
+    const theme = useTheme();  
     const { setUser } = useUser(); 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
@@ -46,7 +48,7 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
                 
             <div className="mb-3">
                 <TextField
-                label="Email"
+                label="Email*"
                 variant="outlined"
                 fullWidth
                 value={email}
@@ -55,7 +57,7 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
              </div>
                 <div className="mb-3">
                 <TextField
-              label="Password"
+              label="Password*"
               type={showPassword ? "text" : "password"}
               variant="outlined"
               fullWidth
@@ -79,7 +81,10 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
                 variant="contained"
                 color="success"
                 fullWidth
-                style={{ marginTop: "10px" }}
+                sx={{ marginTop: "10px" , backgroundColor: theme.palette.primary.main  ,             
+                  "&:hover": {
+                  backgroundColor: theme.palette.primary.dark, 
+                },}}
                 >
                 Log In
                 </Button>
@@ -91,7 +96,7 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
                     fullWidth
                     style={{ textTransform: "none", marginTop: "0px" }}
                      >
-                    Login here
+                    Signup here
                 </Button>
         </div>
     </div>

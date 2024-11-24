@@ -5,42 +5,63 @@ import "react-toastify/dist/ReactToastify.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useUser } from "../../contexts/UserContext";
+import { useTheme } from "@mui/material/styles";
 
 function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
+  const theme = useTheme();
   const { setUser } = useUser();
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const [errors, setErrors] = useState({ name: "", email: "" });
   const hasUpperCase = /[A-Z]/.test(password);
   const isMinLength = password.length >= 8;
 
   const validatePassword = () => isMinLength && hasUpperCase;
+  const validateName = (username) => /^[A-Za-z\s]+$/.test(username); 
+  const validateEmail = (email) => /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const newErrors = {
+      name: validateName(username) ? "" : "Name must contain only letters.",
+      email: validateEmail(email) ? "" : "Email must be a valid Gmail address.",
+      password: validatePassword(password)
+        ? ""
+        : "Password must be at least 8 characters and contain an uppercase letter.",
+    };
+  
+    setErrors(newErrors);
+  
+    // Check if there are any validation errors
+    const hasErrors = Object.values(newErrors).some((error) => error !== "");
+    if (hasErrors) {
+      toast.error("Please fix the errors before submitting.");
+      return;
+    }
 
     if (!username || !email || !password) {
       toast.error("All fields are required.");
       return;
     }
 
-    if (!validatePassword()) {
-      toast.error("Password does not meet the required criteria.");
-      return;
-    }
-
-    axios
-      .post("http://localhost:8082/api/users/signup", { username, email, password })
-      .then((result) => {
-        onSignupSuccess(username);
-        setUser(result.data.user);
-      })
-      .catch((err) => {
-        const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
-        toast.error(errorMessage);
+    try {
+      const response = await axios.post("http://localhost:8082/api/users/signup", {
+        username,
+        email,
+        password,
       });
+  
+      onSignupSuccess(username); 
+      setUser(response.data.user); 
+    } catch (err) {
+      const errorMessage =
+        err.response?.data?.message || "An unexpected error occurred.";
+      toast.error(errorMessage);
+    }
   };
 
   return (
@@ -58,34 +79,43 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
           {/* Username field */}
           <div className="mb-3">
             <TextField
-              label="Name"
+              label="Name*"
               variant="outlined"
               fullWidth
               value={username}
               onChange={(e) => setName(e.target.value)}
+              error={!!errors.name} // Show error outline if error exists
+              helperText={errors.name} // Display error message
+              style={{ marginBottom: "16px" }}
             />
           </div>
 
           {/* Email field */}
           <div className="mb-3">
             <TextField
-              label="Email"
+              label="Email*"
               variant="outlined"
               fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              error={!!errors.email} // Show error outline if error exists
+              helperText={errors.email} // Display error message
+              style={{ marginBottom: "16px" }}// Show helper text if invalid
             />
           </div>
 
           {/* Password field */}
           <div className="mb-3">
             <TextField
-              label="Password"
+              label="Password*"
               type={showPassword ? "text" : "password"}
               variant="outlined"
               fullWidth
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              error={!!errors.password} // Show error outline if error exists
+              helperText={errors.password} // Display error message
+              style={{ marginBottom: "16px" }}// Show helper text if invalid
               InputProps={{
                 endAdornment: (
                   <Button
@@ -98,14 +128,7 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
                 ),
               }}
             />
-            <ul className="form-text mt-2">
-              <li style={{ color: isMinLength ? "green" : "red" }}>
-                At least 8 characters long
-              </li>
-              <li style={{ color: hasUpperCase ? "green" : "red" }}>
-                At least one uppercase letter
-              </li>
-            </ul>
+            
           </div>
 
           {/* Submit button */}
@@ -114,7 +137,13 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
             variant="contained"
             color="success"
             fullWidth
-            style={{ marginTop: "10px" }}
+            sx={{
+              marginTop: "10px",
+              backgroundColor: theme.palette.primary.main, 
+              "&:hover": {
+                backgroundColor: theme.palette.primary.dark, 
+              },
+            }}
           >
             Sign Up
           </Button>
@@ -127,7 +156,7 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
             onClick={onSwitchToLogin}
             variant="text"
             fullWidth
-            style={{ textTransform: "none", marginTop: "10px" }}
+            style={{ textTransform: "none", marginTop: "10px",color : theme.palette.primary.main }}
           >
             Login here
           </Button>

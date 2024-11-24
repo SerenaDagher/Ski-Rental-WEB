@@ -5,8 +5,10 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { useUser } from "../../contexts/UserContext";
+import {useTheme} from "@mui/material/styles";
 
 export default function LetterAvatar({logout}) {
+    const theme = useTheme();
     const { user, setUser } = useUser();
     const [anchorEl, setAnchorEl] = useState(null); // State to manage menu
     const open = Boolean(anchorEl);
@@ -26,14 +28,14 @@ export default function LetterAvatar({logout}) {
     };
 
     const getInitial = (name) => {
-        return name ? name.charAt(0).toUpperCase() : '?';
+        return name ? name.charAt(0).toUpperCase() : 'G';
     };
 
     return (
         <div>
             <Tooltip title="Account settings">
-                <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
-                    <Avatar sx={{ bgcolor: '#4caf50' }}>
+                <IconButton onClick={handleMenuOpen} sx={{ p: 0  }}>
+                    <Avatar sx={{ bgcolor: theme.palette.tertary.main }}>
                         {getInitial(user?.username)}
                     </Avatar>
                 </IconButton>
