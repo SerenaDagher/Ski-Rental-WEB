@@ -4,8 +4,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useUser } from "../../contexts/UserContext";
 
 function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
+  const { setUser } = useUser();
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +35,7 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
       .post("http://localhost:8082/api/users/signup", { username, email, password })
       .then((result) => {
         onSignupSuccess(username);
-        toast.success("Account created successfully!");
+        setUser(result.data.user);
       })
       .catch((err) => {
         const errorMessage = err.response?.data?.message || "An unexpected error occurred.";

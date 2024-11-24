@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import axios from 'axios'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useUser } from "../../contexts/UserContext";
 
-function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {    
+function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {   
+    const { setUser } = useUser(); 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
-
+    const [showPassword, setShowPassword] = useState(false);
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -16,8 +20,8 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
           }
         try {
             const result = await axios.post("http://localhost:8082/api/users/login", { email, password });
-            // toast.success(result.data.message);
-            onLoginSuccess(result.data.username);
+            setUser(result.data.user);
+            onLoginSuccess(result.data.user.username);
         } catch (err) {
             console.log("Error response:", err);
             const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
@@ -40,39 +44,55 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
             <h2><center>Login</center></h2>
             <form onSubmit={handleSubmit}>
                 
+            <div className="mb-3">
+                <TextField
+                label="Email"
+                variant="outlined"
+                fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                />
+             </div>
                 <div className="mb-3">
-                    <label htmlFor="email">
-                        <strong>Email</strong>
-                    </label>
-                    <input type="text" 
-                    placeholder='Enter Email' 
-                    autoComplete='off' 
-                    name='email' 
-                    className='form-control rounded-0' 
-                    onChange={(e) => setEmail(e.target.value)}
-
-                    />
+                <TextField
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              fullWidth
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <Button
+                    onClick={() => setShowPassword(!showPassword)}
+                    size="small"
+                    style={{ textTransform: "none" }}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </Button>
+                ),
+              }}
+            />
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="email">
-                        <strong>Password</strong>
-                    </label>
-                    <input type="password" 
-                    placeholder='Enter Password' 
-                    name='password' 
-                    className='form-control rounded-0' 
-                    onChange={(e) => setPassword(e.target.value)}
-
-                    />
-                </div>
-                <button type="submit" className="btn btn-success w-100 rounded-0" >
-                    Login
-                </button>
+                <Button
+                type="submit"
+                variant="contained"
+                color="success"
+                fullWidth
+                style={{ marginTop: "10px" }}
+                >
+                Log In
+                </Button>
                 </form>
-                <p>Don't have an account?</p>
-                <button onClick={onSwitchToSignup} className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
-                    Signup here
-                </button>
+                <p style={{margin: "0px"}}>Don't have an account?</p>
+                <Button
+                    onClick={onSwitchToSignup}
+                    variant="text"
+                    fullWidth
+                    style={{ textTransform: "none", marginTop: "0px" }}
+                     >
+                    Login here
+                </Button>
         </div>
     </div>
   );
