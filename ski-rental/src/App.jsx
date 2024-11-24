@@ -1,8 +1,8 @@
 import './App.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import React, { useState, useRef } from "react";
-import Signup from "./components/SignUp";
-import Login from "./components/LogIn";
+import Signup from "./components/AuthenticationC/SignUp";
+import Login from "./components/AuthenticationC/LogIn";
 import TopBar from "./components/TopBar";
 import MyCarousel from "./components/MyCarousel";
 import { ToastContainer } from "react-toastify";

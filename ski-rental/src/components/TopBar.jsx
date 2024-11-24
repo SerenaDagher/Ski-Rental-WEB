@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material"; 
 import SearchBar from './SearchBar'; 
-import LetterAvatar from './LetterAvatar';
+import LetterAvatar from './AuthenticationC/LetterAvatar';
 
 function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollToEquip, onScrollToAccessories, onLogoCLick }) {
   console.log("Username passed to TopBar:", username);
