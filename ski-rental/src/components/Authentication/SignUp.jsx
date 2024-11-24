@@ -18,18 +18,18 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
     const isMinLength = password.length >= 8;
     const hasUpperCase = /[A-Z]/.test(password);
   
-    return isMinLength && hasUpperCase ;
+    // Return a boolean indicating whether all conditions are met
+    return isMinLength && hasUpperCase;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!username || !email || !password) {
         toast.error("All fields are required.");
-        return false;
+        return;
       }
 
-    if (!validatePassword()) {
+    if (!validatePassword())  {
         toast.error("Password does not meet the required criteria.");
         return;
       }
@@ -37,11 +37,10 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
     axios
       .post("http://localhost:8082/api/users/signup", { username, email, password })
       .then((result) => {
-        toast.success(result.data.message);
         onSignupSuccess(username);
       })
       .catch((err) => {
-        const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
+        const errorMessage = err.response?.data?.message || "An unexpected error occurred hereee.";
         toast.error(errorMessage);
       });
   };
@@ -113,9 +112,9 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
               </button>
             </div>
             <ul className="form-text mt-2">
-                <li style={{ color: hasUpperCase ? "green" : "red" }}>At least one uppercase letter.</li>
-                <li style = {{ color: isMinLength ? "green" : "red" }}>Minimum 8 characters.</li>
-             </ul>
+                <li style={{ color: isMinLength ? "green" : "red" }}>At least 8 characters long</li>
+                <li style={{ color: hasUpperCase ? "green" : "red" }}>At least one uppercase letter</li>
+            </ul>
           </div>
 
           {/* Submit button */}

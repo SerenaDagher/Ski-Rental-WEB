@@ -9,17 +9,20 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8082/api/users/login", {email, password })
-        .then((result) => {
-            toast.success(result.data.message);
-            onLoginSuccess(result.data.username)
-            // console.log(result.data.username)
-        })
-        .catch((err) => {
+
+        if (!email || !password) {
+            toast.error("All fields are required.");
+            return;
+          }
+        try {
+            const result = await axios.post("http://localhost:8082/api/users/login", { email, password });
+            // toast.success(result.data.message);
+            onLoginSuccess(result.data.username);
+        } catch (err) {
+            console.log("Error response:", err);
             const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
             toast.error(errorMessage);
-        });
-    
+        }
     };
 
   return (

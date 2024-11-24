@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 export default function LetterAvatar({ name }) {
   // Extract the first initial
   const getInitial = (name) => {
-    console.log("Name prop:", name); // Debug the name prop
+    // console.log("Name prop:", name); // Debug the name prop
     return name ? name.charAt(0).toUpperCase() : '?';
   };
 

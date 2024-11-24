@@ -5,16 +5,16 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material"; 
 import SearchBar from './SearchBar'; 
-import LetterAvatar from './AuthenticationC/LetterAvatar';
+import LetterAvatar from './Authentication/LetterAvatar';
 
 function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollToEquip, onScrollToAccessories, onLogoCLick }) {
-  console.log("Username passed to TopBar:", username);
+  // console.log("Username passed to TopBar:", username);
   const [filterSearch, setFilterSearch] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
 
   const handleSearch = (searchValue) => {
     setFilterSearch(searchValue);
-    console.log('Search Value:', searchValue); 
+    // console.log('Search Value:', searchValue); 
   };
 
   useEffect(() => {

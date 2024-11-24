@@ -1,11 +1,11 @@
 import './App.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import React, { useState, useRef } from "react";
-import Signup from "./components/AuthenticationC/SignUp";
-import Login from "./components/AuthenticationC/LogIn";
+import Signup from "./components/Authentication/SignUp";
+import Login from "./components/Authentication/LogIn";
 import TopBar from "./components/TopBar";
 import MyCarousel from "./components/MyCarousel";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SkisList from './components/EquipmentsList';
 import AccessoriesList from './components/AccessoriesList';
@@ -20,7 +20,6 @@ function App() {
   const equipListRef = useRef(null);
   const topBarRef = useRef(null);
   const accessoriesRef = useRef(null);
-
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -123,7 +122,7 @@ function App() {
       <div ref={accessoriesRef}>
         <AccessoriesList/>
       </div>
-      <ToastContainer position="top-center" style={{ zIndex: 10001 }} hideProgressBar />
+      <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
     </div>
   );
 }
