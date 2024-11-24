@@ -2,45 +2,41 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
-  // State hooks
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // Password validation
   const hasUpperCase = /[A-Z]/.test(password);
   const isMinLength = password.length >= 8;
 
-  const validatePassword = () => {
-    const isMinLength = password.length >= 8;
-    const hasUpperCase = /[A-Z]/.test(password);
-  
-    // Return a boolean indicating whether all conditions are met
-    return isMinLength && hasUpperCase;
-  };
+  const validatePassword = () => isMinLength && hasUpperCase;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!username || !email || !password) {
-        toast.error("All fields are required.");
-        return;
-      }
 
-    if (!validatePassword())  {
-        toast.error("Password does not meet the required criteria.");
-        return;
-      }
+    if (!username || !email || !password) {
+      toast.error("All fields are required.");
+      return;
+    }
+
+    if (!validatePassword()) {
+      toast.error("Password does not meet the required criteria.");
+      return;
+    }
 
     axios
       .post("http://localhost:8082/api/users/signup", { username, email, password })
       .then((result) => {
         onSignupSuccess(username);
+        toast.success("Account created successfully!");
       })
       .catch((err) => {
-        const errorMessage = err.response?.data?.message || "An unexpected error occurred hereee.";
+        const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
         toast.error(errorMessage);
       });
   };
@@ -59,15 +55,10 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
         <form onSubmit={handleSubmit}>
           {/* Username field */}
           <div className="mb-3">
-            <label htmlFor="username">
-              <strong>Name</strong>
-            </label>
-            <input
-              type="text"
-              placeholder="Enter Name"
-              autoComplete="off"
-              name="username"
-              className="form-control rounded-0"
+            <TextField
+              label="Name"
+              variant="outlined"
+              fullWidth
               value={username}
               onChange={(e) => setName(e.target.value)}
             />
@@ -75,15 +66,10 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
 
           {/* Email field */}
           <div className="mb-3">
-            <label htmlFor="email">
-              <strong>Email</strong>
-            </label>
-            <input
-              type="text"
-              placeholder="Enter Email"
-              autoComplete="off"
-              name="email"
-              className="form-control rounded-0"
+            <TextField
+              label="Email"
+              variant="outlined"
+              fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -91,47 +77,58 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
 
           {/* Password field */}
           <div className="mb-3">
-            <label htmlFor="password">
-              <strong>Password</strong>
-            </label>
-            <div className="input-group">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter Password"
-                name="password"
-                className="form-control rounded-0"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <button
-                type="button"
-                className="btn btn-outline-secondary"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </button>
-            </div>
+            <TextField
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              fullWidth
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <Button
+                    onClick={() => setShowPassword(!showPassword)}
+                    size="small"
+                    style={{ textTransform: "none" }}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </Button>
+                ),
+              }}
+            />
             <ul className="form-text mt-2">
-                <li style={{ color: isMinLength ? "green" : "red" }}>At least 8 characters long</li>
-                <li style={{ color: hasUpperCase ? "green" : "red" }}>At least one uppercase letter</li>
+              <li style={{ color: isMinLength ? "green" : "red" }}>
+                At least 8 characters long
+              </li>
+              <li style={{ color: hasUpperCase ? "green" : "red" }}>
+                At least one uppercase letter
+              </li>
             </ul>
           </div>
 
           {/* Submit button */}
-          <button type="submit" className="btn btn-success w-100 rounded-0">
+          <Button
+            type="submit"
+            variant="contained"
+            color="success"
+            fullWidth
+            style={{ marginTop: "10px" }}
+          >
             Sign Up
-          </button>
+          </Button>
         </form>
 
         {/* Login switch */}
         <p>
           Already have an account?{" "}
-          <button
+          <Button
             onClick={onSwitchToLogin}
-            className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
+            variant="text"
+            fullWidth
+            style={{ textTransform: "none", marginTop: "10px" }}
           >
             Login here
-          </button>
+          </Button>
         </p>
       </div>
     </div>
