@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useUser } from "../../contexts/UserContext";
 import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
 function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
   const theme = useTheme();
@@ -15,7 +16,6 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({ name: "", email: "" });
   const hasUpperCase = /[A-Z]/.test(password);
   const isMinLength = password.length >= 8;
@@ -26,7 +26,6 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
     
     const newErrors = {
       name: validateName(username) ? "" : "Name must contain only letters.",
@@ -43,7 +42,6 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
       return;
     }
 
-    // Check if there are any validation errors
     const hasErrors = Object.values(newErrors).some((error) => error !== "");
     if (hasErrors) {
       toast.error("Please fix the errors before submitting.");
@@ -107,7 +105,7 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
           </div>
 
           {/* Password field */}
-          <div className="mb-3" style={{ marginBottom: "16px" }}>
+          <div className="mb-3" >
             <TextField
               label="Password*"
               type={showPassword ? "text" : "password"}
@@ -115,15 +113,13 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
               fullWidth
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              error={!!errors.password} // Show error outline if error exists
-              helperText={errors.password} // Display error message
-              style={{ marginBottom: "16px" }}// Show helper text if invalid
+              error={!!errors.password} 
               InputProps={{
                 endAdornment: (
                   <Button
                     onClick={() => setShowPassword(!showPassword)}
                     size="small"
-                    style={{ textTransform: "none" }}
+                    style={{ textTransform: "none"}}
                   >
                     {showPassword ? "Hide" : "Show"}
                   </Button>
@@ -131,11 +127,11 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
               }}
             />
             <ul style={{ listStyleType: "none", padding: 0, margin: "0px 0 0 0" }}>
-              <li style={{ color: isMinLength ? "green" : "black" }}>
-                At least 8 characters long
+              <li style={{ color: isMinLength ? "green" : "gray" , fontSize: "12px"}}>
+                - At least 8 characters long
               </li>
-              <li style={{ color: hasUpperCase ? "green" : "black" }}>
-                At least one uppercase letter
+              <li style={{ color: hasUpperCase ? "green" : "gray", fontSize: "12px" }}>
+                - At least one uppercase letter
               </li>
               </ul>
           </div>
@@ -159,17 +155,21 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
         </form>
 
         {/* Login switch */}
-        <p>
+        <Typography variant="body1" component="div" sx={{marginTop :"16px"}}>
           Already have an account?{" "}
           <Button
             onClick={onSwitchToLogin}
             variant="text"
-            fullWidth
-            style={{ textTransform: "none", marginTop: "10px",color : theme.palette.primary.main }}
+            style={{
+              textTransform: "none",
+              color: theme.palette.primary.main,
+              padding: 0, // Removes unnecessary padding
+              minWidth: "auto", // Ensures the button is compact
+            }}
           >
             Login here
           </Button>
-        </p>
+        </Typography>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useUser } from "../../contexts/UserContext";
 import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
 function Login({ onClose, onSwitchToSignup, onLoginSuccess }) { 
     const theme = useTheme();  
@@ -89,15 +90,21 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
                 Log In
                 </Button>
                 </form>
-                <p style={{margin: "0px"}}>Don't have an account?</p>
-                <Button
+                <Typography variant="body1" component="div" sx={{marginTop :"16px"}}>
+                  Already have an account?{" "}
+                  <Button
                     onClick={onSwitchToSignup}
                     variant="text"
-                    fullWidth
-                    style={{ textTransform: "none", marginTop: "0px" }}
-                     >
+                    style={{
+                      textTransform: "none",
+                      color: theme.palette.primary.main,
+                      padding: 0, // Removes unnecessary padding
+                      minWidth: "auto", // Ensures the button is compact
+                    }}
+                  >
                     Signup here
-                </Button>
+                  </Button>
+                </Typography>
         </div>
     </div>
   );
