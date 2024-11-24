@@ -36,7 +36,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
     <AppBar
       position="fixed"
       sx={{
-        backgroundColor: isScrolled ? "#3339b5" : "transparent", 
+        backgroundColor: isScrolled ? "#ffffff" : "transparent", 
         boxShadow: isScrolled ? "0 2px 4px rgba(0, 0, 0, 0.2)" : "none", 
         transition: "background-color 0.3s ease", 
       }}
@@ -49,7 +49,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
             alt="RentTheSlope Logo"
             style={{ width: 40, height: 'auto', marginRight: 10 }}
           />
-          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: isScrolled ? "#3339b5" : "#ffffff" }}>
             RentTheSlope
           </Typography>
           <SearchBar onSearch={handleSearch} />
