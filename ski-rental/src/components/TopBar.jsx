@@ -67,10 +67,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
 
           {isLoggedIn ? (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LetterAvatar name={username} />
-              <Button color="inherit" onClick={onLogoutClick}>
-                Logout
-              </Button>
+              <LetterAvatar logout={onLogoutClick} />
             </Box>
           ) : (
             <Button color="inherit" onClick={onSignupClick}>
