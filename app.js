@@ -6,6 +6,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/api/users");
 const app = express();
+const bcrypt = require('bcryptjs');
+
 
 // use the cors middleware with the
 // origin and credentials options
