@@ -13,7 +13,7 @@ function RentalCard({ image, title, available, onRentClick }) {
           {available ? (
             <button 
               className="rent-now-btn" 
-              onClick={onRentClick} // Trigger the dialog when clicked
+              onClick={onRentClick} 
             >
               Rent Now
             </button>
