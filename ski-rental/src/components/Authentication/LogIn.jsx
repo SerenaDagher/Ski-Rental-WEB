@@ -2,10 +2,19 @@ import React, { useState } from "react";
 import axios from 'axios'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useUser } from "../../contexts/UserContext";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
-function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {    
+function Login({ onClose, onSwitchToSignup, onLoginSuccess }) { 
+    const theme = useTheme();  
+    const { setUser } = useUser(); 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const [showPassword, setShowPassword] = useState(false);
+    const [wrongPass, setWrongPassword] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,10 +25,13 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
           }
         try {
             const result = await axios.post("http://localhost:8082/api/users/login", { email, password });
-            // toast.success(result.data.message);
-            onLoginSuccess(result.data.username);
+            setUser(result.data.user);
+            onLoginSuccess(result.data.user.username);
         } catch (err) {
             console.log("Error response:", err);
+            if (err.response.data.message == "Invalid credentials") {
+              setWrongPassword(true);
+            }
             const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
             toast.error(errorMessage);
         }
@@ -40,39 +52,65 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
             <h2><center>Login</center></h2>
             <form onSubmit={handleSubmit}>
                 
+            <div className="mb-3">
+                <TextField
+                label="Email*"
+                variant="outlined"
+                fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                />
+             </div>
                 <div className="mb-3">
-                    <label htmlFor="email">
-                        <strong>Email</strong>
-                    </label>
-                    <input type="text" 
-                    placeholder='Enter Email' 
-                    autoComplete='off' 
-                    name='email' 
-                    className='form-control rounded-0' 
-                    onChange={(e) => setEmail(e.target.value)}
-
-                    />
+                <TextField
+              label="Password*"
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              fullWidth
+              value={password}
+              error={wrongPass} 
+              onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <Button
+                    onClick={() => setShowPassword(!showPassword)}
+                    size="small"
+                    style={{ textTransform: "none" }}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </Button>
+                ),
+              }}
+            />
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="email">
-                        <strong>Password</strong>
-                    </label>
-                    <input type="password" 
-                    placeholder='Enter Password' 
-                    name='password' 
-                    className='form-control rounded-0' 
-                    onChange={(e) => setPassword(e.target.value)}
-
-                    />
-                </div>
-                <button type="submit" className="btn btn-success w-100 rounded-0" >
-                    Login
-                </button>
+                <Button
+                type="submit"
+                variant="contained"
+                color="success"
+                fullWidth
+                sx={{ marginTop: "10px" , backgroundColor: theme.palette.primary.main  ,             
+                  "&:hover": {
+                  backgroundColor: theme.palette.primary.dark, 
+                },}}
+                >
+                Log In
+                </Button>
                 </form>
-                <p>Don't have an account?</p>
-                <button onClick={onSwitchToSignup} className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
+                <Typography variant="body1" component="div" sx={{marginTop :"16px"}}>
+                  Already have an account?{" "}
+                  <Button
+                    onClick={onSwitchToSignup}
+                    variant="text"
+                    style={{
+                      textTransform: "none",
+                      color: theme.palette.primary.main,
+                      padding: 0, // Removes unnecessary padding
+                      minWidth: "auto", // Ensures the button is compact
+                    }}
+                  >
                     Signup here
-                </button>
+                  </Button>
+                </Typography>
         </div>
     </div>
   );

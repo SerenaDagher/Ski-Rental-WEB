@@ -23,7 +23,7 @@ router.post("/signup", async (req, res) => {
         const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
 
-        res.status(201).json({ status: "success", message: "User created successfully"  });
+        res.status(201).json({ status: "success", message: "User created successfully", user:newUser  });
     } catch (error) {
         res.status(500).json({ status: "error", message: "Server error", error: error.message });
     }
@@ -48,10 +48,26 @@ router.post("/login", async (req, res) => {
         // Generate JWT token
         const token = jwt.sign({ id: user._id }, "your_jwt_secret_key", { expiresIn: "1h" });
 
-        res.status(200).json({status: "success", message: "Login successful", username:user.username, token });
+        res.status(200).json({status: "success", message: "Login successful", user:user, token });
     } catch (error) {
         res.status(500).json({status: "error", message: "Server error", error });
     }
 });
+
+fetch("http://localhost:8082/api/users/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: "user@example.com", password: "password123" }),
+})
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.status === "success") {
+            localStorage.setItem("user", JSON.stringify(data.user)); // Store user info
+            localStorage.setItem("token", data.token); // Store token
+            console.log("Login successful:", data.user);
+        } else {
+            console.error("Login failed:", data.message);
+        }
+    });
 
 module.exports = router;

@@ -4,13 +4,11 @@ import React, { useState, useRef } from "react";
 import Signup from "./components/Authentication/SignUp";
 import Login from "./components/Authentication/LogIn";
 import TopBar from "./components/TopBar";
-import MyCarousel from "./components/MyCarousel";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SkisList from './components/EquipmentsList';
 import AccessoriesList from './components/AccessoriesList';
-import { Box } from '@mui/material';
-import { Button } from 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -53,9 +51,11 @@ function App() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setUser(null);
     setUserName("");
     toast.info("You have been logged out.");
   };
+  
   return (
     <div className="App" style = {{zIndex: 1}} ref={topBarRef}>
       <TopBar
@@ -123,6 +123,7 @@ function App() {
       <div ref={accessoriesRef}>
         <AccessoriesList/>
       </div>
+      <Footer />
       <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
     </div>
   );
