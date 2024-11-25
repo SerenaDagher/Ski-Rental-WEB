@@ -54,7 +54,7 @@ export default function LetterAvatar({logout}) {
                 }}
             >
                 <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-                <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
+                <MenuItem onClick={handleMenuClose}>My Cart</MenuItem>
                 <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
         </div>

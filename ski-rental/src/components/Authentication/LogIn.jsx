@@ -14,6 +14,8 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [showPassword, setShowPassword] = useState(false);
+    const [wrongPass, setWrongPassword] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -27,6 +29,9 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
             onLoginSuccess(result.data.user.username);
         } catch (err) {
             console.log("Error response:", err);
+            if (err.response.data.message == "Invalid credentials") {
+              setWrongPassword(true);
+            }
             const errorMessage = err.response?.data?.message || "An unexpected error occurred.";
             toast.error(errorMessage);
         }
@@ -63,6 +68,7 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
               variant="outlined"
               fullWidth
               value={password}
+              error={wrongPass} 
               onChange={(e) => setPassword(e.target.value)}
               InputProps={{
                 endAdornment: (
