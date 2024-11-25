@@ -47,10 +47,10 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
     >
       <Toolbar>
         <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 , color: "#ffffff"}} onClick={onLogoCLick}>
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB47QtTJCBv3qki0edHDfJ5WdhSO4nuLkrIw&s"
+          <img class="filter-white"
+            src="/logo.svg"
             alt="RentTheSlope Logo"
-            style={{ width: 40, height: 'auto', marginRight: 10 }}
+            style={{ width: 40, height: 'auto', marginRight: 10}}
           />
           <Typography variant="h4" component="div" sx={{ flexGrow: 1, color: "#ffffff" }}>
             RentTheSlope

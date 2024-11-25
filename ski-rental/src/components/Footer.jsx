@@ -11,10 +11,11 @@ const Footer = () => {
         {/* Logo, title, and tagline section */}
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingLeft: '150px', paddingTop: '10px' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB47QtTJCBv3qki0edHDfJ5WdhSO4nuLkrIw&s"
+            <img 
+              class = "filter-white"
+              src="/logo.svg"
               alt="RentTheSlope Logo"
-              style={{ width: 70, height: 'auto', marginRight: 10 }}
+              style={{ width: 50, height: 'auto', marginRight: 10 }}
             />
             <Typography variant="h4" component="div" sx={{ fontSize: '2.2rem' }}>
               RentTheSlope
