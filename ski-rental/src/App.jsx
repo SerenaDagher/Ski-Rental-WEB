@@ -11,6 +11,7 @@ import AccessoriesList from './components/AccessoriesList';
 import Footer from "./components/Footer";
 import SkiRecommendationForm from './components/SKiRecommendationForm';
 
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");

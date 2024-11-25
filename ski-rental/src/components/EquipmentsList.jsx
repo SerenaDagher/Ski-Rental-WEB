@@ -6,6 +6,7 @@ import { Box } from '@mui/material';
 import MyDropdown from './DropDownButton';
 import ItemDetailsDialog from './ItemsDetailsDialog';
 
+
 const EquipmentList = () => {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,20 +27,20 @@ const EquipmentList = () => {
       let data = [];
   
       if (ride === 'all') {
-        // Fetch all skis and snowboards
+
         const [skisResponse, snowboardsResponse] = await Promise.all([
           axios.get('http://localhost:8082/api/skis'),
           axios.get('http://localhost:8082/api/snowboards'),
         ]);
         data = [...skisResponse.data, ...snowboardsResponse.data];
       } else {
-        // Fetch only the selected ride type
+
         let url = ride === 'Ski' 
           ? 'http://localhost:8082/api/skis' 
           : 'http://localhost:8082/api/snowboards';
         
         if (filter === 'available') {
-          url = `${url}/availability/true`; // Adjust if your API expects query params instead
+          url = `${url}/availability/true`; 
         } else if (filter === 'not available') {
           url = `${url}/availability/false`;
         }
@@ -48,7 +49,7 @@ const EquipmentList = () => {
         data = response.data;
       }
   
-      // Apply filtering for "All" rides manually if filter is applied
+
       if (filter !== 'all' && ride === 'all') {
         data = data.filter(item => {
           return filter === 'available' ? item.available : !item.available;
@@ -73,13 +74,13 @@ const EquipmentList = () => {
   const handleFilterChange = (selectedFilter, label) => {
     setFilter(selectedFilter);
     setFilterLabel(label);
-    setCurrentPage(1); // Reset to first page on filter change
+    setCurrentPage(1); 
   };
 
   const handleRideChange = (selectedRide, label) => {
     setRide(selectedRide);
     setRideLabel(label);
-    setCurrentPage(1); // Reset to first page on ride change
+    setCurrentPage(1); 
   };
 
   const openDialog = (item) => {
@@ -120,7 +121,6 @@ const EquipmentList = () => {
         />
       </div>
   
-      {/* Conditional rendering for items */}
       {items.length === 0 ? (
         <div className="no-matches">
           <h2>No matches found!</h2>
@@ -133,13 +133,12 @@ const EquipmentList = () => {
               image={item.image}
               title={item.name}
               available={item.available}
-              onRentClick={() => openDialog(item)} // Open dialog with the item
+              onRentClick={() => openDialog(item)} 
             />
           ))}
         </div>
       )}
   
-      {/* Pagination - only show if there are items */}
       {items.length > 0 && (
         <Box
           sx={{

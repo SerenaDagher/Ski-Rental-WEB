@@ -6,6 +6,7 @@ import { Box } from '@mui/material';
 import MyDropdown from './DropDownButton';
 import ItemDetailsDialog from './ItemsDetailsDialog';
 
+
 const AccessoriesList = () => {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

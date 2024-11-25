@@ -31,6 +31,12 @@ const SkiSchema = new mongoose.Schema({
   image: { // URL or path to an image of the ski
     type: String
   },
+  rating: { // Rating out of 5
+    type: Number,
+    min: 0, // Minimum rating
+    max: 5, // Maximum rating
+    default: 0 // Default value
+  },
   created_date: {
     type: Date,
     default: Date.now
