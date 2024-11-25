@@ -10,6 +10,8 @@ import SkisList from './components/EquipmentsList';
 import AccessoriesList from './components/AccessoriesList';
 import Footer from "./components/Footer";
 import SkiRecommendationForm from './components/SKiRecommendationForm';
+import { Button } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
   const equipListRef = useRef(null);
   const topBarRef = useRef(null);
   const accessoriesRef = useRef(null);
+  const theme = useTheme();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -115,8 +118,22 @@ function App() {
           }}
         ><h1>Skip the queue!</h1>
           <p>Be the first on the slopes and fully equipped</p>
-          <button type="button" class="btn btn-outline-light btn-lg">Rent Now</button>
-        </div>
+          <Button
+            variant="outlined"
+            size="large"
+            sx={{
+              color: theme.palette.common.white, // Initial text color
+              borderColor: theme.palette.common.white, // Initial border color
+              '&:hover': {
+                backgroundColor: theme.palette.common.white, // White background on hover
+                color: theme.palette.primary.main, // Text color changes to primary on hover
+                borderColor: theme.palette.primary.main, // Outline changes to primary on hover
+              },
+            }}
+          >
+            Rent Now
+          </Button>
+    </div>
       </div>
       <SkiRecommendationForm/>
       <div ref={equipListRef}>

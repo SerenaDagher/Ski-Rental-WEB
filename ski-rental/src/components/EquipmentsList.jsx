@@ -104,7 +104,7 @@ const EquipmentList = () => {
   
       <div className="dropdown-container">
         <MyDropdown
-          buttonLabel={`Filter: ${filterLabel}`}
+          buttonLabel={`Filter`}
           items={[
             { label: 'All', action: () => handleFilterChange('all', 'All') },
             { label: 'Available', action: () => handleFilterChange('available', 'Available') },
@@ -112,7 +112,7 @@ const EquipmentList = () => {
           ]}
         />
         <MyDropdown
-          buttonLabel={`Choose your ride: ${rideLabel}`}
+          buttonLabel={`Choose your ride`}
           items={[
             { label: 'All', action: () => handleRideChange('all', 'All') },
             { label: 'Ski', action: () => handleRideChange('Ski', 'Ski') },

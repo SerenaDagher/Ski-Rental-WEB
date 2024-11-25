@@ -1,36 +1,52 @@
-import React from 'react';
-import { Dropdown } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
-const MyDropdown = ({ buttonLabel, items }) => {
-  const purpleColor = "#3339b5";  // Replace with your actual purple color
+const MyDropdown = ({  items }) => {
+  const theme = useTheme();
+  const [selectedValue, setSelectedValue] = useState('');
+
+  const handleChange = (event) => {
+    const selectedItem = items.find((item) => item.label === event.target.value);
+    if (selectedItem && selectedItem.action) {
+      selectedItem.action();
+    }
+    setSelectedValue(event.target.value);
+  };
 
   return (
-    <Dropdown>
-      <Dropdown.Toggle
-        variant="outline-secondary"
-        id="dropdown-basic"
-        style={{
-          borderColor: purpleColor,  // Set the border color to purple
-          color: purpleColor,  // Set the text color to purple
-          fontWeight: 'bold',  // Make the button label bold
-          padding: '5px 10px',  // Adjust padding for better appearance
+    <FormControl
+      sx={{
+        minWidth: 200,
+        '& .MuiInputBase-root': {
+          borderColor: theme.palette.primary.main,
+          color: theme.palette.tertary.main,
+          fontWeight: 'bold',
+        },
+        '& .MuiSvgIcon-root': {
+          color: theme.palette.tertary.main,
+        },
+      }}
+    >
+      <Select
+        value={selectedValue}
+        onChange={handleChange}
+        displayEmpty
+        variant="outlined"
+        sx={{
+          borderColor: theme.palette.primary.main,
+          color: theme.palette.primary.main,
+          fontWeight: 'bold',
+          borderRadius: 4
         }}
       >
-        {buttonLabel}
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu>
         {items.map((item, index) => (
-          <Dropdown.Item
-            key={index}
-            onClick={item.action}
-            className="custom-dropdown-item"  // Custom class for styling
-          >
+          <MenuItem key={index} value={item.label}>
             {item.label}
-          </Dropdown.Item>
+          </MenuItem>
         ))}
-      </Dropdown.Menu>
-    </Dropdown>
+      </Select>
+    </FormControl>
   );
 };
 
