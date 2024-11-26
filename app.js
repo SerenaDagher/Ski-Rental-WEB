@@ -2,6 +2,8 @@ const express = require("express");
 const connectDB = require("./config/db");
 const skiRoutes = require("./routes/api/skis");
 const snowboardRoutes = require("./routes/api/snowboards")
+const skiBootsRoutes = require("./routes/api/skiBoots")
+const snowboardBootRoutes = require("./routes/api/snowboardBoots")
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/api/users");
@@ -9,21 +11,18 @@ const app = express();
 const bcrypt = require('bcryptjs');
 
 
-// use the cors middleware with the
-// origin and credentials options
 app.use(cors({ origin: true, credentials: true }));
 
-// use the body-parser middleware to parse JSON and URL-encoded data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// use the routes module as a middleware
-// for the /api/books path
+
 app.use("/api/skis", skiRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/snowboards", snowboardRoutes);
+app.use("/api/skiBoots",skiBootsRoutes);
+app.use("/api/snowboardBoots",snowboardBootRoutes);
 
-// Connect Database
 connectDB();
 
 app.get("/", (req, res) => res.send("Hello world!"));

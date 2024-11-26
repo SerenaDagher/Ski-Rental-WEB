@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-const MyDropdown = ({  items }) => {
+const MyDropdown = ({ buttonLabel, items }) => {
   const theme = useTheme();
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -32,12 +32,13 @@ const MyDropdown = ({  items }) => {
         value={selectedValue}
         onChange={handleChange}
         displayEmpty
+        renderValue={(value) => (value ? value : buttonLabel)}
         variant="outlined"
         sx={{
           borderColor: theme.palette.primary.main,
           color: theme.palette.primary.main,
           fontWeight: 'bold',
-          borderRadius: 4
+          borderRadius: 4,
         }}
       >
         {items.map((item, index) => (
@@ -51,3 +52,4 @@ const MyDropdown = ({  items }) => {
 };
 
 export default MyDropdown;
+

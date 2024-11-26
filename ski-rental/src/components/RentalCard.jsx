@@ -9,10 +9,11 @@ import Button from '@mui/material/Button';
 function RentalCard({ image, title, available, onRentClick }) {
   return (
     <Card
-    variant="outlined"
       sx={{
         minWidth: 275,
+        elevation: 6,
         borderRadius: 4,
+        boxShadow: 2
       }}
     >
       <CardContent>
