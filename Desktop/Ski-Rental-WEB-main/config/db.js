@@ -1,0 +1,17 @@
+// db.js
+
+const mongoose = require("mongoose");
+const db = "mongodb+srv://serenadagher:aneres21@ski-rental-dp.wizus.mongodb.net/?retryWrites=true&w=majority&appName=ski-rental-dp";
+
+mongoose.set("strictQuery", true, "useNewUrlParser", true);
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(db);
+    console.log("MongoDB is Connected...");
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
+module.exports = connectDB;
