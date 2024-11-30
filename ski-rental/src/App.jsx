@@ -10,30 +10,31 @@ import SkisList from './components/EquipmentsList';
 import AccessoriesList from './components/AccessoriesList';
 import Footer from "./components/Footer"; 
 import SkiRecommendationForm from './components/SKiRecommendationForm';
-import { Button } from '@mui/material';
+import { Button , Dialog, DialogTitle, DialogContent, DialogActions} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 
 function App() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSignup, setIsSignup] = useState(true); // Used to toggle between Login and Signup modals
+  const [isSignup, setIsSignup] = useState(true); 
   const equipListRef = useRef(null);
   const topBarRef = useRef(null);
   const accessoriesRef = useRef(null);
   const theme = useTheme();
 
-  // Open the modal
+  const openCartDialog = () => setIsDialogOpen(true); 
+  const closeCartDialog = () => setIsDialogOpen(false); 
+
   const openModal = (isSignup) => {
     setIsModalOpen(true);
-    setIsSignup(isSignup); // Set whether it's login or signup
+    setIsSignup(isSignup); 
   };
 
-  // Close the modal
   const closeModal = () => setIsModalOpen(false);
 
-  // Switch between Signup and Login
   const toggleSignupLogin = () => setIsSignup((prev) => !prev);
 
   const scrollToEquipList = () => {
@@ -71,16 +72,32 @@ function App() {
   return (
     <div className="App" style={{ zIndex: 1 }} ref={topBarRef}>
       <TopBar
-        onSignupClick={() => openModal(true)} // Opens Signup modal
-        onLoginClick={() => openModal(false)} // Opens Login modal
+        onSignupClick={() => openModal(true)} 
+        onLoginClick={() => openModal(false)} 
         isLoggedIn={isLoggedIn}
         userName={userName}
         onLogoutClick={handleLogout}
         onScrollToEquip={scrollToEquipList}
         onScrollToAccessories={scrollToAccessories}
         onLogoCLick={scrollToTop}
+        onCartClick={openCartDialog}
       />
 
+      <Dialog open={isDialogOpen} onClose={closeCartDialog} fullWidth maxWidth="sm">
+              <DialogTitle>
+                <Typography variant="h6">Your Cart</Typography>
+              </DialogTitle>
+              <DialogContent>
+                <Typography variant="body1">
+                  Your cart is empty. Start shopping to add items!
+                </Typography>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={closeCartDialog} color="primary" variant="outlined">
+                  Close
+                </Button>
+              </DialogActions>
+      </Dialog>
       {isModalOpen && (
         <div className="modal-overlay">
           {isSignup ? (

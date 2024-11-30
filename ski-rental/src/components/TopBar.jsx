@@ -9,7 +9,7 @@ import LetterAvatar from './Authentication/LetterAvatar';
 import { useTheme } from "@mui/material/styles";
 import ShoppingCart from "./ShoppingCart"; 
 
-function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollToEquip, onScrollToAccessories, onLogoCLick }) {
+function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollToEquip, onScrollToAccessories, onLogoCLick, onCartClick }) {
   const [filterSearch, setFilterSearch] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -119,7 +119,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
             Accessories
           </Button>
           
-          <ShoppingCart /> 
+          <ShoppingCart onClick={onCartClick} /> 
 
           {isLoggedIn ? (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
