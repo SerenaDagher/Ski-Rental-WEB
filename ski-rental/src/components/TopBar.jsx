@@ -50,8 +50,8 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
             display: 'flex', 
             alignItems: 'center', 
             color: "#ffffff", 
-            paddingTop: isScrolled ? '5px' : '15px', // Adjust padding on scroll
-            paddingBottom: isScrolled ? '5px' : '15px', // Adjust padding on scroll
+            paddingTop: isScrolled ? '5px' : '15px', 
+            paddingBottom: isScrolled ? '5px' : '15px', 
             transition: 'padding 0.3s ease',
           }}
           onClick={onLogoCLick}
@@ -61,7 +61,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
             src="/logo.svg"
             alt="RentTheSlope Logo"
             style={{
-              width: isScrolled ? 50 : 80, // Adjust logo size on scroll
+              width: isScrolled ? 50 : 80, 
               height: 'auto',
               marginRight: 10,
             }}
@@ -72,7 +72,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
             sx={{
               flexGrow: 0,
               color: "#ffffff",
-              fontSize: isScrolled ? '1.5rem' : '2.8rem', // Adjust font size on scroll
+              fontSize: isScrolled ? '1.5rem' : '2.8rem', 
               transition: 'font-size 0.3s ease',
             }}
           >
