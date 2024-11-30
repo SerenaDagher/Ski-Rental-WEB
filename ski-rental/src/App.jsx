@@ -136,10 +136,10 @@ function App() {
     </div>
       </div>
       <SkiRecommendationForm/>
-      <div ref={equipListRef}>
+      <div ref={equipListRef} style={{marginTop:'70px'}}>
         <SkisList />
       </div>
-      <div ref={accessoriesRef}>
+      <div ref={accessoriesRef} style={{marginTop:'200px'}}>
         <AccessoriesList />
       </div>
       <Footer />

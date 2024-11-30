@@ -119,7 +119,7 @@ const AccessoriesList = () => {
           ]}
         />
         <MyDropdown
-          buttonLabel={`Choose your ride: ${rideLabel}`}
+          buttonLabel={`Accessories: ${rideLabel}`}
           items={[
             { label: 'All', action: () => handleRideChange(RIDES.ALL, 'All') },
             { label: 'Ski Boot', action: () => handleRideChange(RIDES.SKI_BOOTS, 'Ski Boot') },
