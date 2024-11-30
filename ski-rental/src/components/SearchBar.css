@@ -19,7 +19,7 @@
   flex: 1;
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 20px;
   padding: 0;
   margin: 0;
   background-color: transparent;
@@ -35,7 +35,7 @@
 }
 
 .search-bar-focused {
-  border-color: #3a3c4d;
+  border-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
