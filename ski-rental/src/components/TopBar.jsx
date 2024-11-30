@@ -45,13 +45,37 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
       style={{ zIndex: 999 }}
     >
       <Toolbar>
-        <Box sx={{ display: 'flex', alignItems: 'center', color: "#ffffff"}} onClick={onLogoCLick}>
-          <img className="filter-white"
+        <Box
+          sx={{
+            display: 'flex', 
+            alignItems: 'center', 
+            color: "#ffffff", 
+            paddingTop: isScrolled ? '5px' : '15px', // Adjust padding on scroll
+            paddingBottom: isScrolled ? '5px' : '15px', // Adjust padding on scroll
+            transition: 'padding 0.3s ease',
+          }}
+          onClick={onLogoCLick}
+        >
+          <img
+            className="filter-white"
             src="/logo.svg"
             alt="RentTheSlope Logo"
-            style={{ width: 40, height: 'auto', marginRight: 10 }}
+            style={{
+              width: isScrolled ? 50 : 80, // Adjust logo size on scroll
+              height: 'auto',
+              marginRight: 10,
+            }}
           />
-          <Typography variant="h4" component="div" sx={{ flexGrow: 0, color: "#ffffff" }}>
+          <Typography
+            variant="h3"
+            component="div"
+            sx={{
+              flexGrow: 0,
+              color: "#ffffff",
+              fontSize: isScrolled ? '1.5rem' : '2.8rem', // Adjust font size on scroll
+              transition: 'font-size 0.3s ease',
+            }}
+          >
             RentTheSlope
           </Typography>
         </Box>
@@ -61,12 +85,37 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', color: "#ffffff" }}>
-          <Button color="inherit" sx={{ padding: '0 8px', minWidth: 'auto' }}>MyRentals</Button>
-          <Button color="inherit" sx={{ padding: '0 8px', minWidth: 'auto' }}>Coaches</Button>
-          <Button color="inherit" sx={{ padding: '0 8px', minWidth: 'auto' }} onClick={onScrollToEquip}>
+          <Button
+            color="inherit"
+            sx={{
+              padding: isScrolled ? '0 4px' : '0 8px', // Adjust button padding on scroll
+              minWidth: 'auto',
+              fontSize: isScrolled ? '0.9rem' : '1.1rem', // Adjust button font size on scroll
+              transition: 'padding 0.3s ease, font-size 0.3s ease',
+            }}
+          >
+            Coaches
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              padding: isScrolled ? '0 4px' : '0 8px',
+              minWidth: 'auto',
+              fontSize: isScrolled ? '0.9rem' : '1.1rem',
+            }}
+            onClick={onScrollToEquip}
+          >
             Equipments
           </Button>
-          <Button color="inherit" sx={{ padding: '0 8px', minWidth: 'auto' }} onClick={onScrollToAccessories}>
+          <Button
+            color="inherit"
+            sx={{
+              padding: isScrolled ? '0 4px' : '0 8px',
+              minWidth: 'auto',
+              fontSize: isScrolled ? '0.9rem' : '1.1rem',
+            }}
+            onClick={onScrollToAccessories}
+          >
             Accessories
           </Button>
           
@@ -77,7 +126,15 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
               <LetterAvatar logout={onLogoutClick} />
             </Box>
           ) : (
-            <Button color="inherit" sx={{ padding: '0 8px', minWidth: 'auto' }} onClick={onSignupClick}>
+            <Button
+              color="inherit"
+              sx={{
+                padding: isScrolled ? '0 4px' : '0 8px',
+                minWidth: 'auto',
+                fontSize: isScrolled ? '0.9rem' : '1.1rem',
+              }}
+              onClick={onSignupClick}
+            >
               Sign In
             </Button>
           )}

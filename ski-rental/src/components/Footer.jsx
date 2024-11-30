@@ -4,16 +4,15 @@ import { useTheme } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 
-const Footer = () => {
+const Footer = ({ onLoginClick, onSignupClick }) => {  // Keep both onLoginClick and onSignupClick
   const theme = useTheme();
 
   return (
     <footer style={{ backgroundColor: theme.palette.primary.main, color: '#fff', padding: '20px 0 30px', textAlign: 'center', marginTop: '50px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-        
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingLeft: '150px', paddingTop: '10px' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <img 
+            <img
               className="filter-white"
               src="/logo.svg"
               alt="RentTheSlope Logo"
@@ -23,26 +22,35 @@ const Footer = () => {
               RentTheSlope
             </Typography>
           </Box>
-         
           <Typography variant="body1" sx={{ fontSize: '1rem', marginTop: '10px' }}>
             Rent, ski, repeat - the ultimate destination for your winter gear!
           </Typography>
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: '170px', marginTop: '100px' }}>
-         
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Typography variant="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
               My Account
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
-              <Typography variant="body1" sx={{ fontSize: '1rem' }}>Login</Typography>
-              <Typography variant="body2" sx={{ fontSize: '1rem', marginTop: '5px' }}>Sign up</Typography>
+              <Typography
+                variant="body2"
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer'}}
+                onClick={onLoginClick}  // Triggers Login window
+              >
+                Log in
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer'}}
+                onClick={onSignupClick}  // Triggers Sign-up window
+              >
+                Sign up
+              </Typography>
               <Typography variant="body3" sx={{ fontSize: '1rem', marginTop: '5px' }}>I need help</Typography>
             </Box>
           </Box>
 
-         
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '100px' }}>
             <Typography variant="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>About</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
@@ -53,7 +61,6 @@ const Footer = () => {
             </Box>
           </Box>
 
-          
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '100px' }}>
             <Typography variant="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Terms & Conditions</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
@@ -65,23 +72,20 @@ const Footer = () => {
         </Box>
       </Box>
 
-      
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '35px', paddingRight:'1150px' }}>
-  <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '5px' }}>
-    <IconButton color="inherit" sx={{ margin: '0 10px' }}>
-      <InstagramIcon />
-    </IconButton>
-    <IconButton color="inherit" sx={{ margin: '0 10px' }}>
-      <FacebookIcon />
-    </IconButton>
-  </Box>
-  <Typography variant="body2" component="div" sx={{ fontSize: '0.9rem', marginTop: '5px' }}>
-    © 2024-2025
-  </Typography>
-</Box>
-
-</footer>
-
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '35px', paddingRight: '1150px' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '5px' }}>
+          <IconButton color="inherit" sx={{ margin: '0 10px' }}>
+            <InstagramIcon />
+          </IconButton>
+          <IconButton color="inherit" sx={{ margin: '0 10px' }}>
+            <FacebookIcon />
+          </IconButton>
+        </Box>
+        <Typography variant="body2" component="div" sx={{ fontSize: '0.9rem', marginTop: '5px' }}>
+          © 2024-2025
+        </Typography>
+      </Box>
+    </footer>
   );
 };
 
