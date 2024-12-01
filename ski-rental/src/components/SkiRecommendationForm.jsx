@@ -28,7 +28,6 @@ const SkiRecommendationForm = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // Send data to your backend or process recommendations
   };
 
   return (
