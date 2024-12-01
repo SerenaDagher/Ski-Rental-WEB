@@ -4,10 +4,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
-import SearchBar from './SearchBar'; 
+import InputAdornment from "@mui/material/InputAdornment";
 import LetterAvatar from './Authentication/LetterAvatar';
 import { useTheme } from "@mui/material/styles";
-import ShoppingCart from "./ShoppingCart"; 
+import ShoppingCart from "./ShoppingCart";
+import TextField from '@mui/material/TextField';
+import SearchIcon from "@mui/icons-material/Search";
 
 function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollToEquip, onScrollToAccessories, onLogoCLick, onCartClick }) {
   const [filterSearch, setFilterSearch] = useState('');
@@ -38,21 +40,18 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
     <AppBar
       position="fixed"
       sx={{
-        backgroundColor: isScrolled ? theme.palette.primary.main : "transparent", 
-        boxShadow: isScrolled ? "0 2px 4px rgba(0, 0, 0, 0.2)" : "none", 
-        transition: "background-color 0.3s ease", 
+        backgroundColor: isScrolled ? theme.palette.primary.main : "transparent",
+        boxShadow: isScrolled ? "0 2px 4px rgba(0, 0, 0, 0.2)" : "none",
+        transition: "background-color 0.3s ease",
       }}
       style={{ zIndex: 999 }}
     >
       <Toolbar>
         <Box
           sx={{
-            display: 'flex', 
-            alignItems: 'center', 
-            color: "#ffffff", 
-            paddingTop: isScrolled ? '5px' : '15px', 
-            paddingBottom: isScrolled ? '5px' : '15px', 
-            transition: 'padding 0.3s ease',
+            display: 'flex',
+            alignItems: 'center',
+            color: "#ffffff",
           }}
           onClick={onLogoCLick}
         >
@@ -61,7 +60,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
             src="/logo.svg"
             alt="RentTheSlope Logo"
             style={{
-              width: isScrolled ? 50 : 80, 
+              width: 50,
               height: 'auto',
               marginRight: 10,
             }}
@@ -72,8 +71,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
             sx={{
               flexGrow: 0,
               color: "#ffffff",
-              fontSize: isScrolled ? '1.5rem' : '2.8rem', 
-              transition: 'font-size 0.3s ease',
+              fontSize: '2.8rem',
             }}
           >
             RentTheSlope
@@ -81,16 +79,64 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'center', width: 'auto', flexGrow: 1 }}>
-          <SearchBar onSearch={handleSearch} />
+
         </Box>
 
-        <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', color: "#ffffff" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center", 
+            justifyContent: "center",
+            marginLeft: "auto",
+            gap: 2, 
+            color: "#ffffff",
+          }}>
+          <TextField
+            id="standard-basic"
+            label="Search"
+            variant="standard"
+            onChange={handleSearch}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon style={{ color: "#ffffff" }} />
+                </InputAdornment>
+              ),
+            }}
+            InputLabelProps={{
+              shrink: false, 
+            }}
+            sx={{
+              "& .MuiInputBase-root": {
+                color: "#ffffff",
+                display: "flex", 
+                alignItems: "center", 
+              },
+              "& .MuiInputLabel-root": {
+                color: "#ffffff", // Label color
+                transition: "opacity 0.3s ease, transform 0.3s ease", 
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                opacity:0
+              },
+              "& .MuiInput-underline:before": {
+                borderBottomColor: "#ffffff", 
+              },
+              "& .MuiInput-underline:hover:before": {
+                borderBottomColor: theme.palette.darkorange.main, 
+              },
+              "& .MuiInput-underline:after": {
+                borderBottomColor: theme.palette.darkorange.main, 
+              },
+              paddingBottom: "20px",
+            }}
+          />
           <Button
             color="inherit"
             sx={{
-              padding: isScrolled ? '0 4px' : '0 8px', // Adjust button padding on scroll
+              // padding: '0 8px',
               minWidth: 'auto',
-              fontSize: isScrolled ? '0.9rem' : '1.1rem', // Adjust button font size on scroll
+              fontSize: '1.1rem',
               transition: 'padding 0.3s ease, font-size 0.3s ease',
             }}
           >
@@ -99,9 +145,10 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
           <Button
             color="inherit"
             sx={{
-              padding: isScrolled ? '0 4px' : '0 8px',
+              height: "36px",
+              // padding: '0 8px',
               minWidth: 'auto',
-              fontSize: isScrolled ? '0.9rem' : '1.1rem',
+              fontSize: '1.1rem',
             }}
             onClick={onScrollToEquip}
           >
@@ -110,16 +157,16 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
           <Button
             color="inherit"
             sx={{
-              padding: isScrolled ? '0 4px' : '0 8px',
+              // padding: '0 8px',
               minWidth: 'auto',
-              fontSize: isScrolled ? '0.9rem' : '1.1rem',
+              fontSize: '1.1rem',
             }}
             onClick={onScrollToAccessories}
           >
             Accessories
           </Button>
-          
-          <ShoppingCart onClick={onCartClick} /> 
+
+          <ShoppingCart onClick={onCartClick} />
 
           {isLoggedIn ? (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -129,9 +176,9 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
             <Button
               color="inherit"
               sx={{
-                padding: isScrolled ? '0 4px' : '0 8px',
+                // padding: '0 8px',
                 minWidth: 'auto',
-                fontSize: isScrolled ? '0.9rem' : '1.1rem',
+                fontSize: '1.1rem',
               }}
               onClick={onSignupClick}
             >

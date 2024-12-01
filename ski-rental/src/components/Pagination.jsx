@@ -20,7 +20,6 @@ const Paginate = () => {
       <Pagination
         count={5}
         page={1}
-        // variant="outlined"
         color= "primary"
         renderItem={(item) => (
           <PaginationItem

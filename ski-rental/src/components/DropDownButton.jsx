@@ -19,12 +19,20 @@ const MyDropdown = ({ buttonLabel, items }) => {
       sx={{
         minWidth: 200,
         '& .MuiInputBase-root': {
-          borderColor: theme.palette.primary.main,
-          color: theme.palette.tertary.main,
+          '&.Mui-focused': {
+            '& fieldset': {
+              borderColor: theme.palette.darkorange.main,
+            },
+          },
+          '&:hover fieldset': {
+            borderColor: theme.palette.darkorange.main, // Hover border color
+          },
+          borderColor: theme.palette.darkorange.main,
+          color: theme.palette.darkorange.main,
           fontWeight: 'bold',
         },
         '& .MuiSvgIcon-root': {
-          color: theme.palette.tertary.main,
+          color: theme.palette.darkorange.main,
         },
       }}
     >
@@ -35,8 +43,8 @@ const MyDropdown = ({ buttonLabel, items }) => {
         renderValue={(value) => (value ? value : buttonLabel)}
         variant="outlined"
         sx={{
-          borderColor: theme.palette.primary.main,
-          color: theme.palette.primary.main,
+          borderColor: theme.palette.darkorange.main,
+          color: theme.palette.darkorange.main,
           fontWeight: 'bold',
           borderRadius: 4,
         }}

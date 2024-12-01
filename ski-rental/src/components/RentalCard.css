@@ -59,7 +59,7 @@
 
 
 .card .rent-now-btn {
-  background-color: #3339b5;
+  background-color: #257180;
   color: white; 
   border: none;
   padding: 8px 15px; 
@@ -73,8 +73,8 @@
 
 .card .rent-now-btn:hover {
   background-color: white; 
-  color: #3339b5; 
-  border: 2px solid #3339b5; 
+  color: #257180; 
+  border: 2px solid #257180; 
 }
 
 .card .rent-now-btn:active {
