@@ -95,6 +95,7 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
             id="standard-basic"
             label="Search"
             variant="standard"
+            value={filterSearch}
             onChange={handleSearch}
             InputProps={{
               endAdornment: (
