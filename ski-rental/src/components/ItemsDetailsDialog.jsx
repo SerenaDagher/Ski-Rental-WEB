@@ -24,6 +24,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useForm } from "react-hook-form";
 import dayjs from "dayjs";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ItemDetailsDialog = ({ open, item, onClose, onRent }) => {
   const {
@@ -42,7 +44,31 @@ const ItemDetailsDialog = ({ open, item, onClose, onRent }) => {
   const handlePaymentMethodChange = (event) => setPaymentMethod(event.target.value);
 
   const onSubmit = (data) => {
-    console.log(data);
+    const rentalDetails = {
+      userId: "1", // Replace with actual user ID
+      itemId: item.name,
+      location: location,
+      deliveryDate: selectedDate,
+      deliveryTime: deliveryTime,
+      paymentMethod: "cash on delivery",
+      totalPrice: 100, // Assuming item has a price property
+    };
+  
+    axios
+      .post("http://localhost:8082/api/rentals", rentalDetails, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        toast.success("Item added to cart successfully!");
+        onRent(); // Trigger parent component update if needed
+        onClose(); // Close the dialog
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Failed to rent item. Please try again.");
+      });
   };
 
   return (

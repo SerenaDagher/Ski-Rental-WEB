@@ -66,7 +66,7 @@ fetch("http://localhost:8082/api/users/login", {
             localStorage.setItem("token", data.token); // Store token
             console.log("Login successful:", data.user);
         } else {
-            console.error("Login failed:", data.message);
+            // console.error("Login failed:", data.message);
         }
     });
 

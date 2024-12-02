@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/api/users");
 const app = express();
 const bcrypt = require('bcryptjs');
-
+const rentalRoutes = require("./routes/api/rentalRoute"); // Adjust the path if needed
 
 app.use(cors({ origin: true, credentials: true }));
 
@@ -22,6 +22,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/snowboards", snowboardRoutes);
 app.use("/api/skiBoots",skiBootsRoutes);
 app.use("/api/snowboardBoots",snowboardBootRoutes);
+app.use("/api/rentals", rentalRoutes);
 
 connectDB();
 
