@@ -5,11 +5,11 @@ const Rental = require("../../models/rental");
 // POST route to create a rental
 router.post("/", async (req, res) => {
   try {
-    const { userId, itemId, location, deliveryDate, deliveryTime, paymentMethod, totalPrice } = req.body;
+    const { userId, itemName, location, deliveryDate, deliveryTime, paymentMethod, totalPrice } = req.body;
 
     const newRental = new Rental({
       userId,
-      itemId,
+      itemName,
       location,
       deliveryDate,
       deliveryTime,
@@ -35,5 +35,31 @@ router.get("/:userId", async (req, res) => {
     res.status(500).json({ message: "Failed to fetch rentals", error });
   }
 });
+
+router.delete('/', (req, res) => {
+    Ski.findByIdAndDelete(req.params.id)
+      .then(ski => res.json({ mgs: 'ski entry deleted successfully' }))
+      .catch(err => res.status(404).json({ error: 'No such ski' }));
+  });
+
+router.delete("/:rentalId", async (req, res) => {
+try {
+    const { rentalId } = req.params;
+
+    const rental = await Rental.findById(rentalId);
+    if (!rental) {
+    return res.status(404).json({ message: "Rental not found" });
+    }
+
+    // Delete the rental
+    await Rental.findByIdAndDelete(rentalId);
+
+    res.status(200).json({ message: "Rental deleted successfully" });
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to delete rental", error });
+}
+});
+
 
 module.exports = router;

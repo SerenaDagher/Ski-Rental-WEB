@@ -5,7 +5,7 @@ const RentalSchema = new mongoose.Schema({
     type: String,
     required: true 
   },
-  itemId: { 
+  itemName: { 
     type: String,
     required: true 
   },

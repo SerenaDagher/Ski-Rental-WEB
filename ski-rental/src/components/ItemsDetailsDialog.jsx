@@ -45,13 +45,13 @@ const ItemDetailsDialog = ({ open, item, onClose, onRent }) => {
 
   const onSubmit = (data) => {
     const rentalDetails = {
-      userId: "1", // Replace with actual user ID
-      itemId: item.name,
+      userId: "1", 
+      itemName: item.name,
       location: location,
       deliveryDate: selectedDate,
       deliveryTime: deliveryTime,
       paymentMethod: "cash on delivery",
-      totalPrice: 100, // Assuming item has a price property
+      totalPrice: 100, 
     };
   
     axios
@@ -62,8 +62,8 @@ const ItemDetailsDialog = ({ open, item, onClose, onRent }) => {
       })
       .then((response) => {
         toast.success("Item added to cart successfully!");
-        onRent(); // Trigger parent component update if needed
-        onClose(); // Close the dialog
+        // onRent(); // Trigger parent component update if needed
+        // onClose(); // Close the dialog
       })
       .catch((error) => {
         console.error("Error:", error);
