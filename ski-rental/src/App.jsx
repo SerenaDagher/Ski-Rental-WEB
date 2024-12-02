@@ -10,7 +10,7 @@ import SkisList from './components/EquipmentsList';
 import AccessoriesList from './components/AccessoriesList';
 import Footer from "./components/Footer"; 
 import SkiRecommendationForm from './components/SKiRecommendationForm';
-import { Button , Dialog, DialogTitle, DialogContent, DialogActions} from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 
@@ -20,9 +20,10 @@ function App() {
   const [userName, setUserName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSignup, setIsSignup] = useState(true); 
+
   const equipListRef = useRef(null);
-  const topBarRef = useRef(null);
   const accessoriesRef = useRef(null);
+  const topBarRef = useRef(null);
   const theme = useTheme();
 
   const openCartDialog = () => setIsDialogOpen(true); 
@@ -37,20 +38,8 @@ function App() {
 
   const toggleSignupLogin = () => setIsSignup((prev) => !prev);
 
-  const scrollToEquipList = () => {
-    equipListRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-  };
-  const scrollToAccessories = () => {
-    accessoriesRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-  };
-  const scrollToTop = () => {
-    topBarRef.current?.scrollIntoView({
+  const scrollToSection = (ref) => {
+    ref.current?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
@@ -77,27 +66,28 @@ function App() {
         isLoggedIn={isLoggedIn}
         userName={userName}
         onLogoutClick={handleLogout}
-        onScrollToEquip={scrollToEquipList}
-        onScrollToAccessories={scrollToAccessories}
-        onLogoCLick={scrollToTop}
+        onScrollToEquip={() => scrollToSection(equipListRef)}
+        onScrollToAccessories={() => scrollToSection(accessoriesRef)}
+        onLogoCLick={() => scrollToSection(topBarRef)}
         onCartClick={openCartDialog}
       />
 
       <Dialog open={isDialogOpen} onClose={closeCartDialog} fullWidth maxWidth="sm">
-              <DialogTitle>
-                <Typography variant="h6">Your Cart</Typography>
-              </DialogTitle>
-              <DialogContent>
-                <Typography variant="body1">
-                  Your cart is empty. Start shopping to add items!
-                </Typography>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={closeCartDialog} color="primary" variant="outlined">
-                  Close
-                </Button>
-              </DialogActions>
+        <DialogTitle>
+          <Typography variant="h6">Your Cart</Typography>
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">
+            Your cart is empty. Start shopping to add items!
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeCartDialog} color="primary" variant="outlined">
+            Close
+          </Button>
+        </DialogActions>
       </Dialog>
+
       {isModalOpen && (
         <div className="modal-overlay">
           {isSignup ? (
@@ -161,17 +151,22 @@ function App() {
           </Button>
         </div>
       </div>
-      <SkiRecommendationForm/>
-      <div ref={equipListRef} style={{marginTop:'70px'}}>
+
+      <SkiRecommendationForm />
+
+      <div ref={equipListRef} style={{ marginTop: '70px' }}>
         <SkisList />
       </div>
-      <div ref={accessoriesRef} style={{marginTop:'200px'}}>
+
+      <div ref={accessoriesRef} style={{ marginTop: '200px' }}>
         <AccessoriesList />
       </div>
 
       <Footer
-        onSignupClick={() => openModal(true)} // Opens Signup modal
-        onLoginClick={() => openModal(false)} // Opens Login modal
+        onSignupClick={() => openModal(true)} 
+        onLoginClick={() => openModal(false)}
+        onScrollToAccessories={() => scrollToSection(accessoriesRef)}
+        onScrollToEquipments={() => scrollToSection(equipListRef)}
       />
 
       <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
