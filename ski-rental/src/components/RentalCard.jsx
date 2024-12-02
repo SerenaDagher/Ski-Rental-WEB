@@ -15,6 +15,7 @@ function RentalCard({ image, title, available, onRentClick }) {
         borderRadius: 4,
         boxShadow: 2
       }}
+      
     >
       <CardContent>
         <img
