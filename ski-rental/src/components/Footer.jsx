@@ -1,10 +1,13 @@
+
+
+
 import React from 'react';
 import { Box, Typography, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 
-const Footer = ({ onLoginClick, onSignupClick }) => {  // Keep both onLoginClick and onSignupClick
+const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollToEquipments }) => {  
   const theme = useTheme();
 
   return (
@@ -36,14 +39,14 @@ const Footer = ({ onLoginClick, onSignupClick }) => {  // Keep both onLoginClick
               <Typography
                 variant="body2"
                 sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer'}}
-                onClick={onLoginClick}  // Triggers Login window
+                onClick={onLoginClick}  
               >
                 Log in
               </Typography>
               <Typography
                 variant="body2"
                 sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer'}}
-                onClick={onSignupClick}  // Triggers Sign-up window
+                onClick={onSignupClick}  
               >
                 Sign up
               </Typography>
@@ -56,8 +59,20 @@ const Footer = ({ onLoginClick, onSignupClick }) => {  // Keep both onLoginClick
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
               <Typography variant="body1" sx={{ fontSize: '1rem' }}>Coaches</Typography>
               <Typography variant="body2" sx={{ fontSize: '1rem', marginTop: '5px' }}>MyRental</Typography>
-              <Typography variant="body4" sx={{ fontSize: '1rem', marginTop: '5px' }}>Accessories</Typography>
-              <Typography variant="body3" sx={{ fontSize: '1rem', marginTop: '5px' }}>Equipments</Typography>
+              <Typography 
+                variant="body4" 
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 
+                onClick={onScrollToAccessories}  
+              >
+                Accessories
+              </Typography>
+              <Typography 
+                variant="body4" 
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 
+                onClick={onScrollToEquipments} 
+              >
+                Equipments
+              </Typography>
             </Box>
           </Box>
 
