@@ -154,7 +154,7 @@ function App() {
       <div
         ref={aboutUsRef}
         style={{
-          paddingTop : "200px",
+          paddingTop : "300px",
           padding: "80px 20px",
           backgroundColor: theme.palette.background.default,
           textAlign: "center",
