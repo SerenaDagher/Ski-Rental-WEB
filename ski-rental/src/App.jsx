@@ -12,7 +12,6 @@ import Footer from "./components/Footer";
 import { Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Typography, Box } from '@mui/material';
-import ShoppingCart from './components/ShoppingCart';
 
 function App() {
   const [isItemDialogOpen, setIsItemDialogOpen] = useState(false); 
@@ -23,7 +22,7 @@ function App() {
 
   const equipListRef = useRef(null);
   const accessoriesRef = useRef(null);
-  const aboutUsRef = useRef(null); // Reference for the About Us section
+  const aboutUsRef = useRef(null); 
   const topBarRef = useRef(null);
   const theme = useTheme();
 
@@ -74,14 +73,6 @@ function App() {
         onCartClick={openCartDialog}
       />
 
-      {/* <Dialog open={isItemDialogOpen} onClose={closeCartDialog} fullWidth maxWidth="sm">
-        <Typography variant="h6">Your Cart</Typography>
-        <Typography variant="body1">Your cart is empty. Start shopping to add items!</Typography>
-        <Button onClick={closeCartDialog} color="primary" variant="outlined">
-          Close
-        </Button>
-      </Dialog> */}
-
       {isModalOpen && (
         <div className="modal-overlay">
           {isSignup ? (
@@ -92,13 +83,12 @@ function App() {
         </div>
       )}
 
-      {/* Hero Section */}
       <div
       style={{
         position: "relative",
         width: "100vw",
         height: "100vh",
-        backgroundImage: "url('https://us.images.westend61.de/0001349832pw/a-man-with-ski-gear-and-mountains-and-water-behind-CAVF77790.jpg')", // Replace with your mountain image URL
+        backgroundImage: "url('https://us.images.westend61.de/0001349832pw/a-man-with-ski-gear-and-mountains-and-water-behind-CAVF77790.jpg')", 
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed", 
@@ -111,7 +101,7 @@ function App() {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.5)", // Overlay for text visibility
+          backgroundColor: "rgba(0, 0, 0, 0.5)", 
           zIndex: 1,
         }}
       ></div>
@@ -148,7 +138,7 @@ function App() {
       </div>
       <img
       
-    src="/mountain.svg" // Replace with your mountain image file
+    src="/mountain.svg" 
     alt="Mountain"
     style={{
       position: "absolute",
@@ -161,7 +151,6 @@ function App() {
   />
     </div>
 
-      {/* About Us Section */}
       <div
         ref={aboutUsRef}
         style={{
@@ -171,7 +160,7 @@ function App() {
           textAlign: "center",
         }}
       >
-        <Typography variant="h4" sx={{ marginBottom: "20px" }}>
+        <Typography variant="h4" fontWeight={"bold"} sx={{ marginBottom: "20px" }}>
           About Us
         </Typography>
         <Typography variant="body1" sx={{ marginBottom: "10px", maxWidth: "800px", margin: "0 auto" }}>
@@ -187,12 +176,10 @@ function App() {
         </Typography>
       </div>
 
-      {/* Equipment Section */}
       <div ref={equipListRef} style={{ marginTop: '70px' }}>
         <SkisList />
       </div>
 
-      {/* Accessories Section */}
       <div ref={accessoriesRef} style={{ marginTop: '200px' }}>
         <AccessoriesList />
       </div>

@@ -38,12 +38,10 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
   const [location, setLocation] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [deliveryTime, setDeliveryTime] = useState(null);
-  const [paymentMethod, setPaymentMethod] = useState("");
 
   const handleChangeLocation = (event) => setLocation(event.target.value);
   const handleDateChange = (newDate) => setSelectedDate(newDate);
   const handleTimeChange = (newTime) => setDeliveryTime(newTime);
-  const handlePaymentMethodChange = (event) => setPaymentMethod(event.target.value);
 
   const onSubmit = (data) => {
     const rentalDetails = {
@@ -79,7 +77,6 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogContent className="dialog">
             <Grid container spacing={2}>
-              {/* Left Column */}
               <Grid item xs={12} md={6}>
                 {item ? (
                   <>
@@ -96,7 +93,6 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
                         { title: "Type", content: item.type || "N/A" },
                         { title: "Description", content: item.description || "No description available" },
                         { title: "Length in cm", content: item.length || "No length available" },
-                        { title: "Width Waist in cm", content: item.widthWaist || "No width available" },
                       ]}
                     />
                   </>
@@ -107,13 +103,11 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
                 )}
               </Grid>
 
-              {/* Right Column */}
               <Grid item xs={12} md={6}>
                 <Typography variant="h5" sx={{ textAlign: "center", mt: 4, mb: 4 }} fontWeight="bold">
                   Fill this form to rent
                 </Typography>
                 <FormControl fullWidth sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                  {/* Delivery Location */}
                   <FormControl error={!!errors.location}>
                     <InputLabel>Select Delivery Location</InputLabel>
                     <Select
@@ -132,7 +126,6 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
                     )}
                   </FormControl>
 
-                  {/* Delivery Date */}
                   <DatePicker
                     label="Select Delivery Date"
                     value={selectedDate}
@@ -189,7 +182,6 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
                     )}
                   </FormControl>
 
-                  {/* Terms and Conditions */}
                   <FormGroup>
                     <FormControlLabel
                       control={<Checkbox {...register("terms", { required: "You must accept the terms and conditions" })} />}
@@ -212,7 +204,7 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
             </Button>
             {item && (
               <Button type="submit" variant="contained" size="large">
-                Add to Cart
+                Done
               </Button>
             )}
           </DialogActions>
