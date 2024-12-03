@@ -9,14 +9,13 @@ import "react-toastify/dist/ReactToastify.css";
 import SkisList from './components/EquipmentsList';
 import AccessoriesList from './components/AccessoriesList';
 import Footer from "./components/Footer"; 
-import SkiRecommendationForm from './components/SKiRecommendationForm';
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import ShoppingCart from './components/ShoppingCart';
 
 function App() {
-  const [isDialogOpen, setIsDialogOpen] = useState(false); 
+  const [isItemDialogOpen, setIsItemDialogOpen] = useState(false); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,11 +23,12 @@ function App() {
 
   const equipListRef = useRef(null);
   const accessoriesRef = useRef(null);
+  const aboutUsRef = useRef(null); // Reference for the About Us section
   const topBarRef = useRef(null);
   const theme = useTheme();
 
-  const openCartDialog = () => setIsDialogOpen(true); 
-  const closeCartDialog = () => setIsDialogOpen(false); 
+  const openCartDialog = () => setIsItemDialogOpen(true); 
+  const closeCartDialog = () => setIsItemDialogOpen(false); 
 
   const openModal = (isSignup) => {
     setIsModalOpen(true);
@@ -67,27 +67,21 @@ function App() {
         isLoggedIn={isLoggedIn}
         userName={userName}
         onLogoutClick={handleLogout}
+        onScrollToAboutUs={() => scrollToSection(aboutUsRef)}
         onScrollToEquip={() => scrollToSection(equipListRef)}
         onScrollToAccessories={() => scrollToSection(accessoriesRef)}
         onLogoCLick={() => scrollToSection(topBarRef)}
         onCartClick={openCartDialog}
       />
 
-      <Dialog open={isDialogOpen} onClose={closeCartDialog} fullWidth maxWidth="sm">
-              <DialogTitle>
-                <Typography variant="h6">Your Cart</Typography>
-              </DialogTitle>
-              <DialogContent>
-                <Typography variant="body1">
-                  Your cart is empty. Start shopping to add items!
-                </Typography>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={closeCartDialog} color="primary" variant="outlined">
-                  Close
-                </Button>
-              </DialogActions>
-      </Dialog>
+      {/* <Dialog open={isItemDialogOpen} onClose={closeCartDialog} fullWidth maxWidth="sm">
+        <Typography variant="h6">Your Cart</Typography>
+        <Typography variant="body1">Your cart is empty. Start shopping to add items!</Typography>
+        <Button onClick={closeCartDialog} color="primary" variant="outlined">
+          Close
+        </Button>
+      </Dialog> */}
+
       {isModalOpen && (
         <div className="modal-overlay">
           {isSignup ? (
@@ -98,66 +92,107 @@ function App() {
         </div>
       )}
 
-      <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
-        <img
-          src="https://us.images.westend61.de/0001349832pw/a-man-with-ski-gear-and-mountains-and-water-behind-CAVF77790.jpg"
-          alt="Snowboarding in powder"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            zIndex: 1,
-          }}
-        ></div>
-        <div
-          style={{
-            position: "absolute",
-            top: "40%",
-            left: "5%",
-            transform: "translateY(-50%)",
-            color: "white",
-            textAlign: "left",
-            fontSize: "2rem",
-            textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
-            zIndex: 2,
+      {/* Hero Section */}
+      <div
+      style={{
+        position: "relative",
+        width: "100vw",
+        height: "100vh",
+        backgroundImage: "url('https://us.images.westend61.de/0001349832pw/a-man-with-ski-gear-and-mountains-and-water-behind-CAVF77790.jpg')", // Replace with your mountain image URL
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed", 
+      }}
+      >
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.5)", // Overlay for text visibility
+          zIndex: 1,
+        }}
+      ></div>
+      <div
+        style={{
+          position: "absolute",
+          top: "40%",
+          left: "5%",
+          transform: "translateY(-50%)",
+          color: "white",
+          textAlign: "left",
+          fontSize: "2rem",
+          textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
+          zIndex: 2,
+        }}
+      >
+        <h1>Skip the queue!</h1>
+        <p>Be the first on the slopes and fully equipped</p>
+        <Button
+          variant="outlined"
+          size="large"
+          sx={{
+            color: theme.palette.common.white,
+            borderColor: theme.palette.common.white,
+            '&:hover': {
+              backgroundColor: theme.palette.common.white,
+              color: theme.palette.primary.main,
+              borderColor: theme.palette.primary.main,
+            },
           }}
         >
-          <h1>Skip the queue!</h1>
-          <p>Be the first on the slopes and fully equipped</p>
-          <Button
-            variant="outlined"
-            size="large"
-            sx={{
-              color: theme.palette.common.white,
-              borderColor: theme.palette.common.white,
-              '&:hover': {
-                backgroundColor: theme.palette.common.white,
-                color: theme.palette.primary.main,
-                borderColor: theme.palette.primary.main,
-              },
-            }}
-          >
-            Rent Now
-          </Button>
-        </div>
+          Rent Now
+        </Button>
+      </div>
+      <img
+      
+    src="/mountain.svg" // Replace with your mountain image file
+    alt="Mountain"
+    style={{
+      position: "absolute",
+      bottom: 0,
+      width: "100%",
+      height: "60%",
+      marginBottom: "-190px",
+      zIndex: 2,
+    }}
+  />
+    </div>
+
+      {/* About Us Section */}
+      <div
+        ref={aboutUsRef}
+        style={{
+          paddingTop : "200px",
+          padding: "80px 20px",
+          backgroundColor: theme.palette.background.default,
+          textAlign: "center",
+        }}
+      >
+        <Typography variant="h4" sx={{ marginBottom: "20px" }}>
+          About Us
+        </Typography>
+        <Typography variant="body1" sx={{ marginBottom: "10px", maxWidth: "800px", margin: "0 auto" }}>
+          At RentTheSlope, we make your ski and snowboard adventures hassle-free. 
+          Our mission is to provide top-quality rental equipment delivered directly 
+          to the slopes, so you can focus on what matters most—enjoying the powder. 
+          Whether you're a beginner or a pro, we've got the perfect gear for you.
+        </Typography>
+        <Typography variant="body1" sx={{ maxWidth: "800px", margin: "0 auto" }}>
+          Experience the convenience of skipping the rental lines and stepping onto 
+          the slopes with everything you need. Join thousands of happy skiers who 
+          trust RentTheSlope to make their mountain trips unforgettable.
+        </Typography>
       </div>
 
-      <SkiRecommendationForm />
-
+      {/* Equipment Section */}
       <div ref={equipListRef} style={{ marginTop: '70px' }}>
         <SkisList />
       </div>
 
+      {/* Accessories Section */}
       <div ref={accessoriesRef} style={{ marginTop: '200px' }}>
         <AccessoriesList />
       </div>
@@ -167,6 +202,7 @@ function App() {
         onLoginClick={() => openModal(false)}
         onScrollToAccessories={() => scrollToSection(accessoriesRef)}
         onScrollToEquipments={() => scrollToSection(equipListRef)}
+        onScrollToAboutUs={() => scrollToSection(aboutUsRef)} 
       />
 
       <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
@@ -174,5 +210,4 @@ function App() {
   );
 }
 
-export default App;
-
+export default App;

@@ -25,7 +25,7 @@ const MyDropdown = ({ buttonLabel, items }) => {
             },
           },
           '&:hover fieldset': {
-            borderColor: theme.palette.darkorange.main, // Hover border color
+            borderColor: theme.palette.darkorange.main,
           },
           borderColor: theme.palette.darkorange.main,
           color: theme.palette.darkorange.main,

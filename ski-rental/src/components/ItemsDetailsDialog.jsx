@@ -29,7 +29,7 @@ import { renderTimeViewClock } from '@mui/x-date-pickers/timeViewRenderers';
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const ItemDetailsDialog = ({ open, item, onClose, onRent }) => {
+const ItemDetailsDialog = ({ open, item, onClose }) => {
   const {
     register,
     handleSubmit,

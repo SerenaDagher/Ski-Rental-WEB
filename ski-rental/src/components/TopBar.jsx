@@ -14,12 +14,13 @@ import axios from "axios";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { IconButton } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ItemDetailsDialog from "./ItemsDetailsDialog";
 
 function TopBar({
   onSignupClick,
   isLoggedIn,
-  username,
   onLogoutClick,
+  onScrollToAboutUs,
   onScrollToEquip,
   onScrollToAccessories,
   onLogoCLick,
@@ -30,10 +31,17 @@ function TopBar({
   const [data, setData] = useState([]);
   const [records, setRecords] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const openDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setDialogOpen(false);
+  };
 
   const theme = useTheme();
 
-  // Handle scroll to change AppBar style
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 70);
@@ -45,18 +53,16 @@ function TopBar({
     };
   }, []);
 
-  // Fetch data from the skis API
   useEffect(() => {
     axios
       .get("http://localhost:8082/api/skis")
       .then((res) => {
         setData(res.data);
-        setRecords(res.data); // Initialize with full data
+        setRecords(res.data); 
       })
       .catch((err) => console.log(err));
   }, []);
 
-  // Filter function for the search bar
   const filter = (event) => {
     const searchValue = event.target.value.toLowerCase();
     setFilterSearch(searchValue);
@@ -75,7 +81,6 @@ function TopBar({
 
   return (
     <>
-      {/* AppBar and Toolbar */}
       <AppBar
         position="fixed"
         sx={{
@@ -86,7 +91,6 @@ function TopBar({
         style={{ zIndex: 999 }}
       >
         <Toolbar>
-          {/* Logo */}
           <Box
             sx={{
               display: "flex",
@@ -120,7 +124,6 @@ function TopBar({
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* Right-side items */}
           <Box
             sx={{
               display: "flex",
@@ -204,15 +207,19 @@ function TopBar({
                         onClick={() => {
                           setFilterSearch(ski.name);
                           setShowSuggestions(false);
+                          openDialog();
                         }}
                       >
                         <Typography variant="body1">{ski.name}</Typography>
-                      </Box>
-                    ))}
+                      </Box>)
+                    )}
                   </Box>
                 )}
               </Box>
             </ClickAwayListener>
+            <Button color="inherit" sx={{ fontSize: "1.1rem" }} onClick={onScrollToAboutUs}>
+              About Us
+            </Button>
             <Button color="inherit" sx={{ fontSize: "1.1rem" }}>
               Coaches
             </Button>
@@ -239,6 +246,7 @@ function TopBar({
               </Button>
             )}
           </Box>
+          
         </Toolbar>
       </AppBar>
     </>
