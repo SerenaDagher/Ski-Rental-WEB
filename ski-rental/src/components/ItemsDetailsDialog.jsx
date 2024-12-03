@@ -24,6 +24,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useForm } from "react-hook-form";
 import dayjs from "dayjs";
+import { renderTimeViewClock } from '@mui/x-date-pickers/timeViewRenderers';
+
 
 const ItemDetailsDialog = ({ open, item, onClose, onRent }) => {
   const {
@@ -121,11 +123,16 @@ const ItemDetailsDialog = ({ open, item, onClose, onRent }) => {
                     )}
                   />
 
-                  {/* Delivery Time */}
                   <TimePicker
+                  required
                     label="Select Delivery Time"
                     value={deliveryTime}
                     onChange={handleTimeChange}
+                    viewRenderers={{
+                      hours: renderTimeViewClock,
+                      minutes: renderTimeViewClock,
+                      seconds: renderTimeViewClock,
+                    }}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -137,9 +144,8 @@ const ItemDetailsDialog = ({ open, item, onClose, onRent }) => {
                     )}
                   />
 
-                  {/* Payment Method */}
                   <FormControl>
-                    <FormLabel>Choose payment method</FormLabel>
+                    <FormLabel required>Choose payment method</FormLabel>
                     <RadioGroup
                       row
                       // value={paymentMethod}
@@ -162,6 +168,7 @@ const ItemDetailsDialog = ({ open, item, onClose, onRent }) => {
                     <FormControlLabel
                       control={<Checkbox {...register("terms", { required: "You must accept the terms and conditions" })} />}
                       label="Accept the Terms and Conditions"
+                      required
                     />
                     {errors.terms && (
                       <Typography variant="caption" color="error">

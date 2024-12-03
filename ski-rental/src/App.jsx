@@ -10,9 +10,10 @@ import SkisList from './components/EquipmentsList';
 import AccessoriesList from './components/AccessoriesList';
 import Footer from "./components/Footer"; 
 import SkiRecommendationForm from './components/SKiRecommendationForm';
-import { Button , Dialog, DialogTitle, DialogContent, DialogActions} from '@mui/material';
+import { Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Typography } from '@mui/material';
+import ShoppingCart from './components/ShoppingCart';
 
 function App() {
   const [isDialogOpen, setIsDialogOpen] = useState(false); 
@@ -83,21 +84,7 @@ function App() {
         onCartClick={openCartDialog}
       />
 
-      <Dialog open={isDialogOpen} onClose={closeCartDialog} fullWidth maxWidth="sm">
-              <DialogTitle>
-                <Typography variant="h6">Your Cart</Typography>
-              </DialogTitle>
-              <DialogContent>
-                <Typography variant="body1">
-                  Your cart is empty. Start shopping to add items!
-                </Typography>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={closeCartDialog} color="primary" variant="outlined">
-                  Close
-                </Button>
-              </DialogActions>
-      </Dialog>
+    <ShoppingCart isDialogOpen={isDialogOpen} closeCartDialog={closeCartDialog}/>
       {isModalOpen && (
         <div className="modal-overlay">
           {isSignup ? (

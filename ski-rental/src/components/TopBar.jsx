@@ -10,6 +10,8 @@ import { useTheme } from "@mui/material/styles";
 import ShoppingCart from "./ShoppingCart";
 import TextField from '@mui/material/TextField';
 import SearchIcon from "@mui/icons-material/Search";
+import { IconButton } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollToEquip, onScrollToAccessories, onLogoCLick, onCartClick }) {
   const [filterSearch, setFilterSearch] = useState('');
@@ -167,7 +169,9 @@ function TopBar({ onSignupClick, isLoggedIn, username, onLogoutClick, onScrollTo
             Accessories
           </Button>
 
-          <ShoppingCart onClick={onCartClick} />
+          <IconButton color="inherit" aria-label="shopping-cart" onClick={onCartClick}>
+            <ShoppingCartIcon style={{ color: 'white',fontSize: '2rem' }} />
+          </IconButton>
 
           {isLoggedIn ? (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
