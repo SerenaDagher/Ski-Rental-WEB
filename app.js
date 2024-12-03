@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/api/users");
 const app = express();
 const bcrypt = require('bcryptjs');
-const rentalRoutes = require("./routes/api/rentalRoute"); // Adjust the path if needed
+const rentalRoutes = require("./routes/api/rentalRoute"); 
 
 app.use(cors({ origin: true, credentials: true }));
 

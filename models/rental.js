@@ -18,12 +18,11 @@ const RentalSchema = new mongoose.Schema({
     required: true 
   },
   deliveryTime: { 
-    type: String, // You can also use `Date` for precise timestamps if needed
+    type: String,
     required: true 
   },
   paymentMethod: { 
     type: String, 
-    // enum: ["cash on delivery", "card", "whish"], // Limit allowed values
     required: true 
   },
   totalPrice: { 
