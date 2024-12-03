@@ -1,13 +1,25 @@
 
 import React from 'react';
-import { IconButton } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Dialog , DialogActions, DialogTitle, Typography, DialogContent, Button } from '@mui/material';
 
-function ShoppingCart(onClick) {
+
+function ShoppingCart({isDialogOpen, closeCartDialog}) {
   return (
-    <IconButton color="inherit" aria-label="shopping-cart" onClick={onClick}>
-      <ShoppingCartIcon style={{ color: 'white',fontSize: '2rem' }} />
-    </IconButton>
+    <Dialog open={isDialogOpen} onClose={closeCartDialog} fullWidth maxWidth="sm">
+    <DialogTitle>
+      <Typography variant="h4" fontWeight={"bold"}>Your Cart</Typography>
+    </DialogTitle>
+    <DialogContent>
+      <Typography variant="body1">
+        Your cart is empty. Start shopping to add items!
+      </Typography>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={closeCartDialog} color="primary" variant="outlined">
+        Close
+      </Button>
+    </DialogActions>
+</Dialog>
   );
 }
 

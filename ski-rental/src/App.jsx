@@ -13,6 +13,7 @@ import SkiRecommendationForm from './components/SKiRecommendationForm';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Typography } from '@mui/material';
+import ShoppingCart from './components/ShoppingCart';
 
 function App() {
   const [isDialogOpen, setIsDialogOpen] = useState(false); 
@@ -73,21 +74,20 @@ function App() {
       />
 
       <Dialog open={isDialogOpen} onClose={closeCartDialog} fullWidth maxWidth="sm">
-        <DialogTitle>
-          <Typography variant="h6">Your Cart</Typography>
-        </DialogTitle>
-        <DialogContent>
-          <Typography variant="body1">
-            Your cart is empty. Start shopping to add items!
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={closeCartDialog} color="primary" variant="outlined">
-            Close
-          </Button>
-        </DialogActions>
+              <DialogTitle>
+                <Typography variant="h6">Your Cart</Typography>
+              </DialogTitle>
+              <DialogContent>
+                <Typography variant="body1">
+                  Your cart is empty. Start shopping to add items!
+                </Typography>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={closeCartDialog} color="primary" variant="outlined">
+                  Close
+                </Button>
+              </DialogActions>
       </Dialog>
-
       {isModalOpen && (
         <div className="modal-overlay">
           {isSignup ? (

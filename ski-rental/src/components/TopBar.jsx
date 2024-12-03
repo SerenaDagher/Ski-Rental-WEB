@@ -12,6 +12,8 @@ import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import { IconButton } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function TopBar({
   onSignupClick,
