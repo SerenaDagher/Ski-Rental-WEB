@@ -97,7 +97,7 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
                 </Button>
                 </form>
                 <Typography variant="body1" component="div" sx={{marginTop :"16px"}}>
-                  Already have an account?{" "}
+                  Don't have an account?{" "}
                   <Button
                     onClick={onSwitchToSignup}
                     variant="text"
