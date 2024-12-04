@@ -151,6 +151,7 @@ function TopBar({
             <ClickAwayListener onClickAway={() => setShowSuggestions(false)}>
               <Box sx={{ position: "relative" }}>
                 <TextField
+                  value={filterSearch}
                   id="standard-basic"
                   label={filterSearch === "" ? "Search" : filterSearch}
                   variant="standard"

@@ -45,6 +45,8 @@ function App() {
     });
   };
 
+  
+
   const handleLogin = (userName) => {
     setIsLoggedIn(true);
     setUserName(userName);
@@ -152,32 +154,50 @@ function App() {
   />
     </div>
 
-      <div
-        ref={aboutUsRef}
-        style={{
-          paddingTop : "350px",
-          padding: "80px 20px",
-          backgroundColor: theme.palette.background.default,
-          textAlign: "center",
-        }}
-      >
-        <Typography variant="h4" fontWeight={"bold"} sx={{ marginBottom: "20px" }}>
-          About Us
-        </Typography>
-        <Typography variant="body1" sx={{ marginBottom: "10px", maxWidth: "800px", margin: "0 auto" }}>
-          At RentTheSlope, we make your ski and snowboard adventures hassle-free. 
-          Our mission is to provide top-quality rental equipment delivered directly 
-          to the slopes, so you can focus on what matters most—enjoying the powder. 
-          Whether you're a beginner or a pro, we've got the perfect gear for you.
-        </Typography>
-        <Typography variant="body1" sx={{ maxWidth: "800px", margin: "0 auto" }}>
-          Experience the convenience of skipping the rental lines and stepping onto 
-          the slopes with everything you need. Join thousands of happy skiers who 
-          trust RentTheSlope to make their mountain trips unforgettable.
-        </Typography>
-      </div>
+    <div
+  ref={aboutUsRef}
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingTop: "100px",
+    padding: "80px 20px",
+    backgroundColor: theme.palette.background.default,
+  }}
+>
+  <Typography variant="h4" fontWeight={"bold"} sx={{ marginBottom: "30px", marginTop:'130px' }}>
+    About Us
+  </Typography>
+  <Box
+    sx={{
+      backgroundColor: theme.palette.primary.main,
+      maxWidth: "1150px",  
+      width: "100%",  
+      margin: "0 auto",
+      padding: "40px",  
+      borderRadius: "50px",  
+      marginBottom: "20px",
+    }}
+  >
+    <Typography variant="body1" sx={{ color: "white", marginBottom: "10px" }}>
+    Skip the hassle and hit the slopes fully equipped with Rent the Slope! Our platform is your
+    ultimate destination for renting high-quality ski and snowboard gear, designed to get you 
+    on the mountain faster and without the stress. Whether you're a seasoned pro or a first-time
+    skier, we make it easy to find the perfect equipment for your adventure.
+    </Typography>
+    <Typography variant="body1" sx={{ color: "white" }}>
+    No more long lines or expensive purchases—just rent, ski, and repeat. With Rent the Slope,
+    you’re always ready for your next winter adventure, equipped with the gear you need to make
+    every moment on the slopes unforgettable!
+    </Typography>
+    <Typography variant="body1" sx={{ color: "white" }}>
+    Driven by our passion for skiing, we created this platform to simplify the rental process,
+    making it easier, faster, and more affordable for everyone who loves the mountains as much as we do.
+    </Typography>
+  </Box>
+</div>
 
-      <div ref={equipListRef} style={{ marginTop: '70px' }}>
+      <div ref={equipListRef} style={{ marginTop: '10px' }}>
         <SkisList />
       </div>
 

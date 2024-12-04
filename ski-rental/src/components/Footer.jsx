@@ -1,13 +1,11 @@
-
-
-
 import React from 'react';
 import { Box, Typography, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 
-const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollToEquipments, onScrollToAboutUs }) => {  
+
+const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollToEquipments, onScrollToAboutUs, openRentals }) => {  
   const theme = useTheme();
 
   return (
@@ -65,7 +63,13 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
                 About us
               </Typography>
               <Typography variant="body1" sx={{ fontSize: '1rem', marginTop: '5px' }}>Coaches</Typography>
-              <Typography variant="body2" sx={{ fontSize: '1rem', marginTop: '5px' }}>MyRental</Typography>
+              <Typography 
+                variant="body4" 
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 
+                onClick={openRentals}  
+              >
+                MyRental
+              </Typography>
               <Typography 
                 variant="body4" 
                 sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 
