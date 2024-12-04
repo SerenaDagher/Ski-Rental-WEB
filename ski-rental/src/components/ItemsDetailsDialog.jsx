@@ -46,7 +46,7 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
 
   const onSubmit = (data) => {
     if (!user || !user._id) {
-      alert("User information is missing. Please log in again.");
+      toast.error("Please log in before renting");
       return;
     }
     const rentalDetails = {

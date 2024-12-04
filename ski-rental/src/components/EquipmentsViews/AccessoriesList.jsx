@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import RentalCard from './RentalCard';
+import RentalCard from '../RentalCard';
 import Pagination from '@mui/material/Pagination';
 import { Box } from '@mui/material';
-import MyDropdown from './DropDownButton';
-import ItemDetailsDialog from './ItemsDetailsDialog';
+import MyDropdown from '../DropDownButton';
+import ItemDetailsDialog from '../ItemsDetailsDialog';
+
 
 const FILTERS = {
   ALL: 'all',
@@ -21,13 +22,27 @@ const RIDES = {
 const AccessoriesList = () => {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage] = useState(5);
+  const [cardsPerPage,setCardsPerPage] = useState(4);
   const [filter, setFilter] = useState(FILTERS.ALL);
   const [ride, setRide] = useState(RIDES.ALL);
   const [filterLabel, setFilterLabel] = useState('All');
   const [rideLabel, setRideLabel] = useState('All');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+
+  useEffect(() => {
+    const updateCardsPerPage = () => {
+      const width = window.innerWidth;
+      if (width <= 1000) setCardsPerPage(2); // Small screens
+      else if (width <= 2000) setCardsPerPage(4); // Medium screens
+      else setCardsPerPage(6); // Large screens
+    };
+
+    updateCardsPerPage(); // Set initially
+    window.addEventListener('resize', updateCardsPerPage); // Adjust on resize
+
+    return () => window.removeEventListener('resize', updateCardsPerPage); // Cleanup on unmount
+  }, []);
 
   useEffect(() => {
     fetchItems();

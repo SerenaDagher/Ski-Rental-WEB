@@ -15,6 +15,9 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { IconButton } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ItemDetailsDialog from "./ItemsDetailsDialog";
+import UsersRents from "./Rents/UsersRents"; 
+import { useUser } from "../contexts/UserContext";
+import { toast } from "react-toastify";
 
 function TopBar({
   onSignupClick,
@@ -32,6 +35,9 @@ function TopBar({
   const [records, setRecords] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [openRentalsDialog, setOpenRentalsDialog] = useState(false);
+  const { user, setUser } = useUser();
+
   const openDialog = () => {
     setDialogOpen(true);
   };
@@ -41,6 +47,14 @@ function TopBar({
   };
 
   const theme = useTheme();
+
+  const openRentals = () => {
+    if (!user || !user._id ) {
+      toast.error("Please log in to see your rentals");
+      return;
+    }
+    setOpenRentalsDialog(true);
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -220,17 +234,17 @@ function TopBar({
             <Button color="inherit" sx={{ fontSize: "1.1rem" }} onClick={onScrollToAboutUs}>
               About Us
             </Button>
-            <Button color="inherit" sx={{ fontSize: "1.1rem" }}>
-              Coaches
-            </Button>
             <Button color="inherit" sx={{ fontSize: "1.1rem" }} onClick={onScrollToEquip}>
               Equipments
             </Button>
             <Button color="inherit" sx={{ fontSize: "1.1rem" }} onClick={onScrollToAccessories}>
               Accessories
             </Button>
+            <Button color="inherit" sx={{ fontSize: "1.1rem" }} onClick={openRentals}>
+              My Rentals
+            </Button>
 
-            <ShoppingCart onClick={onCartClick} />
+            {/* <ShoppingCart onClick={onCartClick} /> */}
 
             {isLoggedIn ? (
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -246,7 +260,11 @@ function TopBar({
               </Button>
             )}
           </Box>
-          
+          <UsersRents
+        open={openRentalsDialog}
+        onClose={() => setOpenRentalsDialog(false)}
+        userId={user ? user._id : null} 
+      />
         </Toolbar>
       </AppBar>
     </>

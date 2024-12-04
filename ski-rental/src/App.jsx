@@ -6,8 +6,8 @@ import Login from "./components/Authentication/LogIn";
 import TopBar from "./components/TopBar";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SkisList from './components/EquipmentsList';
-import AccessoriesList from './components/AccessoriesList';
+import SkisList from './components/EquipmentsViews/EquipmentsList';
+import AccessoriesList from './components/EquipmentsViews/AccessoriesList';
 import Footer from "./components/Footer"; 
 import { Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -121,6 +121,7 @@ function App() {
         <h1>Skip the queue!</h1>
         <p>Be the first on the slopes and fully equipped</p>
         <Button
+        onClick={() => scrollToSection(equipListRef)}
           variant="outlined"
           size="large"
           sx={{
@@ -180,7 +181,7 @@ function App() {
         <SkisList />
       </div>
 
-      <div ref={accessoriesRef} style={{ marginTop: '200px' }}>
+      <div ref={accessoriesRef} style={{ marginTop: '100px' }}>
         <AccessoriesList />
       </div>
 

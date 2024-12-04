@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import RentalCard from './RentalCard';
+import RentalCard from '../RentalCard';
 import Pagination from '@mui/material/Pagination';
 import { Box } from '@mui/material';
-import MyDropdown from './DropDownButton';
-import ItemDetailsDialog from './ItemsDetailsDialog';
+import MyDropdown from '../DropDownButton';
+import ItemDetailsDialog from '../ItemsDetailsDialog';
 
 
 const EquipmentList = () => {
@@ -21,7 +21,7 @@ const EquipmentList = () => {
   useEffect(() => {
     const updateCardsPerPage = () => {
       const width = window.innerWidth;
-      if (width <= 600) setCardsPerPage(2); // Small screens
+      if (width <= 1000) setCardsPerPage(2); // Small screens
       else if (width <= 2000) setCardsPerPage(4); // Medium screens
       else setCardsPerPage(6); // Large screens
     };

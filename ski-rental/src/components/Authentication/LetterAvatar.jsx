@@ -7,6 +7,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { useUser } from "../../contexts/UserContext";
 import { useTheme } from "@mui/material/styles";
 import UsersRents from "../Rents/UsersRents"; 
+import { toast, ToastContainer } from "react-toastify";
 
 export default function LetterAvatar({ logout }) {
   const theme = useTheme();
@@ -25,7 +26,9 @@ export default function LetterAvatar({ logout }) {
   };
 
   const handleLogout = () => {
-    setUser(null); // Clear the user from context
+    logout();
+    setUser(null); 
+    console.log(user);
     localStorage.removeItem("user"); // Clear user from local storage
     handleMenuClose();
   };
@@ -57,23 +60,8 @@ export default function LetterAvatar({ logout }) {
         }}
       >
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem
-          onClick={() => {
-            setOpenCartDialog(true); // Open the cart dialog
-            handleMenuClose();
-          }}
-        >
-          My Cart
-        </MenuItem>
-        <MenuItem onClick={logout}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
-
-      {/* Render the UsersRents dialog */}
-      <UsersRents
-        open={openCartDialog}
-        onClose={() => setOpenCartDialog(false)}
-        userId={user._id || "1"} // Replace "1" with dynamic user ID
-      />
     </div>
   );
 }

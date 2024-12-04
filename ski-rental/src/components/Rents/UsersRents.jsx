@@ -16,10 +16,10 @@ const UsersRents = ({ open, onClose, userId }) => {
   const [rentals, setRentals] = useState([]);
 
   useEffect(() => {
-    if (open) {
+    if (open && userId) {
       fetchRentals();
     }
-  }, [open]);
+  }, [open, userId]);
 
   const fetchRentals = async () => {
     try {
