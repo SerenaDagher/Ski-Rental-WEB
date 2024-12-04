@@ -113,7 +113,7 @@ function App() {
           transform: "translateY(-50%)",
           color: "white",
           textAlign: "left",
-          fontSize: "2rem",
+          fontSize: "3rem",
           textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
           zIndex: 2,
         }}
@@ -154,7 +154,7 @@ function App() {
       <div
         ref={aboutUsRef}
         style={{
-          paddingTop : "300px",
+          paddingTop : "350px",
           padding: "80px 20px",
           backgroundColor: theme.palette.background.default,
           textAlign: "center",

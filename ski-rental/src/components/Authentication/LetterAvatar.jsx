@@ -72,7 +72,7 @@ export default function LetterAvatar({ logout }) {
       <UsersRents
         open={openCartDialog}
         onClose={() => setOpenCartDialog(false)}
-        userId={user?.id || "1"} // Replace "1" with dynamic user ID
+        userId={user._id || "1"} // Replace "1" with dynamic user ID
       />
     </div>
   );

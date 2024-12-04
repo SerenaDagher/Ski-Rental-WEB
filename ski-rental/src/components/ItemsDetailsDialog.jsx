@@ -25,11 +25,12 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useForm } from "react-hook-form";
 import dayjs from "dayjs";
 import { renderTimeViewClock } from '@mui/x-date-pickers/timeViewRenderers';
-
+import  {useUser} from "../contexts/UserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const ItemDetailsDialog = ({ open, item, onClose }) => {
+  const { user, setUser } = useUser();
   const {
     register,
     handleSubmit,
@@ -44,8 +45,12 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
   const handleTimeChange = (newTime) => setDeliveryTime(newTime);
 
   const onSubmit = (data) => {
+    if (!user || !user._id) {
+      alert("User information is missing. Please log in again.");
+      return;
+    }
     const rentalDetails = {
-      userId: "1", 
+      userId: user._id, 
       itemName: item.name,
       location: location,
       deliveryDate: selectedDate,
