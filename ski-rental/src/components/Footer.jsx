@@ -7,11 +7,11 @@ import { useTheme } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 
-const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollToEquipments }) => {  
+const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollToEquipments, onScrollToAboutUs }) => {  
   const theme = useTheme();
 
   return (
-    <footer style={{ backgroundColor: theme.palette.primary.main, color: '#fff', padding: '20px 0 30px', textAlign: 'center', marginTop: '50px' }}>
+    <footer style={{ backgroundColor: theme.palette.primary.main, color: '#fff', padding: '20px 0 30px', textAlign: 'center', marginTop: '150px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingLeft: '150px', paddingTop: '10px' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -38,14 +38,14 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
               <Typography
                 variant="body2"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer'}}
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer',fontSize: '1rem'}}
                 onClick={onLoginClick}  
               >
                 Log in
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer'}}
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer',fontSize: '1rem'}}
                 onClick={onSignupClick}  
               >
                 Sign up
@@ -57,7 +57,14 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '100px' }}>
             <Typography variant="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>About</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
-              <Typography variant="body1" sx={{ fontSize: '1rem' }}>Coaches</Typography>
+            <Typography 
+                variant="body4" 
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 
+                onClick={onScrollToAboutUs}  
+              >
+                About us
+              </Typography>
+              <Typography variant="body1" sx={{ fontSize: '1rem', marginTop: '5px' }}>Coaches</Typography>
               <Typography variant="body2" sx={{ fontSize: '1rem', marginTop: '5px' }}>MyRental</Typography>
               <Typography 
                 variant="body4" 
@@ -79,7 +86,7 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '100px' }}>
             <Typography variant="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Terms & Conditions</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
-              <Typography variant="body1" sx={{ fontSize: '1rem' }}>Privacy policy</Typography>
+              <Typography variant="body1" sx={{ fontSize: '1rem' , marginTop: '5px'}}>Privacy policy</Typography>
               <Typography variant="body3" sx={{ fontSize: '1rem', marginTop: '5px' }}>Cancellation policy</Typography>
               <Typography variant="body2" sx={{ fontSize: '1rem', marginTop: '5px' }}>Terms & Conditions</Typography>
             </Box>

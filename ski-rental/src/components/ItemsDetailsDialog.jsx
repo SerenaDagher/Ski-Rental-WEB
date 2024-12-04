@@ -116,9 +116,11 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
                   <FormControl error={!!errors.location}>
                     <InputLabel>Select Delivery Location</InputLabel>
                     <Select
+                      label="Select Delivery Location"
                       {...register("location", { required: "Location is required" })}
                       value={location}
                       onChange={handleChangeLocation}
+                      fullWidth
                     >
                       <MenuItem value="Mzaar Kfardebian">Mzaar Kfardebian</MenuItem>
                       <MenuItem value="Warde Kfardebian">Warde Kfardebian</MenuItem>
