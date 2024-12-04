@@ -10,13 +10,27 @@ import ItemDetailsDialog from './ItemsDetailsDialog';
 const EquipmentList = () => {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage] = useState(5);
+  const [cardsPerPage, setCardsPerPage] = useState(4);
   const [filter, setFilter] = useState('all'); 
   const [ride, setRide] = useState('all'); 
   const [filterLabel, setFilterLabel] = useState('All');
   const [rideLabel, setRideLabel] = useState('All');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+
+  useEffect(() => {
+    const updateCardsPerPage = () => {
+      const width = window.innerWidth;
+      if (width <= 600) setCardsPerPage(2); // Small screens
+      else if (width <= 2000) setCardsPerPage(4); // Medium screens
+      else setCardsPerPage(6); // Large screens
+    };
+
+    updateCardsPerPage(); // Set initially
+    window.addEventListener('resize', updateCardsPerPage); // Adjust on resize
+
+    return () => window.removeEventListener('resize', updateCardsPerPage); // Cleanup on unmount
+  }, []);
 
   useEffect(() => {
     fetchItems();
@@ -93,10 +107,10 @@ const EquipmentList = () => {
     setSelectedItem(null);
   };
 
-  const handleRent = () => {
-    alert(`You have rented: ${selectedItem.name}`);
-    closeDialog();
-  };
+  // const handleRent = () => {
+  //   alert(`You have rented: ${selectedItem.name}`);
+  //   closeDialog();
+  // };
 
   return (
     <div className="main">
