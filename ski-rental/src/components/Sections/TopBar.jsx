@@ -143,7 +143,7 @@ function TopBar({
               alignItems: "center",
               justifyContent: "center",
               marginLeft: "auto",
-              gap: 2,
+              columnGap: 1,
               color: "#ffffff",
             }}
           >
@@ -194,18 +194,12 @@ function TopBar({
                 {showSuggestions && records.length > 0 && (
                   <Box
                     sx={{
-                      position: "absolute",
-                      top: "100%",
-                      left: 0,
-                      right: 0,
-                      maxHeight: "200px",
-                      overflowY: "auto",
-                      backgroundColor: "#ffffff",
-                      color: "#000000",
-                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                      borderRadius: "4px",
-                      zIndex: 1000,
-                      padding: "10px 0",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginLeft: "auto",
+                      gap: 0, 
+                      color: "#ffffff",
                     }}
                   >
                     {records.map((ski) => (
@@ -231,16 +225,16 @@ function TopBar({
                 )}
               </Box>
             </ClickAwayListener>
-            <Button color="inherit" sx={{ fontSize: "1.1rem" }} onClick={onScrollToAboutUs}>
+            <Button color="inherit" sx={{fontSize: "1.2rem", textTransform: "none", letterSpacing: "0.5px" }} onClick={onScrollToAboutUs}>
               About Us
             </Button>
-            <Button color="inherit" sx={{ fontSize: "1.1rem" }} onClick={onScrollToEquip}>
+            <Button color="inherit" sx={{ fontSize: "1.2rem", textTransform: "none", letterSpacing: "0.5px" }} onClick={onScrollToEquip}>
               Equipments
             </Button>
-            <Button color="inherit" sx={{ fontSize: "1.1rem" }} onClick={onScrollToAccessories}>
+            <Button color="inherit" sx={{ fontSize: "1.2rem", textTransform: "none", letterSpacing: "0.5px" }} onClick={onScrollToAccessories}>
               Accessories
             </Button>
-            <Button color="inherit" sx={{ fontSize: "1.1rem" }} onClick={openRentals}>
+            <Button color="inherit" sx={{ fontSize: "1.2rem", textTransform: "none", letterSpacing: "0.5px" }} onClick={openRentals}>
               My Rentals
             </Button>
 

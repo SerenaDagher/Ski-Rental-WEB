@@ -68,7 +68,7 @@ const HeroSection = ({ scrollToSection, equipListRef }) => {
           position: "absolute",
           bottom: 0,
           width: "100%",
-          height: "60%",
+          height: "80%",
           marginBottom: "-190px",
           zIndex: 2,
         }}

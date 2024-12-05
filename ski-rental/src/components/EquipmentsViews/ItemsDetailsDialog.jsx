@@ -77,7 +77,7 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
+      <Dialog open={open} onClose={onClose} fullWidth maxWidth="md"  style={{overflowY: 'hidden'}}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogContent className="dialog">
             <Grid container spacing={2}>
