@@ -4,7 +4,7 @@ import RentalCard from '../RentalCard';
 import Pagination from '@mui/material/Pagination';
 import { Box } from '@mui/material';
 import MyDropdown from '../DropDownButton';
-import ItemDetailsDialog from '../ItemsDetailsDialog';
+import ItemDetailsDialog from './ItemsDetailsDialog';
 
 
 const EquipmentList = () => {

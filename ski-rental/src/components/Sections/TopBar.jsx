@@ -5,18 +5,15 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
-import LetterAvatar from "./Authentication/LetterAvatar";
+import LetterAvatar from "../Authentication/LetterAvatar";
 import { useTheme } from "@mui/material/styles";
-import ShoppingCart from "./ShoppingCart";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
-import { IconButton } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ItemDetailsDialog from "./ItemsDetailsDialog";
-import UsersRents from "./Rents/UsersRents"; 
-import { useUser } from "../contexts/UserContext";
+import ItemDetailsDialog from "../EquipmentsViews/ItemsDetailsDialog";
+import UsersRents from "../Rents/UsersRents";
+import { useUser } from "../../contexts/UserContext";
 import { toast } from "react-toastify";
 
 function TopBar({
@@ -27,18 +24,19 @@ function TopBar({
   onScrollToEquip,
   onScrollToAccessories,
   onLogoCLick,
-  onCartClick,
 }) {
   const [filterSearch, setFilterSearch] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [data, setData] = useState([]);
+  const [item, setItem] = useState([]);
   const [records, setRecords] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [openRentalsDialog, setOpenRentalsDialog] = useState(false);
-  const { user, setUser } = useUser();
+  const [selectedItem, setSelectedItem] = useState(null);
+  const { user } = useUser();
 
-  const openDialog = () => {
+  const openDialog = (item) => {
+    setSelectedItem(item);
     setDialogOpen(true);
   };
 
@@ -46,10 +44,11 @@ function TopBar({
     setDialogOpen(false);
   };
 
+
   const theme = useTheme();
 
   const openRentals = () => {
-    if (!user || !user._id ) {
+    if (!user || !user._id) {
       toast.error("Please log in to see your rentals");
       return;
     }
@@ -71,8 +70,8 @@ function TopBar({
     axios
       .get("http://localhost:8082/api/skis")
       .then((res) => {
-        setData(res.data);
-        setRecords(res.data); 
+        setItem(res.data);
+        setRecords(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -82,7 +81,7 @@ function TopBar({
     setFilterSearch(searchValue);
 
     if (searchValue) {
-      const filtered = data.filter((ski) =>
+      const filtered = item.filter((ski) =>
         ski.name.toLowerCase().includes(searchValue)
       );
       setRecords(filtered);
@@ -222,7 +221,7 @@ function TopBar({
                         onClick={() => {
                           setFilterSearch(ski.name);
                           setShowSuggestions(false);
-                          openDialog();
+                          openDialog(ski);
                         }}
                       >
                         <Typography variant="body1">{ski.name}</Typography>
@@ -262,14 +261,15 @@ function TopBar({
             )}
           </Box>
           <UsersRents
-        open={openRentalsDialog}
-        onClose={() => setOpenRentalsDialog(false)}
-        userId={user ? user._id : null} 
-      />
+            open={openRentalsDialog}
+            onClose={() => setOpenRentalsDialog(false)}
+            userId={user ? user._id : null}
+          />
         </Toolbar>
+        <ItemDetailsDialog open={dialogOpen} onClose={closeDialog} item={selectedItem} />
       </AppBar>
     </>
   );
 }
 
-export default TopBar;
+export default TopBar;

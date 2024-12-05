@@ -18,19 +18,19 @@ import {
   FormGroup,
   Checkbox,
 } from "@mui/material";
-import Accordion from "./DialogAccordion";
+import Accordion from "../DialogAccordion";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useForm } from "react-hook-form";
 import dayjs from "dayjs";
 import { renderTimeViewClock } from '@mui/x-date-pickers/timeViewRenderers';
-import  {useUser} from "../contexts/UserContext";
+import { useUser } from "../../contexts/UserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const ItemDetailsDialog = ({ open, item, onClose }) => {
-  const { user, setUser } = useUser();
+  const { user } = useUser();
   const {
     register,
     handleSubmit,
@@ -50,15 +50,15 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
       return;
     }
     const rentalDetails = {
-      userId: user._id, 
+      userId: user._id,
       itemName: item.name,
       location: location,
       deliveryDate: selectedDate,
       deliveryTime: deliveryTime,
       paymentMethod: "cash on delivery",
-      totalPrice: 100, 
+      totalPrice: 100,
     };
-  
+
     axios
       .post("http://localhost:8082/api/rentals", rentalDetails, {
         headers: {
@@ -67,8 +67,7 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
       })
       .then((response) => {
         toast.success("Item added to cart successfully!");
-        // onRent(); // Trigger parent component update if needed
-        // onClose(); // Close the dialog
+        onClose(); 
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -150,7 +149,7 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
                   />
 
                   <TimePicker
-                  required
+                    required
                     label="Select Delivery Time"
                     value={deliveryTime}
                     onChange={handleTimeChange}

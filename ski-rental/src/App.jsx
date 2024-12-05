@@ -3,35 +3,32 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import React, { useState, useRef } from "react";
 import Signup from "./components/Authentication/SignUp";
 import Login from "./components/Authentication/LogIn";
-import TopBar from "./components/TopBar";
+import TopBar from "./components/Sections/TopBar";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SkisList from './components/EquipmentsViews/EquipmentsList';
 import AccessoriesList from './components/EquipmentsViews/AccessoriesList';
-import Footer from "./components/Footer"; 
-import { Button } from '@mui/material';
+import Footer from "./components/Sections/Footer";
 import { useTheme } from '@mui/material/styles';
-import { Typography, Box } from '@mui/material';
+import HeroSection from './components/Sections/HeroSection';
+import AboutUs from './components/Sections/AboutUs';
 
 function App() {
-  const [isItemDialogOpen, setIsItemDialogOpen] = useState(false); 
+  const [isItemDialogOpen, setIsItemDialogOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSignup, setIsSignup] = useState(true); 
+  const [isSignup, setIsSignup] = useState(true);
 
   const equipListRef = useRef(null);
   const accessoriesRef = useRef(null);
-  const aboutUsRef = useRef(null); 
+  const aboutUsRef = useRef(null);
   const topBarRef = useRef(null);
   const theme = useTheme();
 
-  const openCartDialog = () => setIsItemDialogOpen(true); 
-  const closeCartDialog = () => setIsItemDialogOpen(false); 
-
   const openModal = (isSignup) => {
     setIsModalOpen(true);
-    setIsSignup(isSignup); 
+    setIsSignup(isSignup);
   };
 
   const closeModal = () => setIsModalOpen(false);
@@ -45,7 +42,7 @@ function App() {
     });
   };
 
-  
+
 
   const handleLogin = (userName) => {
     setIsLoggedIn(true);
@@ -61,10 +58,10 @@ function App() {
   };
 
   return (
-    <div className="App" style={{ zIndex: 1 }} ref={topBarRef}>
+    <div className="App app-container" style={{ overflowX: 'hidden', width: '100%' }} ref={topBarRef}>
       <TopBar
-        onSignupClick={() => openModal(true)} 
-        onLoginClick={() => openModal(false)} 
+        onSignupClick={() => openModal(true)}
+        onLoginClick={() => openModal(false)}
         isLoggedIn={isLoggedIn}
         userName={userName}
         onLogoutClick={handleLogout}
@@ -72,7 +69,6 @@ function App() {
         onScrollToEquip={() => scrollToSection(equipListRef)}
         onScrollToAccessories={() => scrollToSection(accessoriesRef)}
         onLogoCLick={() => scrollToSection(topBarRef)}
-        onCartClick={openCartDialog}
       />
 
       {isModalOpen && (
@@ -84,118 +80,9 @@ function App() {
           )}
         </div>
       )}
+      <HeroSection scrollToSection={scrollToSection} equipListRef={equipListRef} />
 
-      <div
-      style={{
-        position: "relative",
-        width: "100vw",
-        height: "100vh",
-        backgroundImage: "url('https://us.images.westend61.de/0001349832pw/a-man-with-ski-gear-and-mountains-and-water-behind-CAVF77790.jpg')", 
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed", 
-      }}
-      >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.5)", 
-          zIndex: 1,
-        }}
-      ></div>
-      <div
-        style={{
-          position: "absolute",
-          top: "40%",
-          left: "5%",
-          transform: "translateY(-50%)",
-          color: "white",
-          textAlign: "left",
-          fontSize: "3rem",
-          textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
-          zIndex: 2,
-        }}
-      >
-        <h1>Skip the queue!</h1>
-        <p>Be the first on the slopes and fully equipped</p>
-        <Button
-        onClick={() => scrollToSection(equipListRef)}
-          variant="outlined"
-          size="large"
-          sx={{
-            color: theme.palette.common.white,
-            borderColor: theme.palette.common.white,
-            '&:hover': {
-              backgroundColor: theme.palette.common.white,
-              color: theme.palette.primary.main,
-              borderColor: theme.palette.primary.main,
-            },
-          }}
-        >
-          Rent Now
-        </Button>
-      </div>
-      <img
-      
-    src="/mountain.svg" 
-    alt="Mountain"
-    style={{
-      position: "absolute",
-      bottom: 0,
-      width: "100%",
-      height: "60%",
-      marginBottom: "-190px",
-      zIndex: 2,
-    }}
-  />
-    </div>
-
-    <div
-  ref={aboutUsRef}
-  style={{
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingTop: "100px",
-    padding: "80px 20px",
-    backgroundColor: theme.palette.background.default,
-  }}
->
-  <Typography variant="h4" fontWeight={"bold"} sx={{ marginBottom: "30px", marginTop:'130px' }}>
-    About Us
-  </Typography>
-  <Box
-    sx={{
-      backgroundColor: theme.palette.primary.main,
-      maxWidth: "1150px",  
-      width: "100%",  
-      margin: "0 auto",
-      padding: "40px",  
-      borderRadius: "50px",  
-      marginBottom: "20px",
-    }}
-  >
-    <Typography variant="body1" sx={{ color: "white", marginBottom: "10px" }}>
-    Skip the hassle and hit the slopes fully equipped with Rent the Slope! Our platform is your
-    ultimate destination for renting high-quality ski and snowboard gear, designed to get you 
-    on the mountain faster and without the stress. Whether you're a seasoned pro or a first-time
-    skier, we make it easy to find the perfect equipment for your adventure.
-    </Typography>
-    <Typography variant="body1" sx={{ color: "white" }}>
-    No more long lines or expensive purchases—just rent, ski, and repeat. With Rent the Slope,
-    you’re always ready for your next winter adventure, equipped with the gear you need to make
-    every moment on the slopes unforgettable!
-    </Typography>
-    <Typography variant="body1" sx={{ color: "white" }}>
-    Driven by our passion for skiing, we created this platform to simplify the rental process,
-    making it easier, faster, and more affordable for everyone who loves the mountains as much as we do.
-    </Typography>
-  </Box>
-</div>
+      <AboutUs ref={aboutUsRef} />
 
       <div ref={equipListRef} style={{ marginTop: '10px' }}>
         <SkisList />
@@ -206,11 +93,11 @@ function App() {
       </div>
 
       <Footer
-        onSignupClick={() => openModal(true)} 
+        onSignupClick={() => openModal(true)}
         onLoginClick={() => openModal(false)}
         onScrollToAccessories={() => scrollToSection(accessoriesRef)}
         onScrollToEquipments={() => scrollToSection(equipListRef)}
-        onScrollToAboutUs={() => scrollToSection(aboutUsRef)} 
+        onScrollToAboutUs={() => scrollToSection(aboutUsRef)}
       />
 
       <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
@@ -218,4 +105,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;
