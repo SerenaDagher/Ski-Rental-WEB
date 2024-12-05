@@ -17,6 +17,7 @@ import {
   Radio,
   FormGroup,
   Checkbox,
+  DialogTitle
 } from "@mui/material";
 import Accordion from "../DialogAccordion";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
@@ -44,14 +45,13 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
   const handleDateChange = (newDate) => setSelectedDate(newDate);
   const handleTimeChange = (newTime) => setDeliveryTime(newTime);
 
-  const onSubmit = (data) => {
-    if (!user || !user._id) {
-      toast.error("Please log in before renting");
-      return;
-    }
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+
+  const handleConfirm = () => {
     const rentalDetails = {
       userId: user._id,
       itemName: item.name,
+      itemPic: item.image,
       location: location,
       deliveryDate: selectedDate,
       deliveryTime: deliveryTime,
@@ -73,7 +73,23 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
         console.error("Error:", error);
         alert("Failed to rent item. Please try again.");
       });
+
+    setOpenConfirmDialog(false);
   };
+
+  const handleCancel = () => {
+    setOpenConfirmDialog(false);
+  };
+
+  const onSubmit = () => {
+    if (!user || !user._id) {
+      toast.error("Please log in before renting");
+      return;
+    }
+
+    setOpenConfirmDialog(true);
+  };
+
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -210,11 +226,27 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
             </Button>
             {item && (
               <Button type="submit" variant="contained" size="large">
-                Done
+                Rent
               </Button>
             )}
           </DialogActions>
         </form>
+      </Dialog>
+      <Dialog open={openConfirmDialog} onClose={handleCancel}>
+        <DialogTitle fontSize={"2rem"} align="center">Confirm Rental</DialogTitle>
+        <DialogContent>
+          <p>
+            Are you sure you want to rent this item? Once confirmed, you can't edit the reservation anymore.
+          </p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancel} >
+            Cancel
+          </Button>
+          <Button onClick={handleConfirm} sx={{margin: "10px"}}>
+            Confirm
+          </Button>
+        </DialogActions>
       </Dialog>
     </LocalizationProvider>
   );

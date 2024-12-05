@@ -5,12 +5,18 @@ import {
   DialogActions,
   Button,
   Typography,
-  List,
-  ListItem,
   Divider,
+  Card,
+  CardMedia,
+  CardContent,
+  Box,
+  IconButton,
 } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
 
 const UsersRents = ({ open, onClose, userId }) => {
   const [rentals, setRentals] = useState([]);
@@ -47,47 +53,54 @@ const UsersRents = ({ open, onClose, userId }) => {
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogContent>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h4" align="center" fontWeight={"bold"} marginBottom={"20px"}>
           My Rentals
         </Typography>
         {rentals.length > 0 ? (
-          <List>
-            {rentals.map((rental) => (
-              <React.Fragment key={rental._id}>
-                <ListItem>
-                  <div style={{ flex: 1 }}>
-                    <Typography variant="body1">
-                      <strong>Item:</strong> {rental.itemName || "N/A"}
-                    </Typography>
-                    <Typography variant="body2">
-                      <strong>Location:</strong> {rental.location}
-                    </Typography>
-                    <Typography variant="body2">
-                      <strong>Delivery Date:</strong> {new Date(rental.deliveryDate).toDateString()}
-                    </Typography>
-                    <Typography variant="body2">
-                      <strong>Total Price:</strong> ${rental.totalPrice}
-                    </Typography>
-                  </div>
-                  <Button
-                    onClick={() => deleteRental(rental._id)}
-                    color="error"
-                    variant="outlined"
-                    sx={{ marginLeft: "16px" }}
-                  >
-                    Delete
-                  </Button>
-                </ListItem>
-                <Divider />
-              </React.Fragment>
-            ))}
-          </List>
+          rentals.map((rental) => (
+            <Card
+              key={rental._id}
+              sx={{ display: "flex", alignItems: "center", marginBottom: "20px"}}
+            >
+              <CardMedia
+                component="img"
+                image={rental.itemPic || "/placeholder.jpg"} 
+                alt={rental.itemName || "Item"}
+                sx={{ width: 120, height: 120 }}
+              />
+              <Divider orientation="vertical" flexItem sx={{ margin: "0 16px" }} />
+              <CardContent sx={{ flex: 1 }}>
+                <Typography variant="body1">
+                  <strong>Item:</strong> {rental.itemName || "N/A"}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Location:</strong> {rental.location}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Delivery Date:</strong> {new Date(rental.deliveryDate).toDateString()}
+                </Typography>
+                <Typography variant="body2">
+                  <strong>Total Price:</strong> ${rental.totalPrice}
+                </Typography>
+              </CardContent>
+              <Box sx={{ padding: "16px" }}>
+                <Button
+                  onClick={() => deleteRental(rental._id)}
+                  color="error"
+                  variant="outlined"
+                  size="small"
+                >
+                  <IconButton><DeleteIcon color="error"/></IconButton>
+                </Button>
+              </Box>
+            </Card>
+          ))
         ) : (
           <Typography>No rentals found.</Typography>
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} variant="outlined">
+        <Button onClick={onClose} variant="outlined" sx={{margin:3}}>
           Close
         </Button>
       </DialogActions>

@@ -225,14 +225,20 @@ const closeMenu = () => {
         />
         {showSuggestions && records.length > 0 && (
           <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginLeft: "auto",
-              gap: 0,
-              color: "#ffffff",
-            }}
+          sx={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            right: 0,
+            maxHeight: "200px",
+            overflowY: "auto",
+            backgroundColor: "#ffffff",
+            color: "#000000",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            borderRadius: "4px",
+            zIndex: 1000,
+            padding: "10px 0",
+          }}
           >
             {records.map((ski) => (
               <Box

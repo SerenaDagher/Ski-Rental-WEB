@@ -5,11 +5,12 @@ const Rental = require("../../models/rental");
 // POST route to create a rental
 router.post("/", async (req, res) => {
   try {
-    const { userId, itemName, location, deliveryDate, deliveryTime, paymentMethod, totalPrice } = req.body;
+    const { userId, itemName, itemPic, location, deliveryDate, deliveryTime, paymentMethod, totalPrice } = req.body;
 
     const newRental = new Rental({
       userId,
       itemName,
+      itemPic,
       location,
       deliveryDate,
       deliveryTime,

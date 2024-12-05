@@ -9,6 +9,10 @@ const RentalSchema = new mongoose.Schema({
     type: String,
     required: true 
   },
+  itemPic:{
+    type: String,
+    required: true
+  },
   location: { 
     type: String, 
     required: true 
