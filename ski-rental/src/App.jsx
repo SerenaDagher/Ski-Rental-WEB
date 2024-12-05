@@ -15,6 +15,7 @@ import AboutUs from './components/Sections/AboutUs';
 import { Fab } from '@mui/material';
 import ForumIcon from '@mui/icons-material/Forum';
 import Carousel from './components/Sections/Carousel';
+import Partners from './components/Sections/Partners';
 
 function App() {
   const [isItemDialogOpen, setIsItemDialogOpen] = useState(false);
@@ -97,6 +98,9 @@ function App() {
 
       <div>
       <Carousel />
+    </div>
+    <div>
+      <Partners/>
     </div>
   
       <Footer
