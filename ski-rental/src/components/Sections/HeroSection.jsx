@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-const HeroSection = ({ scrollToSection, equipListRef }) => {
+const HeroSection = ({ onClick }) => {
   const theme = useTheme();
 
   return (
@@ -45,7 +45,7 @@ const HeroSection = ({ scrollToSection, equipListRef }) => {
         <h1>Skip the queue!</h1>
         <p>Be the first on the slopes and fully equipped</p>
         <Button
-          onClick={() => scrollToSection(equipListRef)}
+          onClick={onClick}
           variant="outlined"
           size="large"
           sx={{

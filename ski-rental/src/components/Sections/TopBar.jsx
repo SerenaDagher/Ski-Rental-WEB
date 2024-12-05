@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/material";
+import { Box, Drawer, IconButton} from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import LetterAvatar from "../Authentication/LetterAvatar";
 import { useTheme } from "@mui/material/styles";
@@ -15,6 +15,7 @@ import ItemDetailsDialog from "../EquipmentsViews/ItemsDetailsDialog";
 import UsersRents from "../Rents/UsersRents";
 import { useUser } from "../../contexts/UserContext";
 import { toast } from "react-toastify";
+import MenuIcon from '@mui/icons-material/Menu';
 
 function TopBar({
   onSignupClick,
@@ -23,7 +24,7 @@ function TopBar({
   onScrollToAboutUs,
   onScrollToEquip,
   onScrollToAccessories,
-  onLogoCLick,
+  onLogoCLick
 }) {
   const [filterSearch, setFilterSearch] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,8 +34,35 @@ function TopBar({
   const [dialogOpen, setDialogOpen] = useState(false);
   const [openRentalsDialog, setOpenRentalsDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [navWithBurger, setNavWithBurger] = useState(window.innerWidth);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { user } = useUser();
-
+  
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width <= 1300) {
+        setNavWithBurger(true); 
+      } else {
+        setNavWithBurger(false);
+      }
+    };
+  
+    handleResize();
+  
+    window.addEventListener("resize", handleResize);
+  
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); 
+  
+const openMenu = () => {
+  setMenuOpen(true);
+};
+const closeMenu = () => {
+  setMenuOpen(false);
+};
   const openDialog = (item) => {
     setSelectedItem(item);
     setDialogOpen(true);
@@ -136,124 +164,213 @@ function TopBar({
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />
-
+          {navWithBurger ? (
+  <IconButton aria-label="menu" color="inherit">
+    <MenuIcon fontSize="large" color="inherit" onClick={openMenu}/>
+  </IconButton>
+) : (
+  <Box
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginLeft: "auto",
+      columnGap: 1,
+      color: "#ffffff",
+    }}
+  >
+    <ClickAwayListener onClickAway={() => setShowSuggestions(false)}>
+      <Box sx={{ position: "relative" }}>
+        <TextField
+          value={filterSearch}
+          id="standard-basic"
+          label={filterSearch === "" ? "Search" : filterSearch}
+          variant="standard"
+          onChange={filter}
+          onFocus={() => setShowSuggestions(true)}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <SearchIcon style={{ color: "#ffffff" }} />
+              </InputAdornment>
+            ),
+          }}
+          InputLabelProps={{
+            shrink: false,
+          }}
+          sx={{
+            "& .MuiInputBase-root": {
+              color: "#ffffff",
+              display: "flex",
+              alignItems: "center",
+            },
+            "& .MuiInputLabel-root": {
+              color: "#ffffff",
+              transition: "opacity 0.3s ease, transform 0.3s ease",
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              opacity: 0,
+            },
+            "& .MuiInput-underline:before": {
+              borderBottomColor: "#ffffff",
+            },
+            "& .MuiInput-underline:hover:before": {
+              borderBottomColor: theme.palette.darkorange.main,
+            },
+            "& .MuiInput-underline:after": {
+              borderBottomColor: theme.palette.darkorange.main,
+            },
+            paddingBottom: "20px",
+          }}
+        />
+        {showSuggestions && records.length > 0 && (
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               marginLeft: "auto",
-              columnGap: 1,
+              gap: 0,
               color: "#ffffff",
             }}
           >
-            <ClickAwayListener onClickAway={() => setShowSuggestions(false)}>
-              <Box sx={{ position: "relative" }}>
-                <TextField
-                  value={filterSearch}
-                  id="standard-basic"
-                  label={filterSearch === "" ? "Search" : filterSearch}
-                  variant="standard"
-                  onChange={filter}
-                  onFocus={() => setShowSuggestions(true)}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <SearchIcon style={{ color: "#ffffff" }} />
-                      </InputAdornment>
-                    ),
-                  }}
-                  InputLabelProps={{
-                    shrink: false,
-                  }}
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      color: "#ffffff",
-                      display: "flex",
-                      alignItems: "center",
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: "#ffffff",
-                      transition: "opacity 0.3s ease, transform 0.3s ease",
-                    },
-                    "& .MuiInputLabel-root.Mui-focused": {
-                      opacity: 0,
-                    },
-                    "& .MuiInput-underline:before": {
-                      borderBottomColor: "#ffffff",
-                    },
-                    "& .MuiInput-underline:hover:before": {
-                      borderBottomColor: theme.palette.darkorange.main,
-                    },
-                    "& .MuiInput-underline:after": {
-                      borderBottomColor: theme.palette.darkorange.main,
-                    },
-                    paddingBottom: "20px",
-                  }}
-                />
-                {showSuggestions && records.length > 0 && (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginLeft: "auto",
-                      gap: 0, 
-                      color: "#ffffff",
-                    }}
-                  >
-                    {records.map((ski) => (
-                      <Box
-                        key={ski.id}
-                        sx={{
-                          padding: "10px 20px",
-                          cursor: "pointer",
-                          "&:hover": {
-                            backgroundColor: theme.palette.action.hover,
-                          },
-                        }}
-                        onClick={() => {
-                          setFilterSearch(ski.name);
-                          setShowSuggestions(false);
-                          openDialog(ski);
-                        }}
-                      >
-                        <Typography variant="body1">{ski.name}</Typography>
-                      </Box>)
-                    )}
-                  </Box>
-                )}
-              </Box>
-            </ClickAwayListener>
-            <Button color="inherit" sx={{fontSize: "1.2rem", textTransform: "none", letterSpacing: "0.5px" }} onClick={onScrollToAboutUs}>
-              About Us
-            </Button>
-            <Button color="inherit" sx={{ fontSize: "1.2rem", textTransform: "none", letterSpacing: "0.5px" }} onClick={onScrollToEquip}>
-              Equipments
-            </Button>
-            <Button color="inherit" sx={{ fontSize: "1.2rem", textTransform: "none", letterSpacing: "0.5px" }} onClick={onScrollToAccessories}>
-              Accessories
-            </Button>
-            <Button color="inherit" sx={{ fontSize: "1.2rem", textTransform: "none", letterSpacing: "0.5px" }} onClick={openRentals}>
-              My Rentals
-            </Button>
-
-            {/* <ShoppingCart onClick={onCartClick} /> */}
-
-            {isLoggedIn ? (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <LetterAvatar logout={onLogoutClick} />
-              </Box>
-            ) : (
-              <Button
-                color="inherit"
-                sx={{ fontSize: "1.1rem" }}
-                onClick={onSignupClick}
+            {records.map((ski) => (
+              <Box
+                key={ski.id}
+                sx={{
+                  padding: "10px 20px",
+                  cursor: "pointer",
+                  "&:hover": {
+                    backgroundColor: theme.palette.action.hover,
+                  },
+                }}
+                onClick={() => {
+                  setFilterSearch(ski.name);
+                  setShowSuggestions(false);
+                  openDialog(ski);
+                }}
               >
-                Sign In
-              </Button>
-            )}
+                <Typography variant="body1">{ski.name}</Typography>
+              </Box>
+            ))}
           </Box>
+        )}
+      </Box>
+    </ClickAwayListener>
+    <Button
+      color="inherit"
+      sx={{
+        fontSize: "1.2rem",
+        textTransform: "none",
+        letterSpacing: "0.5px",
+      }}
+      onClick={onScrollToAboutUs}
+    >
+      About Us
+    </Button>
+    <Button
+      color="inherit"
+      sx={{
+        fontSize: "1.2rem",
+        textTransform: "none",
+        letterSpacing: "0.5px",
+      }}
+      onClick={onScrollToEquip}
+    >
+      Equipments
+    </Button>
+    <Button
+      color="inherit"
+      sx={{
+        fontSize: "1.2rem",
+        textTransform: "none",
+        letterSpacing: "0.5px",
+      }}
+      onClick={onScrollToAccessories}
+    >
+      Accessories
+    </Button>
+    <Button
+      color="inherit"
+      sx={{
+        fontSize: "1.2rem",
+        textTransform: "none",
+        letterSpacing: "0.5px",
+      }}
+      onClick={() => {
+        if (isLoggedIn) {
+          openRentals();
+        } else {
+          toast.error("You need to log in to view your rentals.");
+        }
+      }}
+    >
+      My Rentals
+    </Button>
+
+    {isLoggedIn ? (
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <LetterAvatar logout={onLogoutClick} />
+      </Box>
+    ) : (
+      <Button
+        color="inherit"
+        sx={{ fontSize: "1.1rem" }}
+        onClick={onSignupClick}
+      >
+        Sign In
+      </Button>
+    )}
+  </Box>
+)}
+  <Drawer anchor="right" open={menuOpen} onClose={closeMenu}>
+  <Box
+          sx={{
+            width: 250, // Set the width of the drawer
+            padding: '20px',
+            backgroundColor: theme.palette.primary.main,
+            color: '#fff',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: "center"
+          }}
+        >
+          <Typography fontSize={"1.6rem"} fontWeight={"bold"} sx={{marginBottom:"20px"}}>Menu</Typography>
+          <Button color="inherit"       onClick={() => {
+        openRentals();
+        closeMenu();
+      }} sx={{ marginBottom: '10px' }}>My Rentals</Button>
+          <Button color="inherit"       onClick={() => {
+        onScrollToEquip();
+        closeMenu();
+      }} sx={{ marginBottom: '10px' }}>Equipments</Button>
+          <Button color="inherit"       onClick={() => {
+        onScrollToAccessories();
+        closeMenu();
+      }}sx={{ marginBottom: '10px' }}>Accessories</Button>
+          <Button color="inherit"       onClick={() => {
+        onScrollToAboutUs();
+        closeMenu();
+      }} sx={{ marginBottom: '10px' }}>About Us</Button>
+          {isLoggedIn ? (
+            <Button color="inherit" sx={{marginTop:'auto'}}>My Profile</Button>
+          ) : (
+            <Button
+              color="inherit"
+              sx={{ fontSize: "1.1rem", marginTop:'auto' }}
+              onClick={() => {
+                onSignupClick();
+                closeMenu();
+              }}
+            >
+              Sign In
+            </Button>
+          )}
+        </Box>
+  </Drawer>
+
+
           <UsersRents
             open={openRentalsDialog}
             onClose={() => setOpenRentalsDialog(false)}

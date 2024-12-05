@@ -6,8 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import { useUser } from "../../contexts/UserContext";
 import { useTheme } from "@mui/material/styles";
-import UsersRents from "../Rents/UsersRents"; 
-import { toast, ToastContainer } from "react-toastify";
+
 
 export default function LetterAvatar({ logout }) {
   const theme = useTheme();

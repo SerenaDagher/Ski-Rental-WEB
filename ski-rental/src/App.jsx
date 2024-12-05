@@ -80,7 +80,7 @@ function App() {
           )}
         </div>
       )}
-      <HeroSection scrollToSection={scrollToSection} equipListRef={equipListRef} />
+      <HeroSection onClick={() => scrollToSection(equipListRef)}/>
 
       <AboutUs ref={aboutUsRef} />
 
