@@ -4,34 +4,28 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 const reviews = [
   {
-    name: 'Sarah Williams',
+    name: 'Yara Cham',
     review: "Rent the Slope made my trip to the mountains stress-free! The process of renting high-quality gear was super easy, and the delivery was right on time. I didn’t have to worry about transporting heavy ski equipment—everything was handled for me. Definitely recommend it to anyone looking to enjoy a smooth and convenient ski trip!",
     rating: '⭐⭐⭐⭐⭐',
-    image: 'https://media.istockphoto.com/id/902843142/photo/woman-skier-skiing-at-sunny-ski-resort-amateur-winter-sports-on-the-top.jpg?s=612x612&w=0&k=20&c=XShoCi24eBfvLHZ7r44SDbRWLKuR9NA1TCs9tfvzDtM=', // Placeholder image URL
+    image: '/ANFD1026.JPG'
   },
   {
-    name: 'Mark Thompson',
+    name: 'Perla Mikhael',
     review: "I’ve rented ski gear many times, but Rent the Slope is by far the best experience I’ve had. The website was easy to use, and the equipment was in great condition. I loved the convenience of choosing my delivery time, and the gear fit perfectly. Will definitely use them again for my next trip!",
     rating: '⭐⭐⭐⭐⭐',
-    image: 'https://media.istockphoto.com/id/641226350/photo/skier-man-portrait-in-safe-ski-equipment.jpg?s=612x612&w=0&k=20&c=iAPDbWG8EHo3OhpcdlaSgT2q_pDZLwmNSD3JDTV4F7w=',
+    image: '/IMG_8306.jpg',
   },
   {
-    name: 'Emily Johnson',
+    name: 'Serena Dagher',
     review: "Rent the Slope takes the hassle out of skiing. I was able to easily select the gear I needed and have it delivered directly to my hotel. The skis and snowboard were top quality, and I saved so much time not having to deal with the long lines at the rental shop. Highly recommend this service!",
     rating: '⭐⭐⭐⭐⭐',
-    image: 'https://media.istockphoto.com/id/887298054/photo/happy-skier-girl-ready-to-ski-in-a-slope.jpg?s=612x612&w=0&k=20&c=UEVASKr5kD3fZqDFFEGzSApWa0F4oVS9wFFimyOT4y0=',
+    image: '/IMG_8127.jpg',
   },
   {
-    name: 'Daniel Roberts',
+    name: 'Abdo Azzi',
     review: "I was skeptical at first about renting online, but Rent the Slope exceeded my expectations. The platform was straightforward, and I was able to find the perfect skis and boots for my level. The delivery was on time, and everything was in excellent condition. I’ll definitely be a repeat customer.",
     rating: '⭐⭐⭐⭐',
-    image: 'https://cdn.pixabay.com/photo/2022/01/07/18/32/man-6922354_1280.jpg',
-  },
-  {
-    name: 'Jessica Lee',
-    review: "A fantastic service for anyone who loves skiing! I rented a snowboard through Rent the Slope and it was perfect for my trip. Highly recommend this platform for anyone looking to rent gear for their next adventure.",
-    rating: '⭐⭐⭐⭐⭐',
-    image: 'https://media.istockphoto.com/id/183545707/photo/young-woman-carrying-her-skis.jpg?s=612x612&w=0&k=20&c=TMph1z03uGTkiRVC7-GFd5RSE-5a1sKZLO44AR1yWro=',
+    image: '/abdo.jpg',
   },
 ];
 
