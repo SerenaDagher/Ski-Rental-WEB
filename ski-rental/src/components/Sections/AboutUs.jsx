@@ -33,6 +33,11 @@ const AboutUs = React.forwardRef((props, ref) => {
           padding: "40px",
           borderRadius: "50px",
           marginBottom: "20px",
+          display: "flex",        
+          flexDirection: "column", 
+          justifyContent: "center", 
+          alignItems: "center",    
+          textAlign: "center",     
         }}
       >
         <Typography variant="body1" sx={{ color: "white", marginBottom: "10px" }}>
@@ -42,7 +47,7 @@ const AboutUs = React.forwardRef((props, ref) => {
           without the stress. Whether you're a seasoned pro or a first-time
           skier, we make it easy to find the perfect equipment for your adventure.
         </Typography>
-        <Typography variant="body1" sx={{ color: "white" }}>
+        <Typography variant="body1" sx={{ color: "white", marginBottom: "10px"  }}>
           No more long lines or expensive purchases—just rent, ski, and repeat.
           With Rent the Slope, you’re always ready for your next winter adventure,
           equipped with the gear you need to make every moment on the slopes
