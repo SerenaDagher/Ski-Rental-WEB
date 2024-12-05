@@ -9,7 +9,7 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
   const theme = useTheme();
 
   return (
-    <footer style={{ backgroundColor: theme.palette.primary.main, color: '#fff', padding: '20px 0 30px', textAlign: 'center', marginTop: '150px' }}>
+    <footer style={{ backgroundColor: theme.palette.primary.main, color: '#fff', padding: '20px 0 30px', textAlign: 'center', marginTop: '100px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingLeft: '150px', paddingTop: '10px' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -62,7 +62,7 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
               >
                 About us
               </Typography>
-              <Typography variant="body1" sx={{ fontSize: '1rem', marginTop: '5px' }}>Coaches</Typography>
+              
               <Typography 
                 variant="body4" 
                 sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 
@@ -70,6 +70,7 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
               >
                 MyRental
               </Typography>
+              
               <Typography 
                 variant="body4" 
                 sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 

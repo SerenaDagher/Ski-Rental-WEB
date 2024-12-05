@@ -14,6 +14,7 @@ import HeroSection from './components/Sections/HeroSection';
 import AboutUs from './components/Sections/AboutUs';
 import { Fab } from '@mui/material';
 import ForumIcon from '@mui/icons-material/Forum';
+import Carousel from './components/Sections/Carousel';
 
 function App() {
   const [isItemDialogOpen, setIsItemDialogOpen] = useState(false);
@@ -94,6 +95,10 @@ function App() {
         <AccessoriesList />
       </div>
 
+      <div>
+      <Carousel />
+    </div>
+  
       <Footer
         onSignupClick={() => openModal(true)}
         onLoginClick={() => openModal(false)}
