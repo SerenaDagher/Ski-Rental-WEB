@@ -36,7 +36,7 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
               <Typography
                 variant="body2"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer',fontSize: '1rem'}}
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer'}}
                 onClick={onLoginClick}  
               >
                 Log in

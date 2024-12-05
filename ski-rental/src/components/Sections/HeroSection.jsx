@@ -39,7 +39,7 @@ const HeroSection = ({ onClick }) => {
           textAlign: "left",
           fontSize: "3rem",
           textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
-          zIndex: 2,
+          zIndex: 2000,
         }}
       >
         <h1>Skip the queue!</h1>
@@ -56,6 +56,7 @@ const HeroSection = ({ onClick }) => {
               color: theme.palette.primary.main,
               borderColor: theme.palette.primary.main,
             },
+            transition: 'all 0.3s ease',
           }}
         >
           Rent Now
