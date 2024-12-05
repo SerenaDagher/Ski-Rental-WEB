@@ -12,6 +12,8 @@ import Footer from "./components/Sections/Footer";
 import { useTheme } from '@mui/material/styles';
 import HeroSection from './components/Sections/HeroSection';
 import AboutUs from './components/Sections/AboutUs';
+import { Fab } from '@mui/material';
+import ForumIcon from '@mui/icons-material/Forum';
 
 function App() {
   const [isItemDialogOpen, setIsItemDialogOpen] = useState(false);
@@ -101,6 +103,19 @@ function App() {
       />
 
       <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
+      <Fab
+        onClick={() => toast.error("Chat service not available yet")}
+        color="secondary"
+        aria-label="add"
+        style={{
+          position: 'fixed',  
+          bottom: '16px',     
+          right: '16px',    
+          zIndex: 1000        
+        }}
+      >
+        <ForumIcon />
+      </Fab>
     </div>
   );
 }
