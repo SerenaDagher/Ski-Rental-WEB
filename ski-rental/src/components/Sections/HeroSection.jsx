@@ -39,7 +39,7 @@ const HeroSection = ({ onClick }) => {
           textAlign: "left",
           fontSize: "3rem",
           textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
-          zIndex: 2000,
+          zIndex: 3,
         }}
       >
         <h1>Skip the queue!</h1>
