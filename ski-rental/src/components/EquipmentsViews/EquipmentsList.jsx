@@ -7,7 +7,7 @@ import MyDropdown from '../DropDownButton';
 import ItemDetailsDialog from './ItemsDetailsDialog';
 
 
-const EquipmentList = () => {
+function EquipmentList ({isLoggedIn}) {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(4);
@@ -41,33 +41,28 @@ const EquipmentList = () => {
       let data = [];
   
       if (ride === 'all') {
-
         const [skisResponse, snowboardsResponse] = await Promise.all([
           axios.get('http://localhost:8082/api/skis'),
           axios.get('http://localhost:8082/api/snowboards'),
         ]);
         data = [...skisResponse.data, ...snowboardsResponse.data];
       } else {
-
-        let url = ride === 'Ski' 
-          ? 'http://localhost:8082/api/skis' 
+        let url = ride === 'Ski'
+          ? 'http://localhost:8082/api/skis'
           : 'http://localhost:8082/api/snowboards';
-        
-        if (filter === 'available') {
-          url = `${url}/availability/true`; 
-        } else if (filter === 'not available') {
-          url = `${url}/availability/false`;
+  
+        if (filter.includes('-')) {
+          const [min, max] = filter.split('-').map(Number);
+          url = `${url}/length?min=${min}&max=${max}`;
         }
   
         const response = await axios.get(url);
         data = response.data;
       }
   
-
-      if (filter !== 'all' && ride === 'all') {
-        data = data.filter(item => {
-          return filter === 'available' ? item.available : !item.available;
-        });
+      if (filter.includes('-') && ride === 'all') {
+        const [min, max] = filter.split('-').map(Number);
+        data = data.filter(item => item.length >= min && item.length <= max);
       }
   
       setItems(data);
@@ -118,11 +113,16 @@ const EquipmentList = () => {
   
       <div className="dropdown-container">
         <MyDropdown
-          buttonLabel={`Filter`}
+          buttonLabel={`Choose your height`}
           items={[
             { label: 'All', action: () => handleFilterChange('all', 'All') },
-            { label: 'Available', action: () => handleFilterChange('available', 'Available') },
-            { label: 'Not Available', action: () => handleFilterChange('not available', 'Not Available') },
+            { label: '155-160 cm', action: () => handleFilterChange('155-160', '175-180 cm') },
+            { label: '160-165 cm', action: () => handleFilterChange('160-165', '175-180 cm') },
+            { label: '165-170 cm', action: () => handleFilterChange('165-170', '175-180 cm') },
+            { label: '170-175 cm', action: () => handleFilterChange('170-175', '175-180 cm') },
+            { label: '175-180 cm', action: () => handleFilterChange('175-180', '175-180 cm') },
+            { label: '180-185 cm', action: () => handleFilterChange('180-185', '180-185 cm') },
+            { label: '185-190 cm', action: () => handleFilterChange('185-190', '185-190 cm') },
           ]}
         />
         <MyDropdown
@@ -179,7 +179,7 @@ const EquipmentList = () => {
         </Box>
       )}
   
-      <ItemDetailsDialog open={dialogOpen} onClose={closeDialog} item={selectedItem} />
+      <ItemDetailsDialog open={dialogOpen} onClose={closeDialog} item={selectedItem} isLoggedIn={isLoggedIn} />
     </div>
   )};
   

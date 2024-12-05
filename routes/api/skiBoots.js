@@ -14,6 +14,20 @@ router.get('/', (req, res) => {
     .catch(err => res.status(404).json({ noskibootsfound: 'No skiBoots found' }));
 });
 
+router.get('/size/:size', (req, res) => {
+  const bootSize = Number(req.params.size); 
+
+  SkiBoot.find({ size: bootSize })
+    .then(skiBoots => {
+      if (skiBoots.length > 0) {
+        res.json(skiBoots); 
+      } else {
+        res.status(404).json({ message: 'No ski boots found with the specified size' });
+      }
+    })
+    .catch(err => res.status(500).json({ error: 'Server error', details: err.message }));
+});
+
 
 router.get('/:id', (req, res) => {
   SkiBoot.findById(req.params.id)

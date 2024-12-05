@@ -6,13 +6,6 @@ import { Box } from '@mui/material';
 import MyDropdown from '../DropDownButton';
 import ItemDetailsDialog from './ItemsDetailsDialog';
 
-
-const FILTERS = {
-  ALL: 'all',
-  AVAILABLE: 'available',
-  NOT_AVAILABLE: 'not available',
-};
-
 const RIDES = {
   ALL: 'all',
   SKI_BOOTS: 'skiboots',
@@ -22,10 +15,10 @@ const RIDES = {
 const AccessoriesList = () => {
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage,setCardsPerPage] = useState(4);
-  const [filter, setFilter] = useState(FILTERS.ALL);
+  const [cardsPerPage, setCardsPerPage] = useState(4);
+  const [size, setSize] = useState(null);
   const [ride, setRide] = useState(RIDES.ALL);
-  const [filterLabel, setFilterLabel] = useState('All');
+  const [sizeLabel, setSizeLabel] = useState('All');
   const [rideLabel, setRideLabel] = useState('All');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -33,50 +26,43 @@ const AccessoriesList = () => {
   useEffect(() => {
     const updateCardsPerPage = () => {
       const width = window.innerWidth;
-      if (width <= 1000) setCardsPerPage(2); 
-      else if (width <= 2000) setCardsPerPage(4); 
-      else setCardsPerPage(6); 
+      if (width <= 1000) setCardsPerPage(2);
+      else if (width <= 2000) setCardsPerPage(4);
+      else setCardsPerPage(6);
     };
 
-    updateCardsPerPage(); 
-    window.addEventListener('resize', updateCardsPerPage); 
+    updateCardsPerPage();
+    window.addEventListener('resize', updateCardsPerPage);
 
-    return () => window.removeEventListener('resize', updateCardsPerPage); 
+    return () => window.removeEventListener('resize', updateCardsPerPage);
   }, []);
 
   useEffect(() => {
     fetchItems();
-  }, [filter, ride]);
+  }, [size, ride]);
 
   const fetchItems = async () => {
     try {
       let data = [];
-
       if (ride === RIDES.ALL) {
         const [skiBootsResponse, snowboardBootsResponse] = await Promise.all([
-          axios.get('http://localhost:8082/api/skiBoots'),
-          axios.get('http://localhost:8082/api/snowboardBoots'),
+          size
+            ? axios.get(`http://localhost:8082/api/skiBoots/size/${size}`)
+            : axios.get('http://localhost:8082/api/skiBoots'),
+          size
+            ? axios.get(`http://localhost:8082/api/snowboardBoots/size/${size}`)
+            : axios.get('http://localhost:8082/api/snowboardBoots'),
         ]);
         data = [...skiBootsResponse.data, ...snowboardBootsResponse.data];
       } else {
-        let url = ride === RIDES.SKI_BOOTS 
-          ? 'http://localhost:8082/api/skiBoots' 
-          : 'http://localhost:8082/api/snowboardBoots';
-
-        if (filter === FILTERS.AVAILABLE) {
-          url = `${url}/availability/true`;
-        } else if (filter === FILTERS.NOT_AVAILABLE) {
-          url = `${url}/availability/false`;
-        }
+        const baseUrl =
+          ride === RIDES.SKI_BOOTS
+            ? 'http://localhost:8082/api/skiBoots'
+            : 'http://localhost:8082/api/snowboardBoots';
+        const url = size ? `${baseUrl}/size/${size}` : baseUrl;
 
         const response = await axios.get(url);
         data = response.data;
-      }
-
-      if (filter !== FILTERS.ALL && ride === RIDES.ALL) {
-        data = data.filter((item) => 
-          filter === FILTERS.AVAILABLE ? item.available : !item.available
-        );
       }
 
       setItems(data);
@@ -93,9 +79,9 @@ const AccessoriesList = () => {
     setCurrentPage(value);
   };
 
-  const handleFilterChange = (selectedFilter, label) => {
-    setFilter(selectedFilter);
-    setFilterLabel(label);
+  const handleSizeChange = (selectedSize, label) => {
+    setSize(selectedSize);
+    setSizeLabel(label);
     setCurrentPage(1);
   };
 
@@ -126,11 +112,12 @@ const AccessoriesList = () => {
 
       <div className="dropdown-container">
         <MyDropdown
-          buttonLabel={`Filter: ${filterLabel}`}
+          buttonLabel={`Size: ${sizeLabel}`}
           items={[
-            { label: 'All', action: () => handleFilterChange(FILTERS.ALL, 'All') },
-            { label: 'Available', action: () => handleFilterChange(FILTERS.AVAILABLE, 'Available') },
-            { label: 'Not Available', action: () => handleFilterChange(FILTERS.NOT_AVAILABLE, 'Not Available') },
+            { label: 'All', action: () => handleSizeChange(null, 'All') },
+            { label: 'Size 38', action: () => handleSizeChange(38, 'Size 38') },
+            { label: 'Size 40', action: () => handleSizeChange(40, 'Size 40') },
+            { label: 'Size 42', action: () => handleSizeChange(42, 'Size 42') },
           ]}
         />
         <MyDropdown
@@ -155,7 +142,7 @@ const AccessoriesList = () => {
               image={item.image}
               title={item.name}
               available={item.available}
-              onRentClick={() => openDialog(item)} 
+              onRentClick={() => openDialog(item)}
             />
           ))}
         </div>

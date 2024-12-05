@@ -320,6 +320,7 @@ const closeMenu = () => {
       </Box>
     ) : (
       <Button
+      variant="outlined"
         color="inherit"
         sx={{ fontSize: "1.1rem" }}
         onClick={onSignupClick}
@@ -332,7 +333,7 @@ const closeMenu = () => {
   <Drawer anchor="right" open={menuOpen} onClose={closeMenu}>
   <Box
           sx={{
-            width: 250, // Set the width of the drawer
+            width: 250, 
             padding: '20px',
             backgroundColor: theme.palette.primary.main,
             color: '#fff',

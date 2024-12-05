@@ -14,6 +14,28 @@ router.get('/', (req, res) => {
     .catch(err => res.status(404).json({ nobooksfound: 'No skis found' }));
 });
 
+router.get('/length', (req, res) => {
+  const { min, max } = req.query;
+
+  if (!min && !max) {
+    return res.status(400).json({ error: 'Please provide min and/or max length parameters' });
+  }
+
+  const query = {};
+
+  if (min) query.length = { ...query.length, $gte: parseInt(min, 10) };
+  if (max) query.length = { ...query.length, $lte: parseInt(max, 10) };
+
+  Ski.find(query)
+    .then(skis => {
+      if (skis.length > 0) {
+        res.json(skis);
+      } else {
+        res.status(404).json({ message: 'No skis found within the specified length range' });
+      }
+    })
+    .catch(err => res.status(500).json({ error: 'Server error', details: err.message }));
+});
 
 router.get('/:id', (req, res) => {
   Ski.findById(req.params.id)

@@ -30,7 +30,7 @@ import { useUser } from "../../contexts/UserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const ItemDetailsDialog = ({ open, item, onClose }) => {
+const ItemDetailsDialog = ({ open, item, onClose , isLoggedIn}) => {
   const { user } = useUser();
   const {
     register,
@@ -82,7 +82,7 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
   };
 
   const onSubmit = () => {
-    if (!user || !user._id) {
+    if (!isLoggedIn) {
       toast.error("Please log in before renting");
       return;
     }
@@ -110,11 +110,18 @@ const ItemDetailsDialog = ({ open, item, onClose }) => {
                     </Typography>
                     <Accordion
                       items={[
-                        { title: "Type", content: item.type || "N/A" },
+                        item.type ? { title: "Type", content: item.type || "N/A" } : null,
                         { title: "Description", content: item.description || "No description available" },
-                        { title: "Length in cm", content: item.length || "No length available" },
-                      ]}
+                        {
+                          title: item.size ? "Size" : "Length in cm", 
+                          content: item.size 
+                            ? item.size || "No size available"  
+                            : item.length || "No length available", 
+                        },
+                      ].filter(item => item !== null)}  
                     />
+
+
                   </>
                 ) : (
                   <Typography variant="h6" sx={{ textAlign: "center", mt: 2 }}>
