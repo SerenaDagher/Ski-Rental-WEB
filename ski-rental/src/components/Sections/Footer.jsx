@@ -46,7 +46,7 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories, onScrollTo
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer', fontSize: '1rem' }}
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer'}}
                 onClick={onSignupClick}
               >
                 Sign up
