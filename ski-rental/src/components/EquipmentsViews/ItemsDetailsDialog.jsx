@@ -56,7 +56,7 @@ const ItemDetailsDialog = ({ open, item, onClose , isLoggedIn}) => {
       deliveryDate: selectedDate,
       deliveryTime: deliveryTime,
       paymentMethod: "cash on delivery",
-      totalPrice: 100,
+      totalPrice: 10,
     };
 
     axios

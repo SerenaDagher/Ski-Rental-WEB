@@ -4,17 +4,16 @@
     right: 10px;
     font-size: 1.5rem;
     font-weight: bold;
-    color: black; /* Change to contrast with the background */
+    color: black;
     background: none;
     border: none;
     cursor: pointer;
   }
   
 .x-button:hover {
-    color: gray; /* Optional hover effect */
+    color: gray; 
   }
   
-/* Signup Modal Overlay */
 .signup-overlay {
   position: fixed;
   top: 0;
@@ -50,9 +49,9 @@ body, html {
   padding: 0;
 }
 html {
-  overflow-y: scroll; /* Ensures the vertical scrollbar is always present */
+  overflow-y: scroll; 
 }
 
 body {
-  margin: 0; /* Ensure no unwanted shifts due to default margins */
+  margin: 0; 
 }

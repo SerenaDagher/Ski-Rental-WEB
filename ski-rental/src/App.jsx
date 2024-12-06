@@ -84,11 +84,15 @@ function App() {
           )}
         </div>
       )}
-      <HeroSection onClick={() => scrollToSection(equipListRef)}/>
+      <HeroSection onClick={() => scrollToSection(equipListRef)} />
 
       <AboutUs ref={aboutUsRef} />
 
-      <div  style={{ marginTop: '10px' }}>
+      <h1 style={{ marginTop: '10px', fontWeight: 'bold', textAlign: 'center'}}>
+        All rents are fixed at a price of $10 per day
+      </h1>
+
+      <div style={{ marginTop: '100px' }}>
         <SkisList isLoggedIn={isLoggedIn} ref={equipListRef} />
       </div>
 
@@ -97,12 +101,12 @@ function App() {
       </div>
 
       <div>
-      <Carousel />
-    </div>
-    <div>
-      <Partners/>
-    </div>
-  
+        <Carousel />
+      </div>
+      <div>
+        <Partners />
+      </div>
+
       <Footer
         onSignupClick={() => openModal(true)}
         onLoginClick={() => openModal(false)}
@@ -117,10 +121,10 @@ function App() {
         color="secondary"
         aria-label="add"
         style={{
-          position: 'fixed',  
-          bottom: '16px',     
-          right: '16px',    
-          zIndex: 1000        
+          position: 'fixed',
+          bottom: '16px',
+          right: '16px',
+          zIndex: 1000
         }}
       >
         <ForumIcon />
