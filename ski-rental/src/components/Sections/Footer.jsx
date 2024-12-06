@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Box, Typography, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import UsersRents from '../Rents/UsersRents';
+import { useUser } from '../../contexts/UserContext';
 
-
-const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollToEquipments, onScrollToAboutUs, openRentals }) => {  
+const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories, onScrollToEquipments, onScrollToAboutUs, openRentals }) => {
   const theme = useTheme();
+  const { user } = useUser();
+  const [openRentalsDialog, setOpenRentalsDialog] = useState(false);
 
   return (
     <footer style={{ backgroundColor: theme.palette.primary.main, color: '#fff', padding: '20px 0 30px', textAlign: 'center', marginTop: '100px' }}>
@@ -36,15 +39,15 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
               <Typography
                 variant="body2"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer'}}
-                onClick={onLoginClick}  
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }}
+                onClick={onLoginClick}
               >
                 Log in
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer',fontSize: '1rem'}}
-                onClick={onSignupClick}  
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer', fontSize: '1rem' }}
+                onClick={onSignupClick}
               >
                 Sign up
               </Typography>
@@ -55,33 +58,33 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '100px' }}>
             <Typography variant="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>About</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
-            <Typography 
-                variant="body4" 
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 
-                onClick={onScrollToAboutUs}  
+              <Typography
+                variant="body4"
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }}
+                onClick={onScrollToAboutUs}
               >
                 About us
               </Typography>
-              
-              <Typography 
-                variant="body4" 
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 
-                onClick={openRentals}  
+
+              <Typography
+                variant="body4"
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }}
+                onClick={() => setOpenRentalsDialog(true)}
               >
                 MyRental
               </Typography>
-              
-              <Typography 
-                variant="body4" 
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 
-                onClick={onScrollToAccessories}  
+
+              <Typography
+                variant="body4"
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }}
+                onClick={onScrollToAccessories}
               >
                 Accessories
               </Typography>
-              <Typography 
-                variant="body4" 
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }} 
-                onClick={onScrollToEquipments} 
+              <Typography
+                variant="body4"
+                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }}
+                onClick={onScrollToEquipments}
               >
                 Equipments
               </Typography>
@@ -91,7 +94,7 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '100px' }}>
             <Typography variant="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Terms & Conditions</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
-              <Typography variant="body1" sx={{ fontSize: '1rem' , marginTop: '5px'}}>Privacy policy</Typography>
+              <Typography variant="body1" sx={{ fontSize: '1rem', marginTop: '5px' }}>Privacy policy</Typography>
               <Typography variant="body3" sx={{ fontSize: '1rem', marginTop: '5px' }}>Cancellation policy</Typography>
               <Typography variant="body2" sx={{ fontSize: '1rem', marginTop: '5px' }}>Terms & Conditions</Typography>
             </Box>
@@ -112,6 +115,11 @@ const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories , onScrollT
           © 2024-2025
         </Typography>
       </Box>
+      <UsersRents
+        open={openRentalsDialog}
+        onClose={() => setOpenRentalsDialog(false)}
+        userId={user ? user._id : null}
+      />
     </footer>
   );
 };

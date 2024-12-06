@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef } from 'react';
 import axios from 'axios';
 import RentalCard from '../RentalCard';
 import Pagination from '@mui/material/Pagination';
@@ -7,7 +7,8 @@ import MyDropdown from '../DropDownButton';
 import ItemDetailsDialog from './ItemsDetailsDialog';
 
 
-function EquipmentList ({isLoggedIn}) {
+const EquipmentList = forwardRef((props, ref) => {
+  const { isLoggedIn } = props;
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(4);
@@ -102,16 +103,11 @@ function EquipmentList ({isLoggedIn}) {
     setSelectedItem(null);
   };
 
-  // const handleRent = () => {
-  //   alert(`You have rented: ${selectedItem.name}`);
-  //   closeDialog();
-  // };
-
   return (
-    <div className="main">
-      <h1>Choose your Ride!</h1>
+    <div className="main" >
+      <h1 ref={ref}>Choose your Ride!</h1>
   
-      <div className="dropdown-container">
+      <div className="dropdown-container" >
         <MyDropdown
           buttonLabel={`Choose your height`}
           items={[
@@ -181,7 +177,9 @@ function EquipmentList ({isLoggedIn}) {
   
       <ItemDetailsDialog open={dialogOpen} onClose={closeDialog} item={selectedItem} isLoggedIn={isLoggedIn} />
     </div>
-  )};
+      );
+    });
+    
   
 
 export default EquipmentList;

@@ -88,8 +88,8 @@ function App() {
 
       <AboutUs ref={aboutUsRef} />
 
-      <div ref={equipListRef} style={{ marginTop: '10px' }}>
-        <SkisList isLoggedIn={isLoggedIn} />
+      <div  style={{ marginTop: '10px' }}>
+        <SkisList isLoggedIn={isLoggedIn} ref={equipListRef} />
       </div>
 
       <div ref={accessoriesRef} style={{ marginTop: '100px' }}>

@@ -60,7 +60,8 @@ const AboutUs = React.forwardRef((props, ref) => {
         </Typography>
       </Box>
     </div>
-  );
-});
+    );
+  });
+  
 
 export default AboutUs;
