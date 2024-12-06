@@ -32,7 +32,7 @@ const HeroSection = ({ onClick }) => {
       <div
         style={{
           position: "absolute",
-          top: "40%",
+          top: "50%",
           left: "20%",
           transform: "translateY(-50%)",
           color: "white",
