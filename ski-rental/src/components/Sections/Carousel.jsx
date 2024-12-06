@@ -24,7 +24,7 @@ const reviews = [
   {
     name: 'Abdo Azzi',
     review: "I was skeptical at first about renting online, but Rent the Slope exceeded my expectations. The platform was straightforward, and I was able to find the perfect skis and boots for my level. The delivery was on time, and everything was in excellent condition. I’ll definitely be a repeat customer.",
-    rating: '⭐⭐⭐⭐',
+    rating: '⭐⭐⭐⭐⭐',
     image: '/abdo.jpg',
   },
 ];
