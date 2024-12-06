@@ -39,6 +39,7 @@ const Footer = ({
             <Box display="flex" flexDirection="column" alignItems="center" textAlign={isSmallScreen ? 'center' : 'left'}>
               <Box display="flex" alignItems="center" mb={1}>
                 <img
+                  className='filter-white'
                   src="/logo.svg"
                   alt="RentTheSlope Logo"
                   style={{ width: 50, height: 'auto', marginRight: 10 }}

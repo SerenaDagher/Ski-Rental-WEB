@@ -249,10 +249,10 @@ const ItemDetailsDialog = ({ open, item, onClose , isLoggedIn}) => {
           <Typography fontStyle="italic" sx={{align:"center"}}>Please refer to Cancellation Policy</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel} >
+          <Button variant="outlined" onClick={handleCancel} >
             Cancel
           </Button>
-          <Button onClick={handleConfirm} sx={{margin: "10px"}}>
+          <Button variant="contained" onClick={handleConfirm} sx={{margin: "10px"}}>
             Confirm
           </Button>
         </DialogActions>
