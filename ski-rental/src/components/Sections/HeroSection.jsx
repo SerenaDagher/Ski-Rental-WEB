@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { Button, Typography, Box } from "@mui/material";
 
 const HeroSection = ({ onClick }) => {
   const theme = useTheme();
@@ -29,39 +29,58 @@ const HeroSection = ({ onClick }) => {
           zIndex: 1,
         }}
       ></div>
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "20%",
-          transform: "translateY(-50%)",
-          color: "white",
-          textAlign: "left",
-          fontSize: "3rem",
-          textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
-          zIndex: 3,
-        }}
-      >
-        <h1>Skip the queue!</h1>
-        <p>Be the first on the slopes and fully equipped</p>
-        <Button
-          onClick={onClick}
-          variant="outlined"
-          size="large"
-          sx={{
-            color: theme.palette.common.white,
-            borderColor: theme.palette.common.white,
-            "&:hover": {
-              backgroundColor: theme.palette.common.white,
-              color: theme.palette.primary.main,
-              borderColor: theme.palette.primary.main,
-            },
-            transition: 'all 0.3s ease',
-          }}
-        >
-          Rent Now
-        </Button>
-      </div>
+<Box
+  sx={{
+    position: "absolute",
+    top: { xs: "30%", sm: "40%" }, 
+    left: { xs: "5%", sm: "10%", md: "4%" },
+    transform: "translateY(-50%)",
+    color: "white",
+    textAlign: "left",
+    zIndex: 3,
+    width: { xs: "90%", sm: "80%", md: "60%" }, 
+  }}
+>
+  <Typography
+    variant="h1"
+    sx={{
+      fontSize: { xs: "2rem", sm: "3rem", md: "4rem" }, 
+      textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
+      marginBottom: "16px",
+    }}
+  >
+    Skip the queue!
+  </Typography>
+  <Typography
+    variant="body1"
+    sx={{
+      fontSize: { xs: "2rem", sm: "2.25rem", md: "2.5rem" }, 
+      marginBottom: "24px",
+      textShadow: "1px 1px 3px rgba(0, 0, 0, 0.7)",
+    }}
+  >
+    Be the first on the slopes and fully equipped
+  </Typography>
+  <Button
+    onClick={onClick}
+    variant="outlined"
+    size="large"
+    sx={{
+      color: theme.palette.common.white,
+      borderColor: theme.palette.common.white,
+      "&:hover": {
+        backgroundColor: theme.palette.common.white,
+        color: theme.palette.primary.main,
+        borderColor: theme.palette.primary.main,
+      },
+      fontSize: { xs: "0.75rem", sm: "0.875rem", md: "1rem" }, 
+      transition: "all 0.3s ease",
+    }}
+  >
+    Rent Now
+  </Button>
+</Box>
+
       <img
         src="/mountain.svg"
         alt="Mountain"
