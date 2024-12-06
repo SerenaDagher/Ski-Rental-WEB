@@ -88,9 +88,6 @@ function App() {
 
       <AboutUs ref={aboutUsRef} />
 
-      <h1 style={{ marginTop: '10px', fontWeight: 'bold', textAlign: 'center'}}>
-        All rents are fixed at a price of $10 per day
-      </h1>
 
       <div style={{ marginTop: '100px' }}>
         <SkisList isLoggedIn={isLoggedIn} ref={equipListRef} />

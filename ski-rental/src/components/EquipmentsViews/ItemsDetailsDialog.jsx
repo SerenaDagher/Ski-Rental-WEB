@@ -223,6 +223,7 @@ const ItemDetailsDialog = ({ open, item, onClose , isLoggedIn}) => {
                       </Typography>
                     )}
                   </FormGroup>
+                  <Typography fontStyle={"italic"} sx={{textAlign:"center"}}>All rents are fixed at a price of 10$</Typography>
                 </FormControl>
               </Grid>
             </Grid>

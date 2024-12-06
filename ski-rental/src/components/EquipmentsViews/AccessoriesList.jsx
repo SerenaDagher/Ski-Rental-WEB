@@ -44,33 +44,36 @@ const AccessoriesList = () => {
   const fetchItems = async () => {
     try {
       let data = [];
+  
       if (ride === RIDES.ALL) {
+        const skiBootsUrl = size ? `http://localhost:8082/api/skiBoots/size/${size}` : `http://localhost:8082/api/skiBoots`;
+        const snowboardBootsUrl = size ? `http://localhost:8082/api/snowboardBoots/size/${size}` : `http://localhost:8082/api/snowboardBoots`;
+  
         const [skiBootsResponse, snowboardBootsResponse] = await Promise.all([
-          size
-            ? axios.get(`http://localhost:8082/api/skiBoots/size/${size}`)
-            : axios.get('http://localhost:8082/api/skiBoots'),
-          size
-            ? axios.get(`http://localhost:8082/api/snowboardBoots/size/${size}`)
-            : axios.get('http://localhost:8082/api/snowboardBoots'),
+          axios.get(skiBootsUrl),
+          axios.get(snowboardBootsUrl),
         ]);
+  
         data = [...skiBootsResponse.data, ...snowboardBootsResponse.data];
       } else {
+
         const baseUrl =
           ride === RIDES.SKI_BOOTS
             ? 'http://localhost:8082/api/skiBoots'
             : 'http://localhost:8082/api/snowboardBoots';
         const url = size ? `${baseUrl}/size/${size}` : baseUrl;
-
+  
         const response = await axios.get(url);
         data = response.data;
       }
-
+  
       setItems(data);
     } catch (error) {
       console.error('Error fetching items:', error);
     }
   };
-
+  
+  
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = items.slice(indexOfFirstCard, indexOfLastCard);
@@ -101,11 +104,6 @@ const AccessoriesList = () => {
     setSelectedItem(null);
   };
 
-  const handleRent = () => {
-    alert(`You have rented: ${selectedItem.name}`);
-    closeDialog();
-  };
-
   return (
     <div className="main">
       <h1>What else do you need?</h1>
@@ -115,9 +113,15 @@ const AccessoriesList = () => {
           buttonLabel={`Size: ${sizeLabel}`}
           items={[
             { label: 'All', action: () => handleSizeChange(null, 'All') },
-            { label: 'Size 38', action: () => handleSizeChange(38, 'Size 38') },
-            { label: 'Size 40', action: () => handleSizeChange(40, 'Size 40') },
-            { label: 'Size 42', action: () => handleSizeChange(42, 'Size 42') },
+            { label: 'EUR 36', action: () => handleSizeChange(36, 'EUR 36') },
+            { label: 'EUR 37', action: () => handleSizeChange(37, 'EUR 37') },
+            { label: 'EUR 38', action: () => handleSizeChange(38, 'EUR 38') },
+            { label: 'EUR 39', action: () => handleSizeChange(39, 'EUR 39') },
+            { label: 'EUR 40', action: () => handleSizeChange(40, 'EUR 40') },
+            { label: 'EUR 41', action: () => handleSizeChange(41, 'EUR 41') },
+            { label: 'EUR 42', action: () => handleSizeChange(42, 'EUR 42') },
+            { label: 'EUR 43', action: () => handleSizeChange(43, 'EUR 43') },
+            { label: 'EUR 44', action: () => handleSizeChange(44, 'EUR 44') },
           ]}
         />
         <MyDropdown
