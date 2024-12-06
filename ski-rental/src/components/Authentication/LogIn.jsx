@@ -104,8 +104,8 @@ function Login({ onClose, onSwitchToSignup, onLoginSuccess }) {
                     style={{
                       textTransform: "none",
                       color: theme.palette.primary.main,
-                      padding: 0, // Removes unnecessary padding
-                      minWidth: "auto", // Ensures the button is compact
+                      padding: 0, 
+                      minWidth: "auto", 
                     }}
                   >
                     Signup here

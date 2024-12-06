@@ -1,19 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const Snowboard = require('../../models/snowboard'); // Assuming you have a Snowboard model
+const Snowboard = require('../../models/snowboard'); 
 
-// Test route
+
 router.get('/test', (req, res) => res.send('snowboard route testing!'));
 
-// Get all snowboards
 router.get('/', (req, res) => {
   Snowboard.find()
     .then(snowboards => res.json(snowboards))
     .catch(err => res.status(404).json({ nosnowboardsfound: 'No snowboards found' }));
 });
 
-// Get a single snowboard by ID
 router.get('/:id', (req, res) => {
   Snowboard.findById(req.params.id)
     .then(snowboard => res.json(snowboard))
@@ -34,7 +32,7 @@ router.get('/availability/:status', (req, res) => {
     .catch(err => res.status(500).json({ error: 'Server error', details: err.message }));
 });
 
-// Get snowboards by availability status
+
 router.get('/availability/:status', (req, res) => {
   const isAvailable = req.params.status === 'true';
 
@@ -49,14 +47,14 @@ router.get('/availability/:status', (req, res) => {
     .catch(err => res.status(500).json({ error: 'Server error', details: err.message }));
 });
 
-// Add a new snowboard
+
 router.post('/', (req, res) => {
   Snowboard.create(req.body)
     .then(snowboard => res.json({ msg: 'Snowboard added successfully' }))
     .catch(err => res.status(400).json({ error: 'Unable to add this snowboard' }));
 });
 
-// Update a snowboard
+
 router.put('/:id', (req, res) => {
   Snowboard.findByIdAndUpdate(req.params.id, req.body)
     .then(snowboard => res.json({ msg: 'Updated successfully' }))
@@ -65,7 +63,7 @@ router.put('/:id', (req, res) => {
     );
 });
 
-// Delete a snowboard by ID
+
 router.delete('/:id', (req, res) => {
   Snowboard.findByIdAndDelete(req.params.id)
     .then(snowboard => res.json({ msg: 'Snowboard entry deleted successfully' }))

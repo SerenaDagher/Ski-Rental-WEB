@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import RentalCard from '../RentalCard';
+import RentalCard from './RentalCard';
 import Pagination from '@mui/material/Pagination';
 import { Box } from '@mui/material';
-import MyDropdown from '../DropDownButton';
+import MyDropdown from '../Widgets/DropDownButton';
 import ItemDetailsDialog from './ItemsDetailsDialog';
 
 const RIDES = {
@@ -44,16 +44,16 @@ const AccessoriesList = () => {
   const fetchItems = async () => {
     try {
       let data = [];
-  
+
       if (ride === RIDES.ALL) {
         const skiBootsUrl = size ? `http://localhost:8082/api/skiBoots/size/${size}` : `http://localhost:8082/api/skiBoots`;
         const snowboardBootsUrl = size ? `http://localhost:8082/api/snowboardBoots/size/${size}` : `http://localhost:8082/api/snowboardBoots`;
-  
+
         const [skiBootsResponse, snowboardBootsResponse] = await Promise.all([
           axios.get(skiBootsUrl),
           axios.get(snowboardBootsUrl),
         ]);
-  
+
         data = [...skiBootsResponse.data, ...snowboardBootsResponse.data];
       } else {
 
@@ -62,18 +62,18 @@ const AccessoriesList = () => {
             ? 'http://localhost:8082/api/skiBoots'
             : 'http://localhost:8082/api/snowboardBoots';
         const url = size ? `${baseUrl}/size/${size}` : baseUrl;
-  
+
         const response = await axios.get(url);
         data = response.data;
       }
-  
+
       setItems(data);
     } catch (error) {
       console.error('Error fetching items:', error);
     }
   };
-  
-  
+
+
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = items.slice(indexOfFirstCard, indexOfLastCard);

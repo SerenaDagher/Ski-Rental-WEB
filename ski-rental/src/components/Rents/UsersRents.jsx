@@ -42,7 +42,6 @@ const UsersRents = ({ open, onClose, userId }) => {
       await axios.delete(`http://localhost:8082/api/rentals/${rentalId}`);
       toast.success("Rental deleted successfully!");
 
-      // Remove the deleted rental from the list
       setRentals((prevRentals) => prevRentals.filter((rental) => rental._id !== rentalId));
     } catch (error) {
       console.error("Failed to delete rental:", error);

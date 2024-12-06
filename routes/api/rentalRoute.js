@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Rental = require("../../models/rental"); 
 
-// POST route to create a rental
 router.post("/", async (req, res) => {
   try {
     const { userId, itemName, itemPic, location, deliveryDate, deliveryTime, paymentMethod, totalPrice } = req.body;
@@ -26,7 +25,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET route to fetch rentals by user
+
 router.get("/:userId", async (req, res) => {
   try {
     const rentals = await Rental.find({ userId: req.params.userId });
@@ -52,7 +51,6 @@ try {
     return res.status(404).json({ message: "Rental not found" });
     }
 
-    // Delete the rental
     await Rental.findByIdAndDelete(rentalId);
 
     res.status(200).json({ message: "Rental deleted successfully" });

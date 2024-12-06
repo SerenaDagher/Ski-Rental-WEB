@@ -62,7 +62,7 @@ const Carousel = () => {
         textAlign: 'center',
       }}
     >
-      {/* Title */}
+
       <Typography
         variant="h4"
         component="h2"
@@ -107,7 +107,6 @@ const Carousel = () => {
             </Typography>
           </Grid>
 
-          {/* Divider */}
           <Divider
             orientation="vertical"
             flexItem

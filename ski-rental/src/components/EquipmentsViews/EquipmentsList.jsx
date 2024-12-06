@@ -1,9 +1,9 @@
 import React, { useEffect, useState, forwardRef } from 'react';
 import axios from 'axios';
-import RentalCard from '../RentalCard';
+import RentalCard from './RentalCard';
 import Pagination from '@mui/material/Pagination';
 import { Box } from '@mui/material';
-import MyDropdown from '../DropDownButton';
+import MyDropdown from '../Widgets/DropDownButton';
 import ItemDetailsDialog from './ItemsDetailsDialog';
 
 
@@ -22,15 +22,15 @@ const EquipmentList = forwardRef((props, ref) => {
   useEffect(() => {
     const updateCardsPerPage = () => {
       const width = window.innerWidth;
-      if (width <= 1000) setCardsPerPage(2); // Small screens
-      else if (width <= 2000) setCardsPerPage(4); // Medium screens
-      else setCardsPerPage(6); // Large screens
+      if (width <= 1000) setCardsPerPage(2); 
+      else if (width <= 2000) setCardsPerPage(4); 
+      else setCardsPerPage(6); 
     };
 
-    updateCardsPerPage(); // Set initially
-    window.addEventListener('resize', updateCardsPerPage); // Adjust on resize
+    updateCardsPerPage(); 
+    window.addEventListener('resize', updateCardsPerPage); 
 
-    return () => window.removeEventListener('resize', updateCardsPerPage); // Cleanup on unmount
+    return () => window.removeEventListener('resize', updateCardsPerPage);
   }, []);
 
   useEffect(() => {

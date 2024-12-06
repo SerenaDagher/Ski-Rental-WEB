@@ -1,5 +1,5 @@
 import React from "react";
-import "./RentalCard.css";
+import "../Styles/RentalCard.css"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -9,11 +9,13 @@ import Button from '@mui/material/Button';
 function RentalCard({ image, title, available, onRentClick }) {
   return (
     <Card
-    variant="outlined"
       sx={{
         minWidth: 275,
+        elevation: 6,
         borderRadius: 4,
+        boxShadow: 2
       }}
+      
     >
       <CardContent>
         <img

@@ -19,7 +19,7 @@ import {
   Checkbox,
   DialogTitle
 } from "@mui/material";
-import Accordion from "../DialogAccordion";
+import Accordion from "../Widgets/DialogAccordion";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

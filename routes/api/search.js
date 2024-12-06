@@ -3,14 +3,13 @@ const router = express.Router();
 const Ski = require('../../models/ski');
 
 router.get("/api/skis/search", async (req, res) => {
-    const query = req.query.q; // Get the search query from the request
+    const query = req.query.q; 
   
     if (!query) {
       return res.status(400).json({ error: "Search query is required" });
     }
   
     try {
-      // Perform search using regex to allow partial matches
       const results = await Ski.find({
         $or: [
           { name: { $regex: query, $options: "i" } },

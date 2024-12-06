@@ -76,7 +76,7 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
         </h2>
 
         <form onSubmit={handleSubmit}>
-          {/* Username field */}
+       
           <div className="mb-3">
             <TextField
               label="Name*"
@@ -84,13 +84,12 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
               fullWidth
               value={username}
               onChange={(e) => setName(e.target.value)}
-              error={!!errors.name} // Show error outline if error exists
-              helperText={errors.name} // Display error message
+              error={!!errors.name} 
+              helperText={errors.name} 
               style={{ marginBottom: "16px" }}
             />
           </div>
 
-          {/* Email field */}
           <div className="mb-3" >
             <TextField
               label="Email*"
@@ -98,13 +97,12 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
               fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              error={!!errors.email} // Show error outline if error exists
-              helperText={errors.email} // Display error message
-              style={{ marginBottom: "16px" }}// Show helper text if invalid
+              error={!!errors.email} 
+              helperText={errors.email} 
+              style={{ marginBottom: "16px" }}
             />
           </div>
 
-          {/* Password field */}
           <div className="mb-3" >
             <TextField
               label="Password*"
@@ -136,7 +134,6 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
               </ul>
           </div>
 
-          {/* Submit button */}
           <Button
             type="submit"
             variant="contained"
@@ -154,7 +151,6 @@ function Signup({ onClose, onSwitchToLogin, onSignupSuccess }) {
           </Button>
         </form>
 
-        {/* Login switch */}
         <Typography variant="body1" component="div" sx={{marginTop :"16px"}}>
           Already have an account?{" "}
           <Button

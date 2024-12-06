@@ -11,10 +11,8 @@ import { useTheme } from "@mui/material/styles";
 export default function LetterAvatar({ logout }) {
   const theme = useTheme();
   const { user, setUser } = useUser();
-  const [anchorEl, setAnchorEl] = useState(null); // State to manage menu
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
-  const [openCartDialog, setOpenCartDialog] = useState(false); // Toggles the cart dialog
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -26,9 +24,9 @@ export default function LetterAvatar({ logout }) {
 
   const handleLogout = () => {
     logout();
-    setUser(null); 
+    setUser(null);
     console.log(user);
-    localStorage.removeItem("user"); // Clear user from local storage
+    localStorage.removeItem("user");
     handleMenuClose();
   };
 
