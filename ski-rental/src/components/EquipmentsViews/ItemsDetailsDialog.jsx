@@ -244,8 +244,9 @@ const ItemDetailsDialog = ({ open, item, onClose , isLoggedIn}) => {
         <DialogTitle fontSize={"2rem"} align="center">Confirm Rental</DialogTitle>
         <DialogContent>
           <p>
-            Are you sure you want to rent this item? Once confirmed, you can't edit the reservation anymore.
+            Are you sure you want to rent this item? Once confirmed, you can't edit the reservation anymore. And no refunds are accepted in case of cancellation.
           </p>
+          <Typography fontStyle="italic" sx={{align:"center"}}>Please refer to Cancellation Policy</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel} >

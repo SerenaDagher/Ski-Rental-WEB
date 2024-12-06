@@ -1,120 +1,149 @@
-import React, {useState} from 'react';
-import { Box, Typography, IconButton } from '@mui/material';
-import { useTheme } from '@mui/material';
+import React, { useState } from 'react';
+import { Grid, Typography, IconButton, Box, Container } from '@mui/material';
+import { useTheme, useMediaQuery } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import UsersRents from '../Rents/UsersRents';
 import { useUser } from '../../contexts/UserContext';
 
-const Footer = ({ onLoginClick, onSignupClick, onScrollToAccessories, onScrollToEquipments, onScrollToAboutUs, openRentals }) => {
+const Footer = ({
+  onLoginClick,
+  onSignupClick,
+  onScrollToAccessories,
+  onScrollToEquipments,
+  onScrollToAboutUs,
+  openRentals,
+}) => {
   const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const { user } = useUser();
   const [openRentalsDialog, setOpenRentalsDialog] = useState(false);
 
   return (
-    <footer style={{ backgroundColor: theme.palette.primary.main, color: '#fff', padding: '20px 0 30px', textAlign: 'center', marginTop: '100px' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingLeft: '150px', paddingTop: '10px' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              className="filter-white"
-              src="/logo.svg"
-              alt="RentTheSlope Logo"
-              style={{ width: 50, height: 'auto', marginRight: 10 }}
-            />
-            <Typography variant="h4" component="div" sx={{ fontSize: '2.2rem' }}>
-              RentTheSlope
-            </Typography>
-          </Box>
-          <Typography variant="body1" sx={{ fontSize: '1rem', marginTop: '10px' }}>
-            Rent, ski, repeat - the ultimate destination for your winter gear!
-          </Typography>
-        </Box>
+    <footer
+      style={{
+        backgroundColor: theme.palette.primary.main,
+        color: '#fff',
+        padding: '20px 0 30px',
+        marginTop: '100px',
+      }}
+    >
+      <Container>
+        <Grid
+          container
+          spacing={4}
+          justifyContent="space-between"
+          alignItems={isSmallScreen ? 'flex-start' : 'center'}
+        >
+          <Grid item xs={12} sm={4}>
+            <Box display="flex" flexDirection="column" alignItems="center" textAlign={isSmallScreen ? 'center' : 'left'}>
+              <Box display="flex" alignItems="center" mb={1}>
+                <img
+                  src="/logo.svg"
+                  alt="RentTheSlope Logo"
+                  style={{ width: 50, height: 'auto', marginRight: 10 }}
+                />
+                <Typography variant="h4" sx={{ fontSize: isSmallScreen ? '1.5rem' : '2.2rem' }}>
+                  RentTheSlope
+                </Typography>
+              </Box>
+              <Typography variant="body1" sx={{ fontSize: '1rem' }}>
+                Rent, ski, repeat - the ultimate destination for your winter gear!
+              </Typography>
+            </Box>
+          </Grid>
 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: '170px', marginTop: '100px' }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
-              My Account
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
+          <Grid item xs={12} sm={2}>
+            <Box textAlign={isSmallScreen ? 'center' : 'left'}>
+              <Typography variant="h6" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+                My Account
+              </Typography>
               <Typography
                 variant="body2"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }}
+                sx={{ fontSize: '1rem', cursor: 'pointer', mt: 1 }}
                 onClick={onLoginClick}
               >
                 Log in
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer', fontSize: '1rem' }}
+                sx={{ fontSize: '1rem', cursor: 'pointer', mt: 1 }}
                 onClick={onSignupClick}
               >
                 Sign up
               </Typography>
-              <Typography variant="body3" sx={{ fontSize: '1rem', marginTop: '5px' }}>I need help</Typography>
+              <Typography variant="body2" sx={{ fontSize: '1rem', mt: 1 }}>
+                I need help
+              </Typography>
             </Box>
-          </Box>
+          </Grid>
 
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '100px' }}>
-            <Typography variant="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>About</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
+          <Grid item xs={12} sm={2}>
+            <Box textAlign={isSmallScreen ? 'center' : 'left'}>
+              <Typography variant="h6" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+                About
+              </Typography>
               <Typography
-                variant="body4"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }}
+                variant="body2"
+                sx={{ fontSize: '1rem', cursor: 'pointer', mt: 1 }}
                 onClick={onScrollToAboutUs}
               >
                 About us
               </Typography>
-
               <Typography
-                variant="body4"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }}
+                variant="body2"
+                sx={{ fontSize: '1rem', cursor: 'pointer', mt: 1 }}
                 onClick={() => setOpenRentalsDialog(true)}
               >
                 MyRental
               </Typography>
-
               <Typography
-                variant="body4"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }}
+                variant="body2"
+                sx={{ fontSize: '1rem', cursor: 'pointer', mt: 1 }}
                 onClick={onScrollToAccessories}
               >
                 Accessories
               </Typography>
               <Typography
-                variant="body4"
-                sx={{ fontSize: '1rem', marginTop: '5px', cursor: 'pointer' }}
+                variant="body2"
+                sx={{ fontSize: '1rem', cursor: 'pointer', mt: 1 }}
                 onClick={onScrollToEquipments}
               >
                 Equipments
               </Typography>
             </Box>
-          </Box>
+          </Grid>
 
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: '100px' }}>
-            <Typography variant="h6" component="div" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Terms & Conditions</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5px' }}>
-              <Typography variant="body1" sx={{ fontSize: '1rem', marginTop: '5px' }}>Privacy policy</Typography>
-              <Typography variant="body3" sx={{ fontSize: '1rem', marginTop: '5px' }}>Cancellation policy</Typography>
-              <Typography variant="body2" sx={{ fontSize: '1rem', marginTop: '5px' }}>Terms & Conditions</Typography>
+          <Grid item xs={12} sm={2}>
+            <Box textAlign={isSmallScreen ? 'center' : 'left'}>
+              <Typography variant="h6" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+                Terms & Conditions
+              </Typography>
+              <Typography variant="body2" sx={{ fontSize: '1rem', mt: 1 }}>
+                Privacy policy
+              </Typography>
+              <Typography variant="body2" sx={{ fontSize: '1rem', mt: 1 }}>
+                Cancellation policy
+              </Typography>
+              <Typography variant="body2" sx={{ fontSize: '1rem', mt: 1 }}>
+                Terms & Conditions
+              </Typography>
             </Box>
-          </Box>
-        </Box>
-      </Box>
+          </Grid>
+        </Grid>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '35px', paddingRight: '1150px' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '5px' }}>
-          <IconButton color="inherit" sx={{ margin: '0 10px' }}>
-            <InstagramIcon />
-          </IconButton>
-          <IconButton color="inherit" sx={{ margin: '0 10px' }}>
-            <FacebookIcon />
-          </IconButton>
+        <Box textAlign="center" mt={4}>
+          <Box display="flex" justifyContent="center" mb={1}>
+            <IconButton color="inherit">
+              <InstagramIcon />
+            </IconButton>
+            <IconButton color="inherit">
+              <FacebookIcon />
+            </IconButton>
+          </Box>
+          <Typography variant="body2">© 2024-2025</Typography>
         </Box>
-        <Typography variant="body2" component="div" sx={{ fontSize: '0.9rem', marginTop: '5px' }}>
-          © 2024-2025
-        </Typography>
-      </Box>
+      </Container>
       <UsersRents
         open={openRentalsDialog}
         onClose={() => setOpenRentalsDialog(false)}

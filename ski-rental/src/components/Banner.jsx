@@ -13,7 +13,7 @@ const NotificationBanner = () => {
     isVisible && (
       <Box
         sx={{
-          position: 'fixed',
+          position: 'relative',
           top: 0,
           width: '100%',
           backgroundColor: '#1976d2', 

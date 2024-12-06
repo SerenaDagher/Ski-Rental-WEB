@@ -7,7 +7,7 @@ const reviews = [
     name: 'Yara Cham',
     review: "Rent the Slope made my trip to the mountains stress-free! The process of renting high-quality gear was super easy, and the delivery was right on time. I didn’t have to worry about transporting heavy ski equipment—everything was handled for me. Definitely recommend it to anyone looking to enjoy a smooth and convenient ski trip!",
     rating: '⭐⭐⭐⭐⭐',
-    image: '/ANFD1026.JPG'
+    image: '/ANFD1026.JPG',
   },
   {
     name: 'Perla Mikhael',
@@ -72,12 +72,11 @@ const Carousel = () => {
         Some reviews for you :)
       </Typography>
 
-      {/* Review Card */}
       <Card
         sx={{
-          width: 800,
+          width: { xs: '90%', sm: '80%', md: '800px' },
           textAlign: 'center',
-          padding: 3,
+          padding: { xs: 2, sm: 3 }, 
           boxShadow: 3,
           marginTop: 3,
           backgroundColor: (theme) => theme.palette.tertary.main,
@@ -85,21 +84,24 @@ const Carousel = () => {
           overflow: 'hidden',
         }}
       >
-        <Grid container alignItems="center">
-          {/* Left Section with Image and Name */}
-          <Grid item xs={4} sx={{ textAlign: 'center' }}>
+        <Grid container alignItems="center" spacing={2}>
+          <Grid item xs={12} sm={4} sx={{ textAlign: 'center' }}>
             <Avatar
               src={reviews[currentIndex].image}
               alt={reviews[currentIndex].name}
               sx={{
-                width: 200,
-                height: 200,
+                width: { xs: 120, sm: 150, md: 200 }, 
+                height: { xs: 120, sm: 150, md: 200 }, 
                 margin: '0 auto',
               }}
             />
             <Typography
               variant="h6"
-              sx={{ color: 'white', marginTop: 2 }}
+              sx={{
+                color: 'white',
+                marginTop: 2,
+                fontSize: { xs: '1rem', sm: '1.2rem' }, 
+              }}
             >
               {reviews[currentIndex].name}
             </Typography>
@@ -109,16 +111,22 @@ const Carousel = () => {
           <Divider
             orientation="vertical"
             flexItem
-            sx={{ backgroundColor: 'white', marginX: 2 }}
+            sx={{
+              backgroundColor: 'white',
+              marginX: { xs: 1, sm: 2 },
+              display: { xs: 'none', sm: 'block' }, 
+            }}
           />
 
-          {/* Right Section with Review and Rating */}
-          <Grid item xs={7}>
+          <Grid item xs={12} sm={7}>
             <CardContent>
               <Typography
                 variant="body1"
                 gutterBottom
-                sx={{ color: 'white' }}
+                sx={{
+                  color: 'white',
+                  fontSize: { xs: '0.9rem', sm: '1rem' }, 
+                }}
               >
                 "{reviews[currentIndex].review}"
               </Typography>
@@ -130,12 +138,30 @@ const Carousel = () => {
         </Grid>
       </Card>
 
-      {/* Navigation Buttons */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-        <IconButton onClick={handlePrev} sx={{ color: 'black' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          mt: 2,
+          width: { xs: '90%', sm: '80%', md: '800px' }, 
+        }}
+      >
+        <IconButton
+          onClick={handlePrev}
+          sx={{
+            color: 'black',
+            fontSize: { xs: 'small', sm: 'medium' }, 
+          }}
+        >
           <ArrowBackIos />
         </IconButton>
-        <IconButton onClick={handleNext} sx={{ color: 'black' }}>
+        <IconButton
+          onClick={handleNext}
+          sx={{
+            color: 'black',
+            fontSize: { xs: 'small', sm: 'medium' },
+          }}
+        >
           <ArrowForwardIos />
         </IconButton>
       </Box>
